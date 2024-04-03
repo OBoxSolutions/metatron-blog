@@ -16,7 +16,7 @@ export default function Footer() {
       </div>
       <div>
         <h2 className="text-2xl">Connect with Us</h2>
-        <div className="flex mt-5">
+        <div className="flex gap-1 mt-5">
           <Image
             src="Facebook.svg"
             alt="Facebook logo"
