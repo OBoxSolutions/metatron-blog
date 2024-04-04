@@ -1,4 +1,4 @@
 export type InputProps = {
-  label: string;
+  label?: string;
   required: boolean;
 };
