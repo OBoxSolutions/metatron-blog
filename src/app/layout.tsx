@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hind_Siliguri, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const hindSiliguri = Hind_Siliguri({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+const garamond = Cormorant_Garamond({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={(inter.className, "max-w-screen-xl mx-1 md:mx-auto")}>
+      <body
+        className={
+          (hindSiliguri.className,
+          garamond.className,
+          "max-w-screen-xl mx-1 md:mx-auto")
+        }
+      >
         <Header></Header>
         <main>{children}</main>
         <Footer></Footer>
