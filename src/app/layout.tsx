@@ -9,12 +9,14 @@ const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
   display: "swap",
   weight: "400",
+  variable: "--font-hind-siliguri",
 });
 
 const garamond = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
   weight: "400",
+  variable: "--font-cormorant-garamond",
 });
 
 export const metadata: Metadata = {
