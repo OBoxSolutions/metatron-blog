@@ -1,6 +1,7 @@
 const mockPosts = [
   {
     id: 1,
+    userId: "1",
     name: "Sunrise in the Mountains",
     description:
       "Witness the serene beauty of the mountains as the sun rises, bringing life to the world.",
@@ -10,6 +11,7 @@ const mockPosts = [
   },
   {
     id: 2,
+    userId: "1",
     name: "Exploring the Deep Sea",
     description:
       "Dive into the depths of the ocean and discover the mysteries that lie beneath the waves.",
@@ -19,6 +21,7 @@ const mockPosts = [
   },
   {
     id: 3,
+    userId: "1",
     name: "Adventures in the Jungle",
     description:
       "Journey through the dense jungle, home to an array of fascinating wildlife and lush vegetation.",
@@ -28,6 +31,7 @@ const mockPosts = [
   },
   {
     id: 4,
+    userId: "1",
     name: "Starry Night Camping",
     description:
       "Experience a night under the stars, surrounded by the tranquility of nature.",
@@ -37,6 +41,7 @@ const mockPosts = [
   },
   {
     id: 5,
+    userId: "1",
     name: "City Lights",
     description:
       "The vibrant lights of the city come alive at night, offering a breathtaking urban landscape.",
@@ -46,6 +51,7 @@ const mockPosts = [
   },
   {
     id: 6,
+    userId: "1",
     name: "The Northern Lights",
     description:
       "Behold the awe-inspiring beauty of the Northern Lights, a spectacular natural phenomenon.",
@@ -55,6 +61,7 @@ const mockPosts = [
   },
   {
     id: 7,
+    userId: "1",
     name: "Desert Safari",
     description:
       "Embark on a thrilling safari adventure across the vast, sun-soaked desert.",
@@ -64,6 +71,7 @@ const mockPosts = [
   },
   {
     id: 8,
+    userId: "1",
     name: "Snowy Peaks",
     description:
       "The majestic snowy peaks of the mountains stand tall, offering stunning vistas and challenging climbs.",
@@ -73,6 +81,7 @@ const mockPosts = [
   },
   {
     id: 9,
+    userId: "1",
     name: "Autumn Forest",
     description:
       "The forest in autumn is a tapestry of colors, with leaves in shades of red, orange, and yellow.",
@@ -82,6 +91,7 @@ const mockPosts = [
   },
   {
     id: 10,
+    userId: "1",
     name: "Spring Blossoms",
     description:
       "Spring brings new life, with flowers blossoming and filling the air with their fragrant scent.",
