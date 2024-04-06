@@ -1,0 +1,94 @@
+const mockPosts = [
+  {
+    id: 1,
+    name: "Sunrise in the Mountains",
+    description:
+      "Witness the serene beauty of the mountains as the sun rises, bringing life to the world.",
+    date: "2023-07-01",
+    image: "https://example.com/images/sunrise.jpg",
+    isFeatured: true,
+  },
+  {
+    id: 2,
+    name: "Exploring the Deep Sea",
+    description:
+      "Dive into the depths of the ocean and discover the mysteries that lie beneath the waves.",
+    date: "2023-07-02",
+    image: "https://example.com/images/deepsea.jpg",
+    isFeatured: false,
+  },
+  {
+    id: 3,
+    name: "Adventures in the Jungle",
+    description:
+      "Journey through the dense jungle, home to an array of fascinating wildlife and lush vegetation.",
+    date: "2023-07-03",
+    image: "https://example.com/images/jungle.jpg",
+    isFeatured: false,
+  },
+  {
+    id: 4,
+    name: "Starry Night Camping",
+    description:
+      "Experience a night under the stars, surrounded by the tranquility of nature.",
+    date: "2023-07-04",
+    image: "https://example.com/images/starrynight.jpg",
+    isFeatured: true,
+  },
+  {
+    id: 5,
+    name: "City Lights",
+    description:
+      "The vibrant lights of the city come alive at night, offering a breathtaking urban landscape.",
+    date: "2023-07-05",
+    image: "https://example.com/images/citylights.jpg",
+    isFeatured: false,
+  },
+  {
+    id: 6,
+    name: "The Northern Lights",
+    description:
+      "Behold the awe-inspiring beauty of the Northern Lights, a spectacular natural phenomenon.",
+    date: "2023-07-06",
+    image: "https://example.com/images/northernlights.jpg",
+    isFeatured: true,
+  },
+  {
+    id: 7,
+    name: "Desert Safari",
+    description:
+      "Embark on a thrilling safari adventure across the vast, sun-soaked desert.",
+    date: "2023-07-07",
+    image: "https://example.com/images/desert.jpg",
+    isFeatured: false,
+  },
+  {
+    id: 8,
+    name: "Snowy Peaks",
+    description:
+      "The majestic snowy peaks of the mountains stand tall, offering stunning vistas and challenging climbs.",
+    date: "2023-07-08",
+    image: "https://example.com/images/snowypeaks.jpg",
+    isFeatured: true,
+  },
+  {
+    id: 9,
+    name: "Autumn Forest",
+    description:
+      "The forest in autumn is a tapestry of colors, with leaves in shades of red, orange, and yellow.",
+    date: "2023-07-09",
+    image: "https://example.com/images/autumnforest.jpg",
+    isFeatured: false,
+  },
+  {
+    id: 10,
+    name: "Spring Blossoms",
+    description:
+      "Spring brings new life, with flowers blossoming and filling the air with their fragrant scent.",
+    date: "2023-07-10",
+    image: "https://example.com/images/springblossoms.jpg",
+    isFeatured: true,
+  },
+];
+
+export default mockPosts;
