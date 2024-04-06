@@ -17,8 +17,8 @@ const SOCIAL_ICONS = [
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="md:flex gap-20 py-20">
+    <footer className="bg-primary pt-10">
+      <div className="md:flex max-w-screen-xl mx-auto gap-20 ">
         <div>
           <h2 className="text-2xl">Where are we</h2>
           <ul className="mt-5">
@@ -48,7 +48,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
-      <div className="text-center">All Rights Reserved 2024</div>
+      <div className="text-center pt-10 pb-5">All Rights Reserved 2024</div>
     </footer>
   );
 }
