@@ -7,4 +7,4 @@ type Post = {
   image: string;
 };
 
-export default Post;
+export { Post };
