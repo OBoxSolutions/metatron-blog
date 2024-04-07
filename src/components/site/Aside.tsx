@@ -23,7 +23,7 @@ const Aside = (props: AsideProps) => {
                   width={176}
                   height={103}
                 />
-                <div>
+                <div className="text-base">
                   <p>{post.description}</p>
                 </div>
               </article>
