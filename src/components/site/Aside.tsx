@@ -16,7 +16,7 @@ const Aside = (props: AsideProps) => {
         {props.posts.map((post) => {
           return (
             <li key={`post-${post.id}`} className="mb-10">
-              <article className="flex gap-3">
+              <article className="flex gap-3 items-center">
                 <Image
                   src={post.image}
                   alt={post.description}
