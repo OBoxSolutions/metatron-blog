@@ -15,7 +15,7 @@ function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
     const featuredPosts = posts.filter((post) => post.isFeatured);
 
-    return [featuredPosts.shift(), featuredPosts];
+    return [featuredPosts.shift(), featuredPosts.slice(0, 3)];
   }, [posts]);
 }
 
@@ -25,7 +25,7 @@ function useLatestPosts(posts: Post[]): [Post | undefined, Post[]] {
       (a, b) => +new Date(a.date) - +new Date(b.date),
     );
 
-    return [latestPosts.shift(), latestPosts];
+    return [latestPosts.shift(), latestPosts.slice(0, 3)];
   }, [posts]);
 }
 
