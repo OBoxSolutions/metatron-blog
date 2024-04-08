@@ -87,6 +87,8 @@ export default function Home() {
         </Section>
       )}
 
+      <hr></hr>
+
       <Section className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
         {otherPosts.map((post) => (
           <Card key={`index-post-${post.id}`}>
