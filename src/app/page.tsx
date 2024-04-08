@@ -48,8 +48,6 @@ export default function Home() {
     <div className="max-w-screen-xl mx-auto">
       {firstFeaturedPost && (
         <Section>
-          <h3 className="text-3xl mt-4">{firstFeaturedPost.name}</h3>
-
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
               <Image
@@ -59,12 +57,9 @@ export default function Home() {
                 width={500}
                 height={400}
               ></Image>
-              <p className="mt-5">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Blanditiis, veritatis ex? Tempora nisi corrupti, ut repudiandae
-                molestiae accusantium, nam error amet cum aliquam repellendus
-                ratione iste recusandae esse voluptas a?
-              </p>
+              <h3 className="text-3xl mt-4 text-center">
+                {firstFeaturedPost.name}
+              </h3>
             </article>
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
           </div>
