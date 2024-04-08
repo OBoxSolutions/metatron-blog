@@ -5,11 +5,12 @@ import Image from "next/image";
 type AsideProps = {
   title?: string;
   posts: Post[];
+  className?: string;
 };
 
 const Aside = (props: AsideProps) => {
   return (
-    <aside>
+    <aside className={props.className}>
       {props?.title && <h3 className="text-xl">{props.title}</h3>}
 
       <ul>
