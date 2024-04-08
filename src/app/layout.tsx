@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${hindSiliguri.variable} ${garamond.variable} bg-neutral text-text-primary mx-1 md:mx-0`}
+        className={`${hindSiliguri.variable} ${garamond.variable} bg-neutral text-text-primary mx-2 md:mx-0`}
       >
         <Header></Header>
         <main>{children}</main>
