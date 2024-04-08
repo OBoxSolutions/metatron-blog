@@ -57,7 +57,7 @@ export default function Home() {
                 width={500}
                 height={400}
               ></Image>
-              <h3 className="text-3xl mt-4 text-center">
+              <h3 className="text-4xl mt-4 text-center">
                 {firstFeaturedPost.name}
               </h3>
             </article>
