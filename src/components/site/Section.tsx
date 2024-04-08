@@ -6,7 +6,7 @@ type SectionProps = {
 
 const Section = (props: SectionProps) => {
   return (
-    <section className={props.className}>
+    <section className={`my-5 ${props.className}`}>
       {props?.title && <h2 className="text-3xl">{props.title}</h2>}
       {props.children}
     </section>
