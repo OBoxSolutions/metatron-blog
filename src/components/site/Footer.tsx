@@ -48,7 +48,9 @@ export default function Footer() {
           </form>
         </div>
       </div>
-      <div className="text-center pt-10 pb-5">All Rights Reserved 2024</div>
+      <div className="text-center pt-10 pb-5 text-base">
+        All Rights Reserved 2024
+      </div>
     </footer>
   );
 }
