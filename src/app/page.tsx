@@ -48,6 +48,8 @@ export default function Home() {
     <div className="max-w-screen-xl mx-auto">
       {firstFeaturedPost && (
         <Section>
+          <h3 className="text-3xl mt-4">{firstFeaturedPost.name}</h3>
+
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
               <Image
@@ -71,6 +73,7 @@ export default function Home() {
 
       {firstLatestPost && (
         <Section title="Latest">
+          <h3 className="text-3xl mt-4">{firstLatestPost.name}</h3>
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
               <Image
