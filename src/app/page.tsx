@@ -59,7 +59,7 @@ export default function Home() {
                 width={500}
                 height={400}
               ></Image>
-              <p>
+              <p className="mt-5">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Blanditiis, veritatis ex? Tempora nisi corrupti, ut repudiandae
                 molestiae accusantium, nam error amet cum aliquam repellendus
@@ -83,7 +83,7 @@ export default function Home() {
                 width={500}
                 height={400}
               ></Image>
-              <p>{firstLatestPost.description}</p>
+              <p className="mt-5">{firstLatestPost.description}</p>
             </article>
             <Aside className="col-span-2" posts={latestPosts}></Aside>
           </div>
