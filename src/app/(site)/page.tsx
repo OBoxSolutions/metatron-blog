@@ -4,8 +4,8 @@ import Image from "next/image";
 
 import Aside from "./_components/Aside";
 import Section from "./_components/Section";
-import Card from "@/components/app/Card";
-import CardBody from "@/components/app/CardBody";
+import Card from "@/components/Card";
+import CardBody from "@/components/CardBody";
 
 import { Post } from "@/types/Post";
 
