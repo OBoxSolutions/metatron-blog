@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Hind_Siliguri, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/components/site/Header";
-import Footer from "@/components/site/Footer";
+import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],

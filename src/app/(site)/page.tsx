@@ -2,8 +2,8 @@ import { useMemo } from "react";
 
 import Image from "next/image";
 
-import Aside from "@/components/site/Aside";
-import Section from "@/components/site/Section";
+import Aside from "./_components/Aside";
+import Section from "./_components/Section";
 import Card from "@/components/app/Card";
 import CardBody from "@/components/app/CardBody";
 
