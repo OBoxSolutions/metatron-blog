@@ -28,7 +28,7 @@ const links = [
 const Aside = (props: AsideProps) => {
   return (
     <aside className={props.className}>
-      <ul>
+      <ul className="p-4 flex flex-col gap-5">
         {links.map((link) => {
           return (
             <li key={`link-${link.text}`} className="mb-10">
