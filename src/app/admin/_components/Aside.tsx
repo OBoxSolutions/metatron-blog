@@ -39,9 +39,11 @@ const Aside = (props: AsideProps) => {
           return (
             <li
               key={`link-${link.text}`}
-              className={`p-3 rounded ${pathname === link.href ? "bg-primary" : ""}`}
+              className={` rounded ${pathname === link.href ? "bg-primary" : ""}`}
             >
-              <Link href={link.href}>{link.text}</Link>
+              <Link className="p-3 block w-full" href={link.href}>
+                {link.text}
+              </Link>
             </li>
           );
         })}
