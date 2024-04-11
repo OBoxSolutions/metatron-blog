@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${hindSiliguri.className} bg-neutral text-text-primary grid grid-cols-[300px_1fr] grid-rows-[64px_1fr]`}
+        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid grid-cols-[300px_1fr] grid-rows-[64px_1fr]`}
       >
         <Aside className="col-span-1 row-span-2"></Aside>
         <Nav className="col-start-2"></Nav>
