@@ -3,6 +3,8 @@ import LocalDataTable, {
   TableColumn,
 } from "react-data-table-component";
 
+import TableActions from "./TableActions";
+
 type DataTableProps<T> = {
   columns: TableColumn<T>[];
   data: T[];
@@ -32,10 +34,13 @@ createTheme("app", {
 
 export default function DataTable<T>(props: DataTableProps<T>) {
   return (
-    <LocalDataTable
-      columns={props.columns}
-      data={props.data}
-      theme="app"
-    ></LocalDataTable>
+    <div>
+      <TableActions></TableActions>
+      <LocalDataTable
+        columns={props.columns}
+        data={props.data}
+        theme="app"
+      ></LocalDataTable>
+    </div>
   );
 }
