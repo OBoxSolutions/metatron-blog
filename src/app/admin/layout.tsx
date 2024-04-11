@@ -3,6 +3,8 @@
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
+import Aside from "./_components/Aside";
+
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
   display: "swap",
