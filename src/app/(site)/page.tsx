@@ -58,7 +58,7 @@ export default function Home() {
                 height={400}
               ></Image>
               <h3 className="text-4xl mt-4 text-center">
-                {firstFeaturedPost.name}
+                {firstFeaturedPost.title}
               </h3>
             </article>
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
@@ -68,7 +68,7 @@ export default function Home() {
 
       {firstLatestPost && (
         <Section title="Latest">
-          <h3 className="text-3xl mt-4">{firstLatestPost.name}</h3>
+          <h3 className="text-3xl mt-4">{firstLatestPost.title}</h3>
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
               <Image
