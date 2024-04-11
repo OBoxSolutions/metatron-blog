@@ -9,7 +9,7 @@ import CardBody from "@/components/CardBody";
 
 import { Post } from "@/types/Post";
 
-import posts from "../posts";
+import posts from "../_posts";
 
 function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
