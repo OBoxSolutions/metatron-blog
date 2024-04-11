@@ -32,7 +32,7 @@ const Aside = (props: AsideProps) => {
   const pathname = usePathname();
 
   return (
-    <aside className={props.className}>
+    <aside className={`border-r border-gray-800 ${props.className}`}>
       <h3 className="pl-4 py-4 text-2xl">Metatron Blog</h3>
       <ul className="p-4 flex flex-col gap-2">
         {links.map((link) => {
