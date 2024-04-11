@@ -30,6 +30,7 @@ const links = [
 const Aside = (props: AsideProps) => {
   return (
     <aside className={props.className}>
+      <h3 className="pl-4 py-4 text-2xl">Metatron Blog</h3>
       <ul className="p-4 flex flex-col gap-5">
         {links.map((link) => {
           return (
