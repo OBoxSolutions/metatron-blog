@@ -6,18 +6,22 @@ const links = [
   {
     icon: "",
     text: "Dashboard",
+    href: "/admin",
   },
   {
     icon: "",
     text: "Posts",
+    href: "/posts",
   },
   {
     icon: "",
     text: "Users",
+    href: "/users",
   },
   {
     icon: "",
     text: "Comments",
+    href: "/comments",
   },
 ];
 
