@@ -7,7 +7,7 @@ type NavProps = {
 export default function Nav(props: NavProps) {
   return (
     <nav
-      className={`flex justify-end items-center px-5 gap-4 ${props.className}`}
+      className={`flex bg-primary justify-end items-center px-5 gap-4 ${props.className}`}
     >
       <Link href="/" target="_blank">
         Ver Sitio
