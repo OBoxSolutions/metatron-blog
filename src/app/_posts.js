@@ -2,7 +2,7 @@ const mockPosts = [
   {
     id: 1,
     userId: "1",
-    name: "Sunrise in the Mountains",
+    title: "Sunrise in the Mountains",
     description:
       "Witness the serene beauty of the mountains as the sun rises, bringing life to the world.",
     date: "2023-07-01",
@@ -13,7 +13,7 @@ const mockPosts = [
   {
     id: 2,
     userId: "1",
-    name: "Exploring the Deep Sea",
+    title: "Exploring the Deep Sea",
     description:
       "Dive into the depths of the ocean and discover the mysteries that lie beneath the waves.",
     date: "2023-07-02",
@@ -24,7 +24,7 @@ const mockPosts = [
   {
     id: 3,
     userId: "1",
-    name: "Adventures in the Jungle",
+    title: "Adventures in the Jungle",
     description:
       "Journey through the dense jungle, home to an array of fascinating wildlife and lush vegetation.",
     date: "2023-07-03",
@@ -35,7 +35,7 @@ const mockPosts = [
   {
     id: 4,
     userId: "1",
-    name: "Starry Night Camping",
+    title: "Starry Night Camping",
     description:
       "Experience a night under the stars, surrounded by the tranquility of nature.",
     date: "2023-07-04",
@@ -46,7 +46,7 @@ const mockPosts = [
   {
     id: 5,
     userId: "1",
-    name: "City Lights",
+    title: "City Lights",
     description:
       "The vibrant lights of the city come alive at night, offering a breathtaking urban landscape.",
     date: "2023-07-05",
@@ -57,7 +57,7 @@ const mockPosts = [
   {
     id: 6,
     userId: "1",
-    name: "The Northern Lights",
+    title: "The Northern Lights",
     description:
       "Behold the awe-inspiring beauty of the Northern Lights, a spectacular natural phenomenon.",
     date: "2023-07-06",
@@ -68,7 +68,7 @@ const mockPosts = [
   {
     id: 7,
     userId: "1",
-    name: "Desert Safari",
+    title: "Desert Safari",
     description:
       "Embark on a thrilling safari adventure across the vast, sun-soaked desert.",
     date: "2023-07-07",
@@ -79,7 +79,7 @@ const mockPosts = [
   {
     id: 8,
     userId: "1",
-    name: "Snowy Peaks",
+    title: "Snowy Peaks",
     description:
       "The majestic snowy peaks of the mountains stand tall, offering stunning vistas and challenging climbs.",
     date: "2023-07-08",
@@ -90,7 +90,7 @@ const mockPosts = [
   {
     id: 9,
     userId: "1",
-    name: "Autumn Forest",
+    title: "Autumn Forest",
     description:
       "The forest in autumn is a tapestry of colors, with leaves in shades of red, orange, and yellow.",
     date: "2023-07-09",
@@ -101,7 +101,7 @@ const mockPosts = [
   {
     id: 10,
     userId: "1",
-    name: "Spring Blossoms",
+    title: "Spring Blossoms",
     description:
       "Spring brings new life, with flowers blossoming and filling the air with their fragrant scent.",
     date: "2023-07-10",
