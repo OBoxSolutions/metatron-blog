@@ -1,6 +1,7 @@
 "use client";
 
 import { Hind_Siliguri } from "next/font/google";
+import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
