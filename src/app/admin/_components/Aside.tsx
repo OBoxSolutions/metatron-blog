@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type AsideProps = {
   className?: string;
 };
@@ -31,8 +33,8 @@ const Aside = (props: AsideProps) => {
       <ul className="p-4 flex flex-col gap-5">
         {links.map((link) => {
           return (
-            <li key={`link-${link.text}`} className="mb-10">
-              {link.text}
+            <li key={`link-${link.text}`}>
+              <Link href={link.href}>{link.text}</Link>
             </li>
           );
         })}
