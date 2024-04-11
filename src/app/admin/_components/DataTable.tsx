@@ -37,6 +37,7 @@ export default function DataTable<T>(props: DataTableProps<T>) {
     <div>
       <TableActions></TableActions>
       <LocalDataTable
+        selectableRows={true}
         columns={props.columns}
         data={props.data}
         theme="app"
