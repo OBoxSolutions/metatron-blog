@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type AsideProps = {
   className?: string;
@@ -28,13 +29,18 @@ const links = [
 ];
 
 const Aside = (props: AsideProps) => {
+  const pathname = usePathname();
+
   return (
     <aside className={props.className}>
       <h3 className="pl-4 py-4 text-2xl">Metatron Blog</h3>
-      <ul className="p-4 flex flex-col gap-5">
+      <ul className="p-4 flex flex-col gap-2">
         {links.map((link) => {
           return (
-            <li key={`link-${link.text}`}>
+            <li
+              key={`link-${link.text}`}
+              className={`p-3 rounded ${pathname === link.href ? "bg-primary" : ""}`}
+            >
               <Link href={link.href}>{link.text}</Link>
             </li>
           );
