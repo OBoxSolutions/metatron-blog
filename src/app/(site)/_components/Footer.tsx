@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import TextInput from "@/components/app/InputText";
+import TextInput from "@/components/InputText";
 
 const CONTACTS = [
   "Luis Escala",
