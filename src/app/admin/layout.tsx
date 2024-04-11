@@ -4,6 +4,7 @@ import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
 import Aside from "./_components/Aside";
+import Nav from "./_components/Nav";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export default function RootLayout({
         className={`${hindSiliguri.className} bg-neutral text-text-primary grid grid-cols-[300px_1fr] grid-rows-[64px_1fr]`}
       >
         <Aside className="col-span-1 row-span-2"></Aside>
-        <header className="col-start-2">Some Header</header>
+        <Nav className="col-start-2"></Nav>
         <main className="col-start-2">{children}</main>
       </body>
     </html>
