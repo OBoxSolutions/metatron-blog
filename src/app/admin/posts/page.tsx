@@ -20,6 +20,14 @@ const columns = [
     name: "Year",
     selector: (row: Post) => row.date,
   },
+  {
+    name: "Featured",
+    selector: (row: Post) => (row.isFeatured ? "Yes" : "No"),
+  },
+  {
+    name: "Description",
+    selector: (row: Post) => row.description,
+  },
 ];
 
 export default function Posts() {
