@@ -13,17 +13,17 @@ const links = [
   {
     icon: "",
     text: "Posts",
-    href: "/posts",
+    href: "/admin/posts",
   },
   {
     icon: "",
     text: "Users",
-    href: "/users",
+    href: "/admin/users",
   },
   {
     icon: "",
     text: "Comments",
-    href: "/comments",
+    href: "/admin/comments",
   },
 ];
 
