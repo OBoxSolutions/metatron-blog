@@ -1,7 +1,7 @@
 type Post = {
   id: string | number;
   userId: string;
-  name: string;
+  title: string;
   description: string;
   date: string;
   image: string;

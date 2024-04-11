@@ -14,7 +14,7 @@ import posts from "@/app/_posts";
 const columns = [
   {
     name: "Title",
-    selector: (row: Post) => row.name,
+    selector: (row: Post) => row.title,
   },
   {
     name: "Year",
