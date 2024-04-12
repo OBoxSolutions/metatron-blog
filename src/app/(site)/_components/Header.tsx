@@ -1,4 +1,4 @@
-import Link from "next/link";
+import HeaderLink from "./HeaderLink";
 
 const links = [
   {
@@ -26,9 +26,10 @@ export default function Header() {
         <nav>
           <ul className="flex gap-10">
             {links.map((link) => (
-              <li key={`site-link-${link.href}`}>
-                <Link href={link.href}>{link.text}</Link>
-              </li>
+              <HeaderLink
+                key={`header-link-${link.href}`}
+                link={link}
+              ></HeaderLink>
             ))}
           </ul>
         </nav>
