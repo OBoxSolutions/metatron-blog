@@ -1,3 +1,21 @@
+const links = [
+  {
+    icon: "",
+    text: "Home",
+    href: "/",
+  },
+  {
+    icon: "",
+    text: "Admin",
+    href: "/admin/",
+  },
+  {
+    icon: "",
+    text: "Login",
+    href: "/login/",
+  },
+];
+
 export default function Header() {
   return (
     <header>
