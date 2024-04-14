@@ -5,6 +5,7 @@ import { mdiPlus } from "@mdi/js";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
+import Button from "@/components/Button";
 
 import Section from "../_components/Section";
 
@@ -41,9 +42,11 @@ export default function Posts() {
           <DataTable columns={columns} data={posts} />
         </CardBody>
       </Card>
-      <button className="fixed bottom-10 right-10 rounded-full p-4 bg-accent">
-        <Icon path={mdiPlus} size={2}></Icon>
-      </button>
+      <Button
+        icon={mdiPlus}
+        iconSize={2}
+        className="fixed bottom-10 right-10 "
+      ></Button>
     </Section>
   );
 }
