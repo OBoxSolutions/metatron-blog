@@ -7,15 +7,15 @@ type ButtonProps = {
   iconSize?: number;
   children?: React.ReactNode;
   className?: string;
-  link?: string;
+  href?: string;
 };
 
 export default function Button(props: ButtonProps) {
   let buttonClasses = "";
 
-  const Parent: ElementType = props.link ? Link : "button";
+  const Parent: ElementType = props.href ? Link : "button";
 
-  const parentProps = props.link ? { href: props.link } : {};
+  const parentProps = props.href ? { href: props.href } : {};
 
   if (props.icon) {
     buttonClasses += "p-4 rounded-full bg-accent";
