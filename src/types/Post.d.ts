@@ -6,6 +6,7 @@ type Post = {
   date: string;
   image: string;
   isFeatured: boolean;
+  content: string;
 };
 
 export { Post };
