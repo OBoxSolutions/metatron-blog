@@ -1,6 +1,6 @@
 import { InputProps } from "./Input";
 
-export default function TextInput(props: InputProps) {
+export default function InputText(props: InputProps) {
   return (
     <div className="flex flex-col">
       {props.label && <label htmlFor={props.label}>{props.label}</label>}
