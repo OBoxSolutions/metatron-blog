@@ -45,6 +45,7 @@ export default function Posts() {
       <Button
         icon={mdiPlus}
         iconSize={2}
+        href="new-post"
         className="fixed bottom-10 right-10 "
       ></Button>
     </Section>
