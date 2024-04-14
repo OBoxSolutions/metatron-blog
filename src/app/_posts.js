@@ -9,6 +9,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: true,
+    content: "Test Content",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: false,
+    content: "Test Content",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: false,
+    content: "Test Content",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: true,
+    content: "Test Content",
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: false,
+    content: "Test Content",
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: true,
+    content: "Test Content",
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: false,
+    content: "Test Content",
   },
   {
     id: 8,
@@ -86,6 +93,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: true,
+    content: "Test Content",
   },
   {
     id: 9,
@@ -97,6 +105,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: false,
+    content: "Test Content",
   },
   {
     id: 10,
@@ -108,6 +117,7 @@ const mockPosts = [
     image:
       "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
     isFeatured: true,
+    content: "Test Content",
   },
 ];
 
