@@ -9,6 +9,7 @@ export default function TextArea(props: InputProps) {
         required={props.required}
         v-model="text"
         className="p-1 rounded outline-none mt-0 shadow text-black"
+        name={props.name ? props.name : props.label?.toLowerCase()}
       />
     </div>
   );
