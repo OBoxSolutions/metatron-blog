@@ -62,7 +62,9 @@ export default function Posts() {
     if (!selectedRows[0]) return;
 
     const docRef = doc(db, "posts", String(selectedRows[0].id));
-    deleteDoc(docRef);
+
+    await deleteDoc(docRef);
+    loadPosts();
   };
 
   return (
