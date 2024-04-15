@@ -50,7 +50,7 @@ export default function Posts() {
     const querySnapshot = await getDocs(postsCollection);
     querySnapshot.forEach((doc) => {
       const post = doc.data() as Post;
-      localPosts.push(post);
+      localPosts.push({ ...post, id: doc.id });
     });
 
     setPosts(localPosts);
