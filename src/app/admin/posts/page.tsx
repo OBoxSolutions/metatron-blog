@@ -1,6 +1,5 @@
 "use client";
 
-import Icon from "@mdi/react";
 import { mdiPlus } from "@mdi/js";
 
 import Card from "@/components/Card";
