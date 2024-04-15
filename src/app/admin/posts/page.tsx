@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { deleteDoc, doc, getDocs } from "firebase/firestore";
 import { mdiPlus } from "@mdi/js";
 
@@ -39,6 +40,8 @@ export default function Posts() {
   const [selectedRows, setSelectedRows] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     loadPosts();
   }, []);
@@ -67,6 +70,12 @@ export default function Posts() {
     loadPosts();
   };
 
+  const edit = () => {
+    if (!selectedRows[0]) return;
+
+    router.push(`/admin/new-post/${selectedRows[0].id}`);
+  };
+
   return (
     <Section title="Posts">
       <Card>
@@ -78,6 +87,7 @@ export default function Posts() {
               setSelectedRows(selectedRows)
             }
             onDestroy={destroy}
+            onUpdate={edit}
             progressPending={loading}
           />
         </CardBody>
@@ -91,4 +101,3 @@ export default function Posts() {
     </Section>
   );
 }
-
