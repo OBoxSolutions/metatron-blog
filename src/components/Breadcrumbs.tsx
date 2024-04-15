@@ -2,6 +2,7 @@ import Link from "next/link";
 
 type BreadcrumbsProps = {
   breadcrumbs: Breadcrumb[];
+  className?: string;
 };
 
 type Breadcrumb = {
@@ -13,7 +14,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
   const lastIndex = props.breadcrumbs.length - 1;
 
   return (
-    <div className="flex">
+    <div className={`flex ${props.className}`}>
       {props.breadcrumbs.map((breadcrumb, index) => (
         <div key={`breadcrumb-${breadcrumb.href}`} className="flex gag-10">
           <Link
