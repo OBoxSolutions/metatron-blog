@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { deleteDoc, doc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { deleteDoc, doc, getDocs } from "firebase/firestore";
 import { mdiPlus } from "@mdi/js";
 
 import Card from "@/components/Card";
@@ -13,9 +13,7 @@ import DataTable from "../_components/DataTable";
 
 import { Post } from "@/types/Post";
 
-import posts from "@/app/_posts";
-
-import { db } from "@/utils/firebase";
+import { db, postsCollection } from "@/utils/firebase";
 
 const columns = [
   {
@@ -37,7 +35,24 @@ const columns = [
 ];
 
 export default function Posts() {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [selectedRows, setSelectedRows] = useState<Post[]>([]);
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  const loadPosts = async () => {
+    const localPosts: Post[] = [];
+
+    const querySnapshot = await getDocs(postsCollection);
+    querySnapshot.forEach((doc) => {
+      const post = doc.data() as Post;
+      localPosts.push(post);
+    });
+
+    setPosts(localPosts);
+  };
 
   const destroy = () => {
     if (!selectedRows[0]) return;
