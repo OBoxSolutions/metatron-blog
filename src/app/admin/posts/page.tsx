@@ -37,12 +37,14 @@ const columns = [
 export default function Posts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedRows, setSelectedRows] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadPosts();
   }, []);
 
   const loadPosts = async () => {
+    setLoading(true);
     const localPosts: Post[] = [];
 
     const querySnapshot = await getDocs(postsCollection);
@@ -52,6 +54,7 @@ export default function Posts() {
     });
 
     setPosts(localPosts);
+    setLoading(false);
   };
 
   const destroy = () => {
@@ -72,6 +75,7 @@ export default function Posts() {
               setSelectedRows(selectedRows)
             }
             onDestroy={destroy}
+            progressPending={loading}
           />
         </CardBody>
       </Card>
