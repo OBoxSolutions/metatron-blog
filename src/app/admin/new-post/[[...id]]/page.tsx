@@ -8,6 +8,7 @@ import TextArea from "@/components/TextArea";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Button from "@/components/Button";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 import Section from "@/app/admin/_components/Section";
 
@@ -64,7 +65,22 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
   };
 
   return (
-    <Section title="Add Posts">
+    <Section>
+      <Breadcrumbs
+        className="my-5"
+        breadcrumbs={[
+          {
+            href: "/admin/posts",
+            text: "Posts",
+          },
+          {
+            href: "/admin/new-post",
+            text: "New Post",
+          },
+        ]}
+      ></Breadcrumbs>
+
+      <h2 className="text-3xl mb-2">Posts</h2>
       <Card>
         <CardBody>
           {isLoading && <p>Loading baby</p>}
