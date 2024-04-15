@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { addDoc } from "firebase/firestore";
+import { FormEvent, useEffect, useState } from "react";
+import { addDoc, doc, getDoc } from "firebase/firestore";
 
 import InputText from "@/components/InputText";
 import TextArea from "@/components/TextArea";
@@ -11,10 +11,34 @@ import Button from "@/components/Button";
 
 import Section from "@/app/admin/_components/Section";
 
-import { postsCollection } from "@/utils/firebase";
+import { db, postsCollection } from "@/utils/firebase";
+import { Post } from "@/types/Post";
 
-export default function NewPost() {
+export default function NewPost({ params }: { params: { id?: string[] } }) {
   const [isLoading, setLoading] = useState(false);
+  const [post, setPost] = useState<Post>({
+    userId: "1",
+    title: "",
+    description: "",
+    date: "",
+    image: "",
+    isFeatured: false,
+    content: "",
+  });
+
+  useEffect(() => {
+    if (!params.id) return;
+
+    const loadPost = async () => {
+      const docRef = doc(db, "posts", String(params.id));
+      const querySnapshot = await getDoc(docRef);
+      const localPost = querySnapshot.data() as Post;
+
+      setPost(localPost);
+    };
+
+    loadPost();
+  }, [params.id]);
 
   const addPost = async (e: FormEvent) => {
     setLoading(true);
@@ -46,9 +70,21 @@ export default function NewPost() {
           {isLoading && <p>Loading baby</p>}
 
           <form className="flex flex-col gap-4" onSubmit={addPost}>
-            <InputText label="Title" required={true}></InputText>
-            <TextArea label="Description" required={true}></TextArea>
-            <TextArea label="Content" required={true}></TextArea>
+            <InputText
+              label="Title"
+              required={true}
+              value={post?.title ?? ""}
+            ></InputText>
+            <TextArea
+              label="Description"
+              required={true}
+              value={post.description ?? ""}
+            ></TextArea>
+            <TextArea
+              label="Content"
+              required={true}
+              value={post.content ?? ""}
+            ></TextArea>
             <Button className="ml-auto">Submit</Button>
           </form>
         </CardBody>
