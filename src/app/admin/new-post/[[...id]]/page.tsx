@@ -80,7 +80,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
         ]}
       ></Breadcrumbs>
 
-      <h2 className="text-3xl mb-2">Posts</h2>
+      <h2 className="text-3xl mb-2">Make new post</h2>
       <Card>
         <CardBody>
           {isLoading && <p>Loading baby</p>}
