@@ -1,14 +1,11 @@
 import LocalDataTable, {
   createTheme,
-  TableColumn,
+  TableProps,
 } from "react-data-table-component";
 
-import TableActions from "./TableActions";
+import TableActions, { TableActionsProps } from "./TableActions";
 
-type DataTableProps<T> = {
-  columns: TableColumn<T>[];
-  data: T[];
-};
+type DataTableProps<T> = TableActionsProps & TableProps<T>;
 
 createTheme("app", {
   text: {
@@ -35,12 +32,14 @@ createTheme("app", {
 export default function DataTable<T>(props: DataTableProps<T>) {
   return (
     <div>
-      <TableActions></TableActions>
+      <TableActions
+        onUpdate={props.onUpdate}
+        onDestroy={props.onDestroy}
+      ></TableActions>
       <LocalDataTable
         selectableRows={true}
-        columns={props.columns}
-        data={props.data}
         theme="app"
+        {...props}
       ></LocalDataTable>
     </div>
   );
