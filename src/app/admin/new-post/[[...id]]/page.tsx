@@ -9,7 +9,7 @@ import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Button from "@/components/Button";
 
-import Section from "../_components/Section";
+import Section from "@/app/admin/_components/Section";
 
 import { postsCollection } from "@/utils/firebase";
 
