@@ -23,7 +23,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           >
             {breadcrumb.text}
           </Link>
-          {index !== lastIndex && <div>/</div>}
+          {index !== lastIndex && <div className="mx-2">/</div>}
         </div>
       ))}
     </div>
