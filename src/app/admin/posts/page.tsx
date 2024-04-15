@@ -57,7 +57,8 @@ export default function Posts() {
     setLoading(false);
   };
 
-  const destroy = () => {
+  const destroy = async () => {
+    setLoading(true);
     if (!selectedRows[0]) return;
 
     const docRef = doc(db, "posts", String(selectedRows[0].id));
