@@ -65,7 +65,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
   };
 
   return (
-    <Section>
+    <Section width="max-w-2xl">
       <Breadcrumbs
         className="my-5"
         breadcrumbs={[
