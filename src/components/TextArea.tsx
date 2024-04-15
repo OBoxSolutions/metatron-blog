@@ -7,7 +7,7 @@ export default function TextArea(props: InputProps) {
       <textarea
         id={props.label}
         required={props.required}
-        v-model="text"
+        value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         name={props.name ? props.name : props.label?.toLowerCase()}
       />
