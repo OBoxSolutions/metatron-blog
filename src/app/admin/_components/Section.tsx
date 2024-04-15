@@ -1,5 +1,5 @@
 type SectionProps = {
-  title: string;
+  title?: string;
   children?: React.ReactNode;
 };
 
