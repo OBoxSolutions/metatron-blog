@@ -43,12 +43,11 @@ export default function PostSinglePage({
 
       const querySnapshotFeaturedPosts = await getDocs(queryFeaturedPosts);
 
-      setFeaturedPosts(
-        querySnapshotFeaturedPosts.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        })) as Post[],
-      );
+      const featuredPosts = querySnapshotFeaturedPosts.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as Post[];
+      setFeaturedPosts(featuredPosts.splice(0, 4));
     };
 
     loadPost();
