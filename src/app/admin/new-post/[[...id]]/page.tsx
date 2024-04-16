@@ -14,6 +14,7 @@ import Section from "@/app/admin/_components/Section";
 
 import { db, postsCollection } from "@/utils/firebase";
 import { Post } from "@/types/Post";
+import { toast } from "sonner";
 
 export default function NewPost({ params }: { params: { id?: string[] } }) {
   const [isLoading, setLoading] = useState(false);
@@ -60,18 +61,25 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
       content: String(formData.get("content")),
     };
 
-    params.id ? store(post) : update(post);
+    try {
+      params?.id && params.id[0] ? update(post) : store(post);
+    } catch (error) {
+      toast.error((error as Error).message);
+      console.log(error);
+    }
 
     setLoading(false);
   };
 
   const store = async (post: Post) => {
     await addDoc(postsCollection, post);
+    toast.success("Post inserted successfully");
   };
 
   const update = async (post: Post) => {
     const docRef = doc(db, "posts", String(params.id));
     await updateDoc(docRef, post);
+    toast.success("Post updated successfully");
   };
 
   return (
