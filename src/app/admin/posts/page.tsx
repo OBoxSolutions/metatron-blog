@@ -15,6 +15,7 @@ import DataTable from "../_components/DataTable";
 import { Post } from "@/types/Post";
 
 import { db, postsCollection } from "@/utils/firebase";
+import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 
 const columns = [
   {
@@ -39,6 +40,7 @@ export default function Posts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedRows, setSelectedRows] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
+  const [dialog, setDialog] = useState(false);
 
   const router = useRouter();
 
@@ -60,13 +62,19 @@ export default function Posts() {
     setLoading(false);
   };
 
+  const openConfirmationDialog = () => {
+    if (!selectedRows[0]) return;
+
+    setDialog(true);
+  };
+
   const destroy = async () => {
     setLoading(true);
-    if (!selectedRows[0]) return;
 
     const docRef = doc(db, "posts", String(selectedRows[0].id));
 
     await deleteDoc(docRef);
+    setDialog(false);
     loadPosts();
   };
 
@@ -86,7 +94,7 @@ export default function Posts() {
             onSelectedRowsChange={({ selectedRows }) =>
               setSelectedRows(selectedRows)
             }
-            onDestroy={destroy}
+            onDestroy={openConfirmationDialog}
             onUpdate={edit}
             progressPending={loading}
           />
@@ -98,6 +106,13 @@ export default function Posts() {
         href="new-post"
         className="fixed bottom-20 right-20"
       ></Button>
+
+      <DialogDeleteConfirmation
+        dialog={dialog}
+        closeDialog={setDialog}
+        onClickAccept={destroy}
+        onClickCancel={() => setDialog(false)}
+      ></DialogDeleteConfirmation>
     </Section>
   );
 }
