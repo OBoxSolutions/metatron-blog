@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Button from "@/components/Button";
+import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 
 import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
@@ -16,7 +17,6 @@ import DataTable from "../_components/DataTable";
 import { Post } from "@/types/Post";
 
 import { db, postsCollection } from "@/utils/firebase";
-import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 
 const columns = [
   {
@@ -65,7 +65,7 @@ export default function Posts() {
 
   const openConfirmationDialog = () => {
     if (!selectedRows[0]) {
-      toast.info("Select a post in the table");
+      toast.info("You need to select an item before deleting it");
       return;
     }
 
@@ -84,7 +84,7 @@ export default function Posts() {
 
   const edit = () => {
     if (!selectedRows[0]) {
-      toast.info("Select a post in the table");
+      toast.info("You need to select an item before updating it");
       return;
     }
 
