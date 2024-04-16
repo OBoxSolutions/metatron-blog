@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { deleteDoc, doc, getDocs } from "firebase/firestore";
 import { mdiPlus } from "@mdi/js";
+import { toast } from "sonner";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
@@ -63,7 +64,10 @@ export default function Posts() {
   };
 
   const openConfirmationDialog = () => {
-    if (!selectedRows[0]) return;
+    if (!selectedRows[0]) {
+      toast.info("Select a post in the table");
+      return;
+    }
 
     setDialog(true);
   };
