@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 
 import { useEffect, useState } from "react";
-import { DocumentData, QuerySnapshot, getDocs } from "firebase/firestore";
+import { DocumentData, getDocs } from "firebase/firestore";
 
 import Image from "next/image";
 
@@ -14,7 +14,6 @@ import CardBody from "@/components/CardBody";
 
 import { Post } from "@/types/Post";
 
-import posts from "../_posts";
 import Link from "next/link";
 import { postsCollection } from "@/utils/firebase";
 
