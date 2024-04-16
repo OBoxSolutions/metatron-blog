@@ -1,6 +1,7 @@
 import { Post } from "@/types/Post";
 
 import Image from "next/image";
+import Link from "next/link";
 
 type AsideProps = {
   title?: string;
@@ -17,16 +18,21 @@ const Aside = (props: AsideProps) => {
         {props.posts.map((post) => {
           return (
             <li key={`post-${post.id}`} className="mb-10">
-              <article className="flex gap-3 items-center">
-                <Image
-                  src={post.image}
-                  alt={post.description}
-                  width={176}
-                  height={103}
-                />
-                <div className="text-base">
-                  <p>{post.description}</p>
-                </div>
+              <article>
+                <Link
+                  href={`/post/${post.id}`}
+                  className="flex gap-3 items-center"
+                >
+                  <Image
+                    src={post.image}
+                    alt={post.description}
+                    width={176}
+                    height={103}
+                  />
+                  <div className="text-base">
+                    <p>{post.description}</p>
+                  </div>
+                </Link>
               </article>
             </li>
           );
