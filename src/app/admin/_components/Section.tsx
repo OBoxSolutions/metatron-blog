@@ -9,7 +9,7 @@ export default function Section(props: SectionProps) {
 
   return (
     <section className={`mx-auto mt-10 ${localWidth}`}>
-      {props.title && <h2 className="text-3xl mb-2">Posts</h2>}
+      {props.title && <h2 className="text-3xl mb-2">{props.title}</h2>}
       {props.children}
     </section>
   );
