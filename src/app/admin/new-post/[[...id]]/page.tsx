@@ -64,8 +64,6 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     setLoading(false);
   };
 
-  const defaultInputText = "123";
-
   return (
     <Section width="max-w-2xl">
       <Breadcrumbs
