@@ -22,7 +22,7 @@ const columns = [
     selector: (row: Post) => row.title,
   },
   {
-    name: "Year",
+    name: "Date",
     selector: (row: Post) => row.date,
   },
   {
