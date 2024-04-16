@@ -81,10 +81,8 @@ export default function PostSinglePage({
         (await updateDoc(docRef, {
           commentsIds: arrayUnion(comment?.id),
         }));
-      toast.success("Comment added successfully");
     } catch (error) {
       console.log((error as Error).message);
-      toast.error("Problem adding comment");
     }
   };
 
