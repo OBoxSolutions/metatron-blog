@@ -6,6 +6,8 @@ import "./globals.css";
 import Aside from "./_components/Aside";
 import Nav from "./_components/Nav";
 
+import { Toaster } from "sonner";
+
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
   display: "swap",
@@ -26,6 +28,8 @@ export default function RootLayout({
         <Aside className="col-span-1 row-span-2"></Aside>
         <Nav className="col-start-2"></Nav>
         <main className="col-start-2">{children}</main>
+
+        <Toaster expand={true}></Toaster>
       </body>
     </html>
   );
