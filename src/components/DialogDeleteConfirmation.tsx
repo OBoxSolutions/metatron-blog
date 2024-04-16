@@ -5,6 +5,7 @@ import CardBody from "./CardBody";
 
 type DialogDeleteConfirmationProps = {
   onClickAccept: () => void;
+  onClickCancel: () => void;
 } & DialogProps;
 
 export default function DialogDeleteConfirmation(
@@ -17,7 +18,7 @@ export default function DialogDeleteConfirmation(
           <p className="text-2xl">Delete?</p>
           <p className="py-4">The selected element will be deleted</p>
           <div className="flex justify-end gap-1">
-            <Button>Cancel</Button>
+            <Button onClick={props.onClickCancel}>Cancel</Button>
             <Button onClick={props.onClickAccept}>Accept</Button>
           </div>
         </CardBody>
