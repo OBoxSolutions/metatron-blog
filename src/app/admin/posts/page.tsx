@@ -83,7 +83,10 @@ export default function Posts() {
   };
 
   const edit = () => {
-    if (!selectedRows[0]) return;
+    if (!selectedRows[0]) {
+      toast.info("Select a post in the table");
+      return;
+    }
 
     router.push(`/admin/new-post/${selectedRows[0].id}`);
   };
