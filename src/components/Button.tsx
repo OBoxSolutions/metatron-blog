@@ -1,6 +1,6 @@
 import Icon from "@mdi/react";
 import Link from "next/link";
-import { ElementType } from "react";
+import { ElementType, MouseEvent } from "react";
 
 type ButtonProps = {
   icon?: string;
@@ -8,6 +8,7 @@ type ButtonProps = {
   children?: React.ReactNode;
   className?: string;
   href?: string;
+  onClick?: (e: MouseEvent) => void;
 };
 
 export default function Button(props: ButtonProps) {
@@ -27,6 +28,7 @@ export default function Button(props: ButtonProps) {
     <Parent
       className={`${buttonClasses} ${props.className}` || ""}
       {...parentProps}
+      onClick={props.onClick}
     >
       {props.icon && <Icon path={props.icon} size={props.iconSize}></Icon>}
       {props.children}
