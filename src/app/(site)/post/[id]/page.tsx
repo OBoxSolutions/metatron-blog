@@ -1,7 +1,16 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { addDoc, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 import { commentsCollection, db, postsCollection } from "@/utils/firebase";
 import { Post } from "@/types/Post";
@@ -59,11 +68,19 @@ export default function PostSinglePage({
     const formData = new FormData(e.target as HTMLFormElement);
 
     try {
-      await addDoc(commentsCollection, {
+      const commentRef = await addDoc(commentsCollection, {
         text: formData.get("text"),
         postId: params.id,
         userId: "1",
       });
+
+      const comment = await getDoc(commentRef);
+
+      const docRef = doc(db, "posts", String(params.id));
+      comment?.id &&
+        (await updateDoc(docRef, {
+          commentsIds: arrayUnion(comment?.id),
+        }));
       toast.success("Comment added successfully");
     } catch (error) {
       console.log((error as Error).message);
