@@ -1,4 +1,9 @@
+"use client";
+
 import { useMemo } from "react";
+
+import { useEffect, useState } from "react";
+import { DocumentData, QuerySnapshot, getDocs } from "firebase/firestore";
 
 import Image from "next/image";
 
@@ -11,6 +16,7 @@ import { Post } from "@/types/Post";
 
 import posts from "../_posts";
 import Link from "next/link";
+import { postsCollection } from "@/utils/firebase";
 
 function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
@@ -41,9 +47,24 @@ function useOtherPosts(
 }
 
 export default function Home() {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [firstFeaturedPost, featuredPosts] = useFeaturedPosts(posts);
   const [firstLatestPost, latestPosts] = useLatestPosts(posts);
   const otherPosts = useOtherPosts(posts, featuredPosts, latestPosts);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      const querySnapshot = await getDocs(postsCollection);
+      setPosts(
+        querySnapshot.docs.map((doc: DocumentData) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      );
+    };
+
+    loadPosts();
+  }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto">
