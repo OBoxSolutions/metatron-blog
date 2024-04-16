@@ -3,4 +3,5 @@ export type InputProps = {
   required: boolean;
   name?: string;
   value?: string;
+  defaultValue?: string;
 };

@@ -10,6 +10,7 @@ export default function TextArea(props: InputProps) {
         value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         name={props.name ? props.name : props.label?.toLowerCase()}
+        defaultValue={props.defaultValue}
       />
     </div>
   );
