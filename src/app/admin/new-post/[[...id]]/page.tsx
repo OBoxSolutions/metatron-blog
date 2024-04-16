@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { addDoc, doc, getDoc } from "firebase/firestore";
+import { addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 import InputText from "@/components/InputText";
 import TextArea from "@/components/TextArea";
@@ -41,7 +41,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     loadPost();
   }, [params.id]);
 
-  const addPost = async (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     setLoading(true);
     e.preventDefault();
 
@@ -50,18 +50,28 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
 
     const formData = new FormData(target);
 
-    const data = {
-      date: new Date().getUTCDate(),
-      userId: 1,
-      title: formData.get("title"),
-      description: formData.get("description"),
+    const post = {
+      date: String(new Date().getUTCDate()),
+      userId: "1",
+      title: String(formData.get("title")),
+      description: String(formData.get("description")),
       image: "",
       isFeatured: false,
-      content: formData.get("content"),
+      content: String(formData.get("content")),
     };
 
-    await addDoc(postsCollection, data);
+    params.id ? store(post) : update(post);
+
     setLoading(false);
+  };
+
+  const store = async (post: Post) => {
+    await addDoc(postsCollection, post);
+  };
+
+  const update = async (post: Post) => {
+    const docRef = doc(db, "posts", String(params.id));
+    await updateDoc(docRef, post);
   };
 
   return (
@@ -85,7 +95,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
         <CardBody>
           {isLoading && <p>Loading baby</p>}
 
-          <form className="flex flex-col gap-4" onSubmit={addPost}>
+          <form className="flex flex-col gap-4" onSubmit={submit}>
             <InputText
               label="Title"
               required={true}
