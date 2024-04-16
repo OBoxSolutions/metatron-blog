@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 import InputText from "@/components/InputText";
@@ -27,6 +28,8 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     isFeatured: false,
     content: "",
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     if (!params.id) return;
@@ -73,6 +76,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
 
   const store = async (post: Post) => {
     await addDoc(postsCollection, post);
+    router.push("/admin/posts");
     toast.success("Post inserted successfully");
   };
 
