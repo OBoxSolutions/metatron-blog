@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-type DialogProps = {
+export type DialogProps = {
   dialog: boolean;
   closeDialog: (dialog: boolean) => void;
   width?: string;
