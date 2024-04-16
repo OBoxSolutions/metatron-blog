@@ -33,7 +33,6 @@ export default function PostSinglePage({
       const docRef = doc(db, "posts", String(params.id));
       const querySnapshot = await getDoc(docRef);
 
-      console.log(querySnapshot.data());
       const localPost = querySnapshot.data() as Post;
       localPost && setPost(localPost);
 
@@ -43,8 +42,6 @@ export default function PostSinglePage({
       );
 
       const querySnapshotFeaturedPosts = await getDocs(queryFeaturedPosts);
-
-      console.log(localPost);
 
       setFeaturedPosts(
         querySnapshotFeaturedPosts.docs.map((doc) => ({
