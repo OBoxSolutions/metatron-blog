@@ -10,6 +10,7 @@ import CardBody from "@/components/CardBody";
 import { Post } from "@/types/Post";
 
 import posts from "../_posts";
+import Link from "next/link";
 
 function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
@@ -50,16 +51,18 @@ export default function Home() {
         <Section>
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
-              <Image
-                className="w-full"
-                src={firstFeaturedPost.image}
-                alt={firstFeaturedPost.description}
-                width={500}
-                height={400}
-              ></Image>
-              <h3 className="text-4xl mt-4 text-center">
-                {firstFeaturedPost.title}
-              </h3>
+              <Link href={`/post/${firstFeaturedPost.id}`}>
+                <Image
+                  className="w-full"
+                  src={firstFeaturedPost.image}
+                  alt={firstFeaturedPost.description}
+                  width={500}
+                  height={400}
+                ></Image>
+                <h3 className="text-4xl mt-4 text-center">
+                  {firstFeaturedPost.title}
+                </h3>
+              </Link>
             </article>
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
           </div>
@@ -71,14 +74,16 @@ export default function Home() {
           <h3 className="text-3xl mt-4">{firstLatestPost.title}</h3>
           <div className="md:grid grid-cols-6 gap-16">
             <article className="col-span-4">
-              <Image
-                className="w-full"
-                src={firstLatestPost.image}
-                alt={firstLatestPost.description}
-                width={500}
-                height={400}
-              ></Image>
-              <p className="mt-5">{firstLatestPost.description}</p>
+              <Link href={`/post/${firstLatestPost.id}`}>
+                <Image
+                  className="w-full"
+                  src={firstLatestPost.image}
+                  alt={firstLatestPost.description}
+                  width={500}
+                  height={400}
+                ></Image>
+                <p className="mt-5">{firstLatestPost.description}</p>
+              </Link>
             </article>
             <Aside className="col-span-2" posts={latestPosts}></Aside>
           </div>
@@ -89,16 +94,18 @@ export default function Home() {
 
       <Section className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
         {otherPosts.map((post) => (
-          <Card key={`index-post-${post.id}`}>
-            <Image
-              className="w-full"
-              src={post.image}
-              alt={post.description}
-              width={355}
-              height={240}
-            ></Image>
-            <CardBody>{post.description}</CardBody>
-          </Card>
+          <Link key={`index-post-${post.id}`} href={`/post/${post.id}`}>
+            <Card>
+              <Image
+                className="w-full"
+                src={post.image}
+                alt={post.description}
+                width={355}
+                height={240}
+              ></Image>
+              <CardBody>{post.description}</CardBody>
+            </Card>
+          </Link>
         ))}
       </Section>
     </div>
