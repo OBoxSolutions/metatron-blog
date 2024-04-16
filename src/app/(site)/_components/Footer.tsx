@@ -10,9 +10,9 @@ const CONTACTS = [
 ];
 
 const SOCIAL_ICONS = [
-  { src: "Facebook.svg", alt: "Facebook Logo" },
-  { src: "Instagram.svg", alt: "Instagram Logo" },
-  { src: "TikTok.svg", alt: "TikTok Logo" },
+  { src: "/Facebook.svg", alt: "Facebook Logo" },
+  { src: "/Instagram.svg", alt: "Instagram Logo" },
+  { src: "/TikTok.svg", alt: "TikTok Logo" },
 ];
 
 export default function Footer() {
