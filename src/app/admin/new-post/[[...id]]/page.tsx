@@ -64,6 +64,8 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     setLoading(false);
   };
 
+  const defaultInputText = "123";
+
   return (
     <Section width="max-w-2xl">
       <Breadcrumbs
@@ -89,17 +91,17 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
             <InputText
               label="Title"
               required={true}
-              value={post?.title ?? ""}
+              defaultValue={post?.title ?? ""}
             ></InputText>
             <TextArea
               label="Description"
               required={true}
-              value={post.description ?? ""}
+              defaultValue={post.description ?? ""}
             ></TextArea>
             <TextArea
               label="Content"
               required={true}
-              value={post.content ?? ""}
+              defaultValue={post.content ?? ""}
             ></TextArea>
             <Button className="ml-auto">Submit</Button>
           </form>
