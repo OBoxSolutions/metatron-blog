@@ -7,6 +7,7 @@ import { FormEvent } from "react";
 
 type CommentFormProps = {
   comment: Comment;
+  loading?: boolean;
   onSubmit: (e: FormEvent) => void;
 };
 export default function CommentForm(props: CommentFormProps) {
@@ -23,7 +24,7 @@ export default function CommentForm(props: CommentFormProps) {
             label="Text"
           ></TextArea>
           <div className="flex justify-end mt-4">
-            <Button>Submit</Button>
+            <Button loading={props.loading}>Submit</Button>
           </div>
         </form>
       </CardBody>
