@@ -28,6 +28,7 @@ export default function Comments() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [selectedRows, setSelectedRows] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [formDialog, setFormDialog] = useState(false);
 
@@ -76,18 +77,20 @@ export default function Comments() {
     loadComments();
   };
 
-  const edit = (e: FormEvent) => {
+  const edit = async (e: FormEvent) => {
     e.preventDefault();
+    setFormLoading(true);
 
     const formData = new FormData(e.target as HTMLFormElement);
 
     const docRef = doc(db, "comments", String(selectedRows[0].id));
-    updateDoc(docRef, {
+    await updateDoc(docRef, {
       text: formData.get("text") as string,
     });
 
     toast.success("Comment updated");
     loadComments();
+    setFormLoading(false);
     setFormDialog(false);
   };
 
@@ -109,7 +112,11 @@ export default function Comments() {
       </Card>
 
       <Dialog dialog={formDialog} closeDialog={setFormDialog} width="500px">
-        <CommentForm comment={selectedRows[0]} onSubmit={edit}></CommentForm>
+        <CommentForm
+          comment={selectedRows[0]}
+          onSubmit={edit}
+          loading={formLoading}
+        ></CommentForm>
       </Dialog>
 
       <DialogDeleteConfirmation
