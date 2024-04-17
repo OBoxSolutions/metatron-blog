@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Icon from "@mdi/react";
+import {
+  mdiViewDashboard,
+  mdiPost,
+  mdiAccountGroup,
+  mdiComment,
+} from "@mdi/js";
 
 type AsideProps = {
   className?: string;
@@ -7,22 +14,22 @@ type AsideProps = {
 
 const links = [
   {
-    icon: "",
+    icon: mdiViewDashboard,
     text: "Dashboard",
     href: "/admin",
   },
   {
-    icon: "",
+    icon: mdiPost,
     text: "Posts",
     href: "/admin/posts",
   },
   {
-    icon: "",
+    icon: mdiAccountGroup,
     text: "Users",
     href: "/admin/users",
   },
   {
-    icon: "",
+    icon: mdiComment,
     text: "Comments",
     href: "/admin/comments",
   },
@@ -39,8 +46,9 @@ const Aside = (props: AsideProps) => {
           return (
             <li
               key={`link-${link.text}`}
-              className={` rounded ${pathname === link.href ? "bg-accent" : ""}`}
+              className={` rounded flex items-center ${pathname === link.href ? "bg-accent" : ""}`}
             >
+              <Icon path={link.icon} size={1}></Icon>
               <Link className="p-3 block w-full" href={link.href}>
                 {link.text}
               </Link>
