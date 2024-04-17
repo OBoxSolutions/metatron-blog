@@ -101,6 +101,7 @@ export default function Comments() {
       <Button
         icon={mdiPlus}
         iconSize={2}
+        floating={true}
         href="new-comment"
         className="fixed bottom-20 right-20"
       ></Button>
