@@ -109,6 +109,8 @@ export default function PostSinglePage({
         (await updateDoc(docRef, {
           commentsIds: arrayUnion(comment?.id),
         }));
+
+      (e.target as HTMLFormElement).reset();
     } catch (error) {
       console.log((error as Error).message);
     }
