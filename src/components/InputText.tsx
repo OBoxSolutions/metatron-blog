@@ -11,6 +11,7 @@ export default function InputText(props: InputProps) {
         className="p-1 rounded outline-none mt-0 shadow text-black"
         name={props.name ? props.name : props.label?.toLowerCase()}
         defaultValue={props.defaultValue}
+        disabled={props.disabled}
       />
     </div>
   );
