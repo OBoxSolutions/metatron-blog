@@ -1,6 +1,7 @@
 type Post = {
   id?: string | number;
   userId: string;
+  commentsIds?: string[];
   title: string;
   description: string;
   date: string;
