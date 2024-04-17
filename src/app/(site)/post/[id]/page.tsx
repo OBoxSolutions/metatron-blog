@@ -2,9 +2,11 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import {
+  DocumentData,
   addDoc,
   arrayUnion,
   doc,
+  documentId,
   getDoc,
   getDocs,
   query,
@@ -13,12 +15,13 @@ import {
 } from "firebase/firestore";
 
 import { commentsCollection, db, postsCollection } from "@/utils/firebase";
+
 import { Post } from "@/types/Post";
+import { Comment } from "@/types/Comment";
 
 import Section from "../../_components/Section";
 import CommentForm from "@/app/(site)/_components/CommentForm";
 import Aside from "../../_components/Aside";
-import { toast } from "sonner";
 
 export default function PostSinglePage({
   params,
@@ -35,9 +38,17 @@ export default function PostSinglePage({
     content: "",
   });
   const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     if (!params.id) return;
+
+    const loadData = async () => {
+      const commentsIds = await loadPost();
+      if (commentsIds?.length) {
+        await loadComments(commentsIds);
+      }
+    };
 
     const loadPost = async () => {
       const docRef = doc(db, "posts", String(params.id));
@@ -58,9 +69,26 @@ export default function PostSinglePage({
         id: doc.id,
       })) as Post[];
       setFeaturedPosts(featuredPosts.splice(0, 4));
+
+      return localPost?.commentsIds ?? [];
     };
 
-    loadPost();
+    const loadComments = async (commentsIds: string[]) => {
+      const q = query(
+        commentsCollection,
+        where(documentId(), "in", commentsIds),
+      );
+      const querySnapshot = await getDocs(q);
+
+      setComments(
+        querySnapshot.docs.map((doc: DocumentData) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      );
+    };
+
+    loadData();
   }, [params.id]);
 
   const addComment = async (e: FormEvent) => {
@@ -92,6 +120,13 @@ export default function PostSinglePage({
         <div className="md:grid grid-cols-6 gap-16">
           <div className="col-span-4">
             <article>{post.content}</article>
+            <div className="flex flex-col">
+              {comments.map((comment) => (
+                <div className="flex" key={`comment-id-${comment?.id}`}>
+                  <p>{comment.text}</p>
+                </div>
+              ))}
+            </div>
             <CommentForm className="mt-8" onSubmit={addComment}></CommentForm>
           </div>
           <div className="col-span-2">
