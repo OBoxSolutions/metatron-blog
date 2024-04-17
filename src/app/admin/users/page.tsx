@@ -1,13 +1,15 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDocs } from "firebase/firestore";
 import { toast } from "sonner";
+import { mdiPlus } from "@mdi/js";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 import Dialog from "@/components/Dialog";
+import Button from "@/components/Button";
 
 import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
@@ -15,7 +17,9 @@ import UserForm from "../_components/UserForm";
 
 import { User } from "@/types/User";
 
-import { db, commentsCollection } from "@/utils/firebase";
+import { db, usersCollection } from "@/utils/firebase";
+
+import { destroy, store, update } from "@/services/users";
 
 const columns = [
   {
@@ -32,8 +36,10 @@ export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedRows, setSelectedRows] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [formDialog, setFormDialog] = useState(false);
+  const [isFormUpdating, setIsFormUpdating] = useState(false);
 
   useEffect(() => {
     loadUsers();
@@ -42,7 +48,7 @@ export default function Users() {
   const loadUsers = async () => {
     setLoading(true);
 
-    const querySnapshot = await getDocs(commentsCollection);
+    const querySnapshot = await getDocs(usersCollection);
     setUsers(
       querySnapshot.docs.map((doc) => ({
         ...(doc.data() as User),
@@ -61,34 +67,66 @@ export default function Users() {
     setDeleteDialog(true);
   };
 
+  const openAddDialog = (e: FormEvent) => {
+    setIsFormUpdating(false);
+    setFormDialog(true);
+  };
+
   const openEditDialog = () => {
     if (!selectedRows[0]) {
       toast.info("You need to select an item before updating it");
       return;
     }
 
+    setIsFormUpdating(true);
     setFormDialog(true);
   };
 
-  const destroy = async () => {
+  const destroyUser = async () => {
+    if (!selectedRows[0]) {
+      toast.info("You need to select an item before deleting it");
+      return;
+    }
+
     setLoading(true);
 
-    const docRef = doc(db, "users", String(selectedRows[0].id));
+    await destroy(selectedRows[0].id as string);
 
-    await deleteDoc(docRef);
     setDeleteDialog(false);
     loadUsers();
   };
 
-  const edit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
+    setFormLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
 
-    const docRef = doc(db, "users", String(selectedRows[0].id));
-    updateDoc(docRef, {
-      text: formData.get("text") as string,
-    });
+    const user: User = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+    };
+
+    try {
+      isFormUpdating
+        ? await updateUser({ ...user, id: selectedRows[0].id })
+        : await storeUser(user);
+      loadUsers();
+    } catch (error) {
+      toast.error("Problem adding user");
+      console.log((error as Error).message);
+    }
+    setFormLoading(false);
+  };
+
+  const storeUser = async (user: User) => {
+    await store(user);
+    toast.success("User inserted successfully");
+    setFormDialog(false);
+  };
+
+  const updateUser = async (user: User) => {
+    await update(user);
 
     toast.success("User updated");
     loadUsers();
@@ -112,14 +150,26 @@ export default function Users() {
         </CardBody>
       </Card>
 
+      <Button
+        icon={mdiPlus}
+        iconSize={2}
+        floating={true}
+        onClick={openAddDialog}
+        className="bottom-20 right-20"
+      ></Button>
+
       <Dialog dialog={formDialog} closeDialog={setFormDialog} width="500px">
-        <UserForm user={selectedRows[0]} onSubmit={edit}></UserForm>
+        <UserForm
+          user={selectedRows[0]}
+          onSubmit={submit}
+          loading={formLoading}
+        ></UserForm>
       </Dialog>
 
       <DialogDeleteConfirmation
         dialog={deleteDialog}
         closeDialog={setDeleteDialog}
-        onClickAccept={destroy}
+        onClickAccept={destroyUser}
         onClickCancel={() => setDeleteDialog(false)}
       ></DialogDeleteConfirmation>
     </Section>
