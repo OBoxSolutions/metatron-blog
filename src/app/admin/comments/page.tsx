@@ -40,15 +40,14 @@ export default function Comments() {
 
   const loadComments = async () => {
     setLoading(true);
-    const localComments: Comment[] = [];
 
     const querySnapshot = await getDocs(commentsCollection);
-    querySnapshot.forEach((doc) => {
-      const comment = doc.data() as Comment;
-      localComments.push({ ...comment, id: doc.id });
-    });
-
-    setComments(localComments);
+    setComments(
+      querySnapshot.docs.map((doc) => ({
+        ...(doc.data() as Comment),
+        id: doc.id,
+      })),
+    );
     setLoading(false);
   };
 
