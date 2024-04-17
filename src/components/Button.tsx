@@ -10,6 +10,7 @@ type ButtonProps = {
   className?: string;
   href?: string;
   loading?: boolean;
+  floating?: boolean;
   onClick?: (e: MouseEvent) => void;
 };
 
@@ -26,9 +27,11 @@ export default function Button(props: ButtonProps) {
     buttonClasses += "px-4 py-2 rounded bg-accent";
   }
 
+  props.floating ? (buttonClasses += " fixed") : " relative";
+
   return (
     <Parent
-      className={`relative ${buttonClasses} ${props.className}` || ""}
+      className={`${buttonClasses} ${props.className}` || ""}
       {...parentProps}
       onClick={props.onClick}
     >
