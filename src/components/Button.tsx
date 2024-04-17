@@ -1,6 +1,7 @@
 import Icon from "@mdi/react";
 import Link from "next/link";
 import { ElementType, MouseEvent } from "react";
+import { mdiLoading } from "@mdi/js";
 
 type ButtonProps = {
   icon?: string;
@@ -8,6 +9,7 @@ type ButtonProps = {
   children?: React.ReactNode;
   className?: string;
   href?: string;
+  loading?: boolean;
   onClick?: (e: MouseEvent) => void;
 };
 
@@ -26,10 +28,20 @@ export default function Button(props: ButtonProps) {
 
   return (
     <Parent
-      className={`${buttonClasses} ${props.className}` || ""}
+      className={`relative ${buttonClasses} ${props.className}` || ""}
       {...parentProps}
       onClick={props.onClick}
     >
+      {props.loading && (
+        <span className="absolute inset-0 bg-accent">
+          <Icon
+            path={mdiLoading}
+            size={props.iconSize}
+            className="animate-spin h-full w-full"
+          ></Icon>
+        </span>
+      )}
+
       {props.icon && <Icon path={props.icon} size={props.iconSize}></Icon>}
       {props.children}
     </Parent>
