@@ -22,6 +22,7 @@ import { Comment } from "@/types/Comment";
 import Section from "../../_components/Section";
 import CommentForm from "@/app/(site)/_components/CommentForm";
 import Aside from "../../_components/Aside";
+import Image from "next/image";
 
 export default function PostSinglePage({
   params,
@@ -120,8 +121,15 @@ export default function PostSinglePage({
   return (
     <div className="max-w-screen-xl mx-auto">
       <Section title={post?.title ?? ""}>
-        <div className="md:grid grid-cols-6 gap-16">
+        <div className="md:grid grid-cols-6 gap-16 mt-16">
           <div className="col-span-4">
+            <Image
+              src={post.image}
+              alt={post.description}
+              width={600}
+              height={600}
+              className="w-full"
+            ></Image>
             <article>{post.content}</article>
             <div className="flex flex-col gap-4 mt-16">
               <h3 className="text-3xl">Comments</h3>
