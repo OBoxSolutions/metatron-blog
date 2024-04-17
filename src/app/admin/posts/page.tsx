@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteDoc, doc, getDocs } from "firebase/firestore";
 import { mdiPlus } from "@mdi/js";
 import { toast } from "sonner";
 
@@ -14,9 +13,9 @@ import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
 
-import { Post } from "@/types/Post";
+import { destroy, index } from "@/services/posts";
 
-import { db, postsCollection } from "@/utils/firebase";
+import { Post } from "@/types/Post";
 
 const columns = [
   {
@@ -51,15 +50,10 @@ export default function Posts() {
 
   const loadPosts = async () => {
     setLoading(true);
-    const localPosts: Post[] = [];
 
-    const querySnapshot = await getDocs(postsCollection);
-    querySnapshot.forEach((doc) => {
-      const post = doc.data() as Post;
-      localPosts.push({ ...post, id: doc.id });
-    });
+    const posts = await index();
+    setPosts(posts);
 
-    setPosts(localPosts);
     setLoading(false);
   };
 
@@ -72,12 +66,11 @@ export default function Posts() {
     setDialog(true);
   };
 
-  const destroy = async () => {
+  const deletePost = async () => {
     setLoading(true);
 
-    const docRef = doc(db, "posts", String(selectedRows[0].id));
+    await destroy(`${selectedRows[0].id}`);
 
-    await deleteDoc(docRef);
     setDialog(false);
     loadPosts();
   };
@@ -118,7 +111,7 @@ export default function Posts() {
       <DialogDeleteConfirmation
         dialog={dialog}
         closeDialog={setDialog}
-        onClickAccept={destroy}
+        onClickAccept={deletePost}
         onClickCancel={() => setDialog(false)}
       ></DialogDeleteConfirmation>
     </Section>
