@@ -16,5 +16,6 @@ const db = getFirestore(app);
 
 const postsCollection = collection(db, "posts");
 const commentsCollection = collection(db, "comments");
+const usersCollection = collection(db, "users");
 
-export { app, db, postsCollection, commentsCollection };
+export { app, db, postsCollection, commentsCollection, usersCollection };
