@@ -40,12 +40,13 @@ export default function PostSinglePage({
   const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
+  const [commentsIds, setCommentsIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (!params.id) return;
 
     const loadData = async () => {
-      const commentsIds = await loadPost();
+      setCommentsIds(await loadPost());
       if (commentsIds?.length) {
         await loadComments(commentsIds);
       }
@@ -74,23 +75,20 @@ export default function PostSinglePage({
       return localPost?.commentsIds ?? [];
     };
 
-    const loadComments = async (commentsIds: string[]) => {
-      const q = query(
-        commentsCollection,
-        where(documentId(), "in", commentsIds),
-      );
-      const querySnapshot = await getDocs(q);
-
-      setComments(
-        querySnapshot.docs.map((doc: DocumentData) => ({
-          ...doc.data(),
-          id: doc.id,
-        })),
-      );
-    };
-
     loadData();
-  }, [params.id]);
+  }, [params.id, commentsIds]);
+
+  const loadComments = async (commentsIds: string[]) => {
+    const q = query(commentsCollection, where(documentId(), "in", commentsIds));
+    const querySnapshot = await getDocs(q);
+
+    setComments(
+      querySnapshot.docs.map((doc: DocumentData) => ({
+        ...doc.data(),
+        id: doc.id,
+      })),
+    );
+  };
 
   const addComment = async (e: FormEvent) => {
     setLoading(true);
