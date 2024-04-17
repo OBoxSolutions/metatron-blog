@@ -16,14 +16,14 @@ export default function CommentForm(props: CommentFormProps) {
     <Card>
       <CardBody>
         <p className="text-2xl mb-8">Update comment</p>
-        <form>
+        <form onSubmit={props.onSubmit}>
           <TextArea
             required={true}
             defaultValue={comment.text}
             label="Text"
           ></TextArea>
           <div className="flex justify-end mt-4">
-            <Button onClick={(_) => props.onSubmit(comment)}>Submit</Button>
+            <Button>Submit</Button>
           </div>
         </form>
       </CardBody>
