@@ -93,6 +93,7 @@ export default function PostSinglePage({
   }, [params.id]);
 
   const addComment = async (e: FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
@@ -113,6 +114,7 @@ export default function PostSinglePage({
     } catch (error) {
       console.log((error as Error).message);
     }
+    setLoading(false);
   };
 
   return (
@@ -129,7 +131,11 @@ export default function PostSinglePage({
                 </div>
               ))}
             </div>
-            <CommentForm onSubmit={addComment} className="mt-8"></CommentForm>
+            <CommentForm
+              onSubmit={addComment}
+              className="mt-8"
+              loading={loading}
+            ></CommentForm>
           </div>
           <div className="col-span-2">
             <Aside title="Featured" posts={featuredPosts}></Aside>
