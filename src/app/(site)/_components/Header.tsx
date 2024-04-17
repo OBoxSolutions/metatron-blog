@@ -24,7 +24,7 @@ export default function Header() {
       <div className="max-w-screen-xl mx-auto flex">
         <h1 className="text-3xl mr-auto">Metatron</h1>
         <nav>
-          <ul className="flex gap-10">
+          <ul className="flex gap-10 h-full items-center">
             {links.map((link) => (
               <HeaderLink
                 key={`header-link-${link.href}`}
