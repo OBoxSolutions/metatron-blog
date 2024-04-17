@@ -61,7 +61,9 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     };
 
     try {
-      params?.id && params.id[0] ? updatePost(post) : storePost(post);
+      params?.id && params.id[0]
+        ? await updatePost(post)
+        : await storePost(post);
     } catch (error) {
       toast.error((error as Error).message);
       console.log(error);
@@ -118,7 +120,9 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               required={true}
               defaultValue={post.content ?? ""}
             ></TextArea>
-            <Button className="ml-auto">Submit</Button>
+            <Button className="ml-auto" loading={isLoading}>
+              Submit
+            </Button>
           </form>
         </CardBody>
       </Card>
