@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { deleteDoc, doc, getDocs } from "firebase/firestore";
-import { mdiPlus } from "@mdi/js";
+import { FormEvent, useEffect, useState } from "react";
+import { deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { toast } from "sonner";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
-import Button from "@/components/Button";
 import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 
 import Section from "../_components/Section";
@@ -32,7 +29,7 @@ export default function Comments() {
   const [selectedRows, setSelectedRows] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
-  const [editDialog, setEditDialog] = useState(false);
+  const [formDialog, setFormDialog] = useState(false);
 
   useEffect(() => {
     loadComments();
@@ -66,7 +63,7 @@ export default function Comments() {
       return;
     }
 
-    setEditDialog(true);
+    setFormDialog(true);
   };
 
   const destroy = async () => {
@@ -79,7 +76,20 @@ export default function Comments() {
     loadComments();
   };
 
-  const edit = () => {};
+  const edit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const docRef = doc(db, "comments", String(selectedRows[0].id));
+    updateDoc(docRef, {
+      text: formData.get("text") as string,
+    });
+
+    toast.success("Comment updated");
+    loadComments();
+    setFormDialog(false);
+  };
 
   return (
     <Section title="Comments">
@@ -97,15 +107,8 @@ export default function Comments() {
           />
         </CardBody>
       </Card>
-      <Button
-        icon={mdiPlus}
-        iconSize={2}
-        floating={true}
-        href="new-comment"
-        className="fixed bottom-20 right-20"
-      ></Button>
 
-      <Dialog dialog={editDialog} closeDialog={setEditDialog}>
+      <Dialog dialog={formDialog} closeDialog={setFormDialog} width="500px">
         <CommentForm comment={selectedRows[0]} onSubmit={edit}></CommentForm>
       </Dialog>
 
