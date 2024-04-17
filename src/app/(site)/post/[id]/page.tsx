@@ -39,6 +39,7 @@ export default function PostSinglePage({
   });
   const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!params.id) return;
