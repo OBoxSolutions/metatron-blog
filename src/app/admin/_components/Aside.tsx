@@ -46,7 +46,7 @@ const Aside = (props: AsideProps) => {
           return (
             <li
               key={`link-${link.text}`}
-              className={` rounded flex items-center ${pathname === link.href ? "bg-accent" : ""}`}
+              className={` rounded flex items-center px-4 ${pathname === link.href ? "bg-accent" : ""}`}
             >
               <Icon path={link.icon} size={1}></Icon>
               <Link className="p-3 block w-full" href={link.href}>
