@@ -17,7 +17,7 @@ type ButtonProps = {
 
 export default function Button(props: ButtonProps) {
   let buttonClasses = "";
-  let iconWrapperClasses = "";
+  let loadingClasses = "";
 
   const Parent: ElementType = props.href ? Link : "button";
 
@@ -35,7 +35,7 @@ export default function Button(props: ButtonProps) {
     ? " outline outline-1 outline-accent bg-primary"
     : " bg-accent";
 
-  iconWrapperClasses += props.outline ? " bg-primary" : " bg-accent";
+  loadingClasses += props.outline ? " bg-primary" : " bg-accent";
 
   return (
     <Parent
@@ -44,7 +44,7 @@ export default function Button(props: ButtonProps) {
       onClick={props.onClick}
     >
       {props.loading && (
-        <span className={` absolute inset-0 ${iconWrapperClasses}`}>
+        <span className={` absolute inset-0 ${loadingClasses}`}>
           <Icon
             path={mdiLoading}
             size={props.iconSize}
