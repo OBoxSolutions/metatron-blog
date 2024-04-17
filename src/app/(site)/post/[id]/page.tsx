@@ -120,14 +120,14 @@ export default function PostSinglePage({
         <div className="md:grid grid-cols-6 gap-16">
           <div className="col-span-4">
             <article>{post.content}</article>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4 mt-16">
               {comments.map((comment) => (
                 <div className="flex" key={`comment-id-${comment?.id}`}>
                   <p>{comment.text}</p>
                 </div>
               ))}
             </div>
-            <CommentForm className="mt-8" onSubmit={addComment}></CommentForm>
+            <CommentForm onSubmit={addComment} className="mt-8"></CommentForm>
           </div>
           <div className="col-span-2">
             <Aside title="Featured" posts={featuredPosts}></Aside>
