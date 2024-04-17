@@ -3,10 +3,11 @@ import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import TextArea from "@/components/TextArea";
 import { Comment } from "@/types/Comment";
+import { FormEvent } from "react";
 
 type CommentFormProps = {
   comment: Comment;
-  onSubmit: (comment: Comment) => void;
+  onSubmit: (e: FormEvent) => void;
 };
 export default function CommentForm(props: CommentFormProps) {
   const comment = { ...props.comment };
