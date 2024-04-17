@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 import InputText from "@/components/InputText";
 import TextArea from "@/components/TextArea";
@@ -13,9 +12,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 
 import Section from "@/app/admin/_components/Section";
 
-import { db, postsCollection } from "@/utils/firebase";
 import { Post } from "@/types/Post";
 import { toast } from "sonner";
+import { show, store, update } from "@/services/posts";
 
 export default function NewPost({ params }: { params: { id?: string[] } }) {
   const [isLoading, setLoading] = useState(false);
@@ -35,11 +34,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     if (!params.id) return;
 
     const loadPost = async () => {
-      const docRef = doc(db, "posts", String(params.id));
-      const querySnapshot = await getDoc(docRef);
-      const localPost = querySnapshot.data() as Post;
-
-      setPost(localPost);
+      setPost(await show(String(params.id)));
     };
 
     loadPost();
@@ -55,6 +50,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     const formData = new FormData(target);
 
     const post = {
+      id: String(params?.id) ?? "",
       date: String(new Date().getUTCDate()),
       userId: "1",
       title: String(formData.get("title")),
@@ -65,7 +61,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     };
 
     try {
-      params?.id && params.id[0] ? update(post) : store(post);
+      params?.id && params.id[0] ? updatePost(post) : storePost(post);
     } catch (error) {
       toast.error((error as Error).message);
       console.log(error);
@@ -74,15 +70,14 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     setLoading(false);
   };
 
-  const store = async (post: Post) => {
-    await addDoc(postsCollection, post);
+  const storePost = async (post: Post) => {
+    await store(post);
     router.push("/admin/posts");
     toast.success("Post inserted successfully");
   };
 
-  const update = async (post: Post) => {
-    const docRef = doc(db, "posts", String(params.id));
-    await updateDoc(docRef, post);
+  const updatePost = async (post: Post) => {
+    await update(post);
     toast.success("Post updated successfully");
   };
 
