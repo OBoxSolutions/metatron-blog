@@ -112,6 +112,7 @@ export default function Posts() {
         iconSize={2}
         href="new-post"
         className="fixed bottom-20 right-20"
+        floating
       ></Button>
 
       <DialogDeleteConfirmation
