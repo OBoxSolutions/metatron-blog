@@ -25,8 +25,10 @@ export default function Button(props: ButtonProps) {
 
   if (props.icon) {
     buttonClasses += "p-4 rounded-full bg-accent";
+    loadingClasses += "rounded-full";
   } else {
     buttonClasses += "px-4 py-2 rounded bg-accent";
+    loadingClasses += "rounded";
   }
 
   buttonClasses += props.floating ? " fixed" : " relative";
