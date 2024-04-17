@@ -33,9 +33,9 @@ export default function Button(props: ButtonProps) {
 
   buttonClasses += props.outline
     ? " outline outline-1 outline-accent bg-primary"
-    : "bg-accent";
+    : " bg-accent";
 
-  iconWrapperClasses += props.outline ? "bg-primary" : "bg-accent";
+  iconWrapperClasses += props.outline ? " bg-primary" : " bg-accent";
 
   return (
     <Parent
