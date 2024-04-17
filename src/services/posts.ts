@@ -5,6 +5,7 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
@@ -17,6 +18,14 @@ export async function index(): Promise<Post[]> {
   });
 
   return localPosts as Post[];
+}
+
+export async function show(id: string): Promise<Post> {
+  const docRef = doc(db, "posts", id);
+  const querySnapshot = await getDoc(docRef);
+  const localPost = { ...(querySnapshot.data() as Post), id: querySnapshot.id };
+
+  return localPost;
 }
 
 export async function store(post: Post): Promise<DocumentReference> {
