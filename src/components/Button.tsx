@@ -27,7 +27,7 @@ export default function Button(props: ButtonProps) {
     buttonClasses += "px-4 py-2 rounded bg-accent";
   }
 
-  props.floating ? (buttonClasses += " fixed") : " relative";
+  buttonClasses += props.floating ? " fixed" : " relative";
 
   return (
     <Parent
