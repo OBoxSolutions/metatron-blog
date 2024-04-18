@@ -11,6 +11,7 @@ import Link from "next/link";
 
 type LoginInputs = {
   email: string;
+  test: string;
   password: string;
 };
 
@@ -36,19 +37,23 @@ export default function Login() {
             <InputText
               label="Email"
               type="email"
-              register={register("email", {
-                required: "Email address is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
+              required="The email is required"
+              pattern={{
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              }}
+              register={register}
               error={errors.email}
             ></InputText>
             <InputText
               label="Password"
               type="password"
-              register={register("password", { required: true, minLength: 8 })}
+              required="The password is required"
+              minLength={{
+                value: 8,
+                message: "Password must be at least 8 characters",
+              }}
+              register={register}
               error={errors.password}
             ></InputText>
             <div className="flex items-center">
