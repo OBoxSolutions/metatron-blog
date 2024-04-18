@@ -50,18 +50,14 @@ export default function Login() {
               type="password"
               register={register("password", { required: true, minLength: 8 })}
             ></InputText>
-            <div className="flex items-center justify-between">
-              <div className="text-sm">
-                <Link
-                  href="/forgot-password"
-                  className="font-medium text-accent"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <Button>Login</Button>
+            <div className="flex items-center">
+              <Link
+                href="/forgot-password"
+                className="font-medium text-accent text-sm"
+              >
+                Forgot your password?
+              </Link>
+              <Button className="ml-auto">Login</Button>
             </div>
           </form>
         </CardBody>
