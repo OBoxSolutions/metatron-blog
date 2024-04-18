@@ -13,7 +13,7 @@ export default function InputText(props: InputProps) {
         required={props.required}
         value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
-        name={props.name ? props.name : props.label?.toLowerCase()}
+        name={props.name ?? props.label?.toLowerCase()}
         defaultValue={props.defaultValue}
         disabled={props.disabled}
         type={props.type}

@@ -7,4 +7,5 @@ export type InputProps = {
   defaultValue?: string;
   disabled?: boolean;
   type?: string;
+  register?: UseFormRegister<IFormValues>;
 };
