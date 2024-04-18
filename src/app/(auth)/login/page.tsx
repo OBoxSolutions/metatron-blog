@@ -11,7 +11,6 @@ import Link from "next/link";
 
 type LoginInputs = {
   email: string;
-  test: string;
   password: string;
 };
 
