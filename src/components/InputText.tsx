@@ -18,6 +18,7 @@ export default function InputText(props: InputProps) {
         defaultValue={props.defaultValue}
         disabled={props.disabled}
         type={props.type}
+        {...props.register}
       />
     </div>
   );
