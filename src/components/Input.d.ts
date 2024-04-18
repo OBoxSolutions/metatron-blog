@@ -1,14 +1,29 @@
 import { FieldErrors } from "react-hook-form";
 
+export type InputPattern = {
+  value: RegExp;
+  message: string;
+};
+
+export type ValidationAttribute = {
+  value: number;
+  message: string;
+};
+
 export type InputProps = {
   id?: string;
   label?: string;
-  required?: boolean;
   name?: string;
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
   type?: string;
   register?: UseFormRegister<IFormValues>;
+  required?: boolean | string;
+  pattern?: InputPattern;
+  min?: number | ValidationAttribute;
+  minLength?: number | ValidationAttribute;
+  max?: number | ValidationAttribute;
+  maxLength?: number | ValidationAttribute;
   error?: FieldError;
 };
