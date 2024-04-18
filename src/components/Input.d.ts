@@ -1,3 +1,5 @@
+import { FieldErrors } from "react-hook-form";
+
 export type InputProps = {
   id?: string;
   label?: string;
@@ -8,4 +10,5 @@ export type InputProps = {
   disabled?: boolean;
   type?: string;
   register?: UseFormRegister<IFormValues>;
+  error?: FieldError;
 };
