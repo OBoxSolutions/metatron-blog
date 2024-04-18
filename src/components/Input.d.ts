@@ -1,7 +1,7 @@
 export type InputProps = {
   id?: string;
   label?: string;
-  required: boolean;
+  required?: boolean;
   name?: string;
   value?: string;
   defaultValue?: string;
