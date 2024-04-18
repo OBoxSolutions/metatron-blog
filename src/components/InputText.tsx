@@ -1,3 +1,4 @@
+import { FocusEvent } from "react";
 import { InputProps } from "./Input";
 
 export default function InputText(props: InputProps) {
@@ -9,7 +10,7 @@ export default function InputText(props: InputProps) {
         </label>
       )}
       <input
-        id={props.label}
+        id={props.id ?? props.label?.toLowerCase()}
         required={props.required}
         value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
