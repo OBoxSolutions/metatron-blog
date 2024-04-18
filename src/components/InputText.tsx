@@ -17,6 +17,7 @@ export default function InputText(props: InputProps) {
         defaultValue={props.defaultValue}
         disabled={props.disabled}
         type={props.type}
+        aria-invalid={!!props.error}
         {...props.register}
       />
       {props?.error?.message && (
