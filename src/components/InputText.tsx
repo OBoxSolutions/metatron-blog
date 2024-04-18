@@ -12,6 +12,7 @@ export default function InputText(props: InputProps) {
         name={props.name ? props.name : props.label?.toLowerCase()}
         defaultValue={props.defaultValue}
         disabled={props.disabled}
+        type={props.type}
       />
     </div>
   );

@@ -5,4 +5,5 @@ export type InputProps = {
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
+  type?: string;
 };
