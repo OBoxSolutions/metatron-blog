@@ -1,32 +1,54 @@
 "use client";
 
-import { FormEvent } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
+
 import Link from "next/link";
 
-function RegisterForm() {
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+type LoginInputs = {
+  email: string;
+  password: string;
+};
 
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInputs>();
+
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    console.log(data);
   };
 
   return (
     <div>
       <Card>
         <CardBody>
-          <form className="flex flex-col gap-5 mb-0" onSubmit={onSubmit}>
-            <InputText label="Email" type="email" required={true}></InputText>
+          <form
+            className="flex flex-col gap-5 mb-0"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <InputText
+              label="Email"
+              type="email"
+              register={register("email", {
+                required: "Email address is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              })}
+              error={errors.email}
+            ></InputText>
             <InputText
               label="Password"
               type="password"
-              required={true}
+              register={register("password", { required: true, minLength: 8 })}
             ></InputText>
             <div className="flex items-center justify-between">
               <div className="text-sm">
@@ -56,5 +78,3 @@ function RegisterForm() {
     </div>
   );
 }
-
-export default RegisterForm;
