@@ -18,6 +18,7 @@ export default function InputText(props: InputProps) {
         disabled={props.disabled}
         type={props.type}
         aria-invalid={!!props.error}
+        autoComplete="off"
         {...props.register}
       />
       {props?.error?.message && (
