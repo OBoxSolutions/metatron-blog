@@ -1,4 +1,3 @@
-import { FocusEvent } from "react";
 import { InputProps } from "./Input";
 
 export default function InputText(props: InputProps) {
@@ -20,6 +19,11 @@ export default function InputText(props: InputProps) {
         type={props.type}
         {...props.register}
       />
+      {props?.error?.message && (
+        <p role="alert" className="text-red-400">
+          {props.error.message}
+        </p>
+      )}
     </div>
   );
 }
