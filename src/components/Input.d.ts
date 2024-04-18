@@ -25,5 +25,6 @@ export type InputProps = {
   minLength?: number | ValidationAttribute;
   max?: number | ValidationAttribute;
   maxLength?: number | ValidationAttribute;
+  validate?: (value: string) => boolean | string;
   error?: FieldError;
 };

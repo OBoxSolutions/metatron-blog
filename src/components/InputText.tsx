@@ -24,6 +24,7 @@ export default function InputText(props: InputProps) {
           min: props.min,
           maxLength: props.maxLength,
           max: props.max,
+          validate: props.validate,
         })}
       />
       {props?.error?.message && (
