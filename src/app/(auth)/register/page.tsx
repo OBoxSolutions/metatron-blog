@@ -1,42 +1,73 @@
 "use client";
 
-import { FormEvent } from "react";
+import Link from "next/link";
+
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import CardBody from "@/components/CardBody";
 import Card from "@/components/Card";
-import Link from "next/link";
+
+type RegisterInputs = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 function RegisterForm() {
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<RegisterInputs>();
 
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
-
-    if (password !== confirmPassword) {
-      console.error("Passwords do not match");
-    }
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    console.log(data);
   };
 
   return (
     <div>
       <Card>
         <CardBody>
-          <form className="flex flex-col gap-5 mb-0" onSubmit={onSubmit}>
-            <InputText label="Email" type="email" required={true}></InputText>
+          <form
+            noValidate
+            className="flex flex-col gap-5 mb-0"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <InputText
+              label="Email"
+              type="email"
+              required="The email is required"
+              pattern={{
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              }}
+              register={register}
+              error={errors.email}
+            ></InputText>
             <InputText
               label="Password"
               type="password"
-              required={true}
+              required="The password is required"
+              register={register}
+              error={errors.password}
+              minLength={{
+                value: 8,
+                message: "Password must be at least 8 characters",
+              }}
             ></InputText>
             <InputText
               label="Confirm Password"
+              name="confirmPassword"
               type="password"
-              required={true}
+              required="The confirm password is required"
+              validate={(value: string) =>
+                value === getValues("password")[0] || "Passwords do not match"
+              }
+              register={register}
+              error={errors.confirmPassword}
             ></InputText>
             <div className="flex justify-end">
               <Button>Register</Button>
