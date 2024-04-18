@@ -3,7 +3,11 @@ import { InputProps } from "./Input";
 export default function InputText(props: InputProps) {
   return (
     <div className="flex flex-col">
-      {props.label && <label htmlFor={props.label}>{props.label}</label>}
+      {props.label && (
+        <label htmlFor={props.label} className="text-white">
+          {props.label}
+        </label>
+      )}
       <input
         id={props.label}
         required={props.required}
