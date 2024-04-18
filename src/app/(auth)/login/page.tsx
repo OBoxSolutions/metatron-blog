@@ -49,6 +49,7 @@ export default function Login() {
               label="Password"
               type="password"
               register={register("password", { required: true, minLength: 8 })}
+              error={errors.password}
             ></InputText>
             <div className="flex items-center">
               <Link
