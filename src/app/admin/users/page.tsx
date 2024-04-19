@@ -59,7 +59,7 @@ export default function Users() {
     setDeleteDialog(true);
   };
 
-  const openAddDialog = (e: FormEvent) => {
+  const openAddDialog = () => {
     setIsFormUpdating(false);
     setFormDialog(true);
   };
