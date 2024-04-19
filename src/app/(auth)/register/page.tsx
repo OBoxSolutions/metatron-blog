@@ -41,7 +41,7 @@ function RegisterForm() {
               type="name"
               required="The name is required"
               register={register}
-              error={errors.email}
+              error={errors.name}
             ></InputText>
             <InputText
               label="Email"
