@@ -37,6 +37,13 @@ function RegisterForm() {
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputText
+              label="Name"
+              type="name"
+              required="The name is required"
+              register={register}
+              error={errors.email}
+            ></InputText>
+            <InputText
               label="Email"
               type="email"
               required="The email is required"
