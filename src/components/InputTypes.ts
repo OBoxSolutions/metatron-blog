@@ -20,7 +20,6 @@ export type InputProps<T> = {
   id?: string;
   label?: string;
   name?: string;
-  value?: string;
   disabled?: boolean;
   register?: UseFormRegister<FieldValues>;
   required?: boolean | string;
