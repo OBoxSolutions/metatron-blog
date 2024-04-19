@@ -1,14 +1,10 @@
 import { Path } from "react-hook-form";
 import { InputProps } from "./InputTypes";
+import Input from "./Input";
 
 export default function TextArea<T>(props: InputProps<T>) {
   return (
-    <div className="flex flex-col">
-      {props.label && (
-        <label htmlFor={props.label} className="text-white">
-          {props.label}
-        </label>
-      )}
+    <Input {...props}>
       <textarea
         id={props.id ?? props.label?.toLowerCase()}
         value={props.value}
@@ -31,11 +27,6 @@ export default function TextArea<T>(props: InputProps<T>) {
             },
           ))}
       />
-      {props?.error?.message && (
-        <p role="alert" className="text-red-400">
-          {props.error.message}
-        </p>
-      )}
-    </div>
+    </Input>
   );
 }
