@@ -1,4 +1,4 @@
-import { FieldErrors } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 
 export type InputPattern = {
   value: RegExp;
