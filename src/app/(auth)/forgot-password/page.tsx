@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
@@ -8,12 +8,20 @@ import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Link from "next/link";
 
-function RegisterForm() {
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+type ForgotPasswordInputs = {
+  email: string;
+  password: string;
+};
 
-    const password = formData.get("password") as string;
+function RegisterForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForgotPasswordInputs>();
+
+  const onSubmit: SubmitHandler<ForgotPasswordInputs> = (data) => {
+    console.log(data);
   };
 
   return (
@@ -26,8 +34,21 @@ function RegisterForm() {
             you to choose a new one.
           </div>
 
-          <form className="flex flex-col gap-5 mb-0" onSubmit={onSubmit}>
-            <InputText label="Email" type="email" required={true}></InputText>
+          <form
+            className="flex flex-col gap-5 mb-0"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <InputText
+              label="Email"
+              type="email"
+              required="The email is required"
+              pattern={{
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              }}
+              register={register}
+              error={errors.email}
+            ></InputText>
             <div className="flex justify-end">
               <Button>Email password reset link</Button>
             </div>
