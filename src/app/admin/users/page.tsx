@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { getDocs } from "firebase/firestore";
 import { toast } from "sonner";
 import { mdiPlus } from "@mdi/js";
 
@@ -16,8 +15,6 @@ import DataTable from "../_components/DataTable";
 import UserForm from "../_components/UserForm";
 
 import { User } from "@/types/User";
-
-import { db, usersCollection } from "@/utils/firebase";
 
 import { index, destroy, store, update } from "@/services/users";
 
