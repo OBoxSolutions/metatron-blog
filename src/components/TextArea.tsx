@@ -6,7 +6,7 @@ export default function TextArea<T>(props: InputProps<T>) {
   return (
     <Input {...props}>
       <textarea
-        id={props.id ?? props.label?.toLowerCase()}
+        id={props?.id}
         value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         name={props.name ? props.name : props.label?.toLowerCase()}
