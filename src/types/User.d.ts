@@ -8,4 +8,11 @@ type User = {
   email: string;
 };
 
-export { User };
+type RegisterUserInputs = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export { User, RegisterUserInputs };
