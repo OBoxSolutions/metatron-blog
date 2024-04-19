@@ -21,7 +21,7 @@ export type InputProps<T> = {
   label?: string;
   disabled?: boolean;
   registerName?: string;
-  register?: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<FieldValues & T>;
   required?: boolean | string;
   pattern?: InputPattern;
   min?: number | ValidationAttribute;
