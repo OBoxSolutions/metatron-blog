@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import Card from "@/components/Card";
@@ -12,9 +12,10 @@ import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
 import CommentForm from "../_components/CommentForm";
 
-import { Comment } from "@/types/Comment";
+import { Comment, CommentInput } from "@/types/Comment";
 
 import { destroy, index, update } from "@/services/comments";
+import { SubmitHandler } from "react-hook-form";
 
 const columns = [
   {
@@ -70,14 +71,12 @@ export default function Comments() {
     setDeleteDialog(false);
   };
 
-  const edit = async (e: FormEvent) => {
-    e.preventDefault();
+  const edit: SubmitHandler<CommentInput> = async (data) => {
     setFormLoading(true);
 
-    const formData = new FormData(e.target as HTMLFormElement);
     await update({
       id: String(selectedRows[0].id),
-      text: formData.get("text") as string,
+      text: data.text,
     });
     loadComments();
 

@@ -5,4 +5,9 @@ type Comment = {
   text: string;
 };
 
-export { Comment };
+type CommentInput = {
+  id?: string;
+  text: string;
+};
+
+export { Comment, CommentInput };
