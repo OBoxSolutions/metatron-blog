@@ -1,4 +1,10 @@
-import { FieldError, PathValue, UseFormRegister } from "react-hook-form";
+import {
+  FieldError,
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormRegister,
+} from "react-hook-form";
 
 export type InputPattern = {
   value: RegExp;
@@ -18,14 +24,14 @@ export type InputProps<T> = {
   defaultValue?: string;
   disabled?: boolean;
   type?: string;
-  register?: UseFormRegister<T>;
+  register?: UseFormRegister<FieldValues>;
   required?: boolean | string;
   pattern?: InputPattern;
   min?: number | ValidationAttribute;
   minLength?: number | ValidationAttribute;
   max?: number | ValidationAttribute;
   maxLength?: number | ValidationAttribute;
-  validate?: (value: PathValue<T>) => boolean | string;
+  validate?: (value: PathValue<T, Path<T>>) => boolean | string;
   error?: FieldError;
   children?: React.ReactNode;
 };
