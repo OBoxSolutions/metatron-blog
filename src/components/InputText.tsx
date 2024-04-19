@@ -10,7 +10,6 @@ export default function InputText<T>(props: InputProps<T>) {
         value={props.value}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         name={props.name ?? props.label?.toLowerCase()}
-        defaultValue={props.defaultValue}
         disabled={props.disabled}
         type="text"
         aria-invalid={!!props.error}
