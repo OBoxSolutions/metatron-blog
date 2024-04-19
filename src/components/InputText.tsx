@@ -1,6 +1,7 @@
-import { InputProps } from "./Input";
+import { Path } from "react-hook-form";
+import { InputProps } from "./InputTypes";
 
-export default function InputText(props: InputProps) {
+export default function InputText<T>(props: InputProps<T>) {
   return (
     <div className="flex flex-col">
       {props.label && (
@@ -18,15 +19,18 @@ export default function InputText(props: InputProps) {
         type={props.type}
         aria-invalid={!!props.error}
         {...(props?.register &&
-          props.register(props.name ?? props.label?.toLowerCase(), {
-            required: props.required,
-            pattern: props.pattern,
-            minLength: props.minLength,
-            min: props.min,
-            maxLength: props.maxLength,
-            max: props.max,
-            validate: props.validate,
-          }))}
+          props.register(
+            (props.name as Path<T>) ?? props.label?.toLowerCase(),
+            {
+              required: props.required,
+              pattern: props.pattern,
+              minLength: props.minLength,
+              min: props.min,
+              maxLength: props.maxLength,
+              max: props.max,
+              validate: props.validate,
+            },
+          ))}
       />
       {props?.error?.message && (
         <p role="alert" className="text-red-400">
