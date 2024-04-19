@@ -9,11 +9,7 @@ import InputText from "@/components/InputText";
 import CardBody from "@/components/CardBody";
 import Card from "@/components/Card";
 
-type RegisterInputs = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import { RegisterUserInputs } from "@/types/User";
 
 function RegisterForm() {
   const {
@@ -21,9 +17,9 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<RegisterInputs>();
+  } = useForm<RegisterUserInputs>();
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+  const onSubmit: SubmitHandler<RegisterUserInputs> = (data) => {
     console.log(data);
   };
 
