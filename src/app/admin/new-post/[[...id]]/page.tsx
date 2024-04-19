@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+
 import InputText from "@/components/InputText";
 import TextArea from "@/components/TextArea";
 import Card from "@/components/Card";
@@ -16,6 +18,12 @@ import { Post } from "@/types/Post";
 import { toast } from "sonner";
 import { show, store, update } from "@/services/posts";
 
+type PostInputs = {
+  title: string;
+  description: string;
+  content: string;
+};
+
 export default function NewPost({ params }: { params: { id?: string[] } }) {
   const [isLoading, setLoading] = useState(false);
   const [post, setPost] = useState<Post>({
@@ -28,36 +36,22 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
     content: "",
   });
 
-  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PostInputs>();
 
-  useEffect(() => {
-    if (!params.id) return;
-
-    const loadPost = async () => {
-      setPost(await show(String(params.id)));
-    };
-
-    loadPost();
-  }, [params.id]);
-
-  const submit = async (e: FormEvent) => {
+  const onSubmit: SubmitHandler<PostInputs> = async (data) => {
     setLoading(true);
-    e.preventDefault();
-
-    const target = e.target as HTMLFormElement;
-    if (!target.checkValidity()) return;
-
-    const formData = new FormData(target);
 
     const post = {
       id: String(params?.id) ?? "",
       date: String(new Date().getUTCDate()),
       userId: "1",
-      title: String(formData.get("title")),
-      description: String(formData.get("description")),
       image: "",
       isFeatured: false,
-      content: String(formData.get("content")),
+      ...data,
     };
 
     try {
@@ -71,6 +65,18 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
 
     setLoading(false);
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!params.id) return;
+
+    const loadPost = async () => {
+      setPost(await show(String(params.id)));
+    };
+
+    loadPost();
+  }, [params.id]);
 
   const storePost = async (post: Post) => {
     await store(post);
@@ -104,21 +110,30 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
         <CardBody>
           {isLoading && <p>Loading baby</p>}
 
-          <form className="flex flex-col gap-4" onSubmit={submit}>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <InputText
               label="Title"
-              required={true}
               defaultValue={post?.title ?? ""}
+              required="The title is required"
+              register={register}
+              error={errors.title}
             ></InputText>
             <TextArea
               label="Description"
-              required={true}
+              required="The description is required"
               defaultValue={post.description ?? ""}
+              register={register}
+              error={errors.description}
             ></TextArea>
             <TextArea
               label="Content"
-              required={true}
+              required="The content is required"
               defaultValue={post.content ?? ""}
+              register={register}
+              error={errors.description}
             ></TextArea>
             <Button className="ml-auto" loading={isLoading}>
               Submit
