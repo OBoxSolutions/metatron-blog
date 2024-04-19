@@ -14,9 +14,10 @@ import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
 import UserForm from "../_components/UserForm";
 
-import { User } from "@/types/User";
+import { RegisterUserInputs, User } from "@/types/User";
 
 import { index, destroy, store, update } from "@/services/users";
+import { SubmitHandler } from "react-hook-form";
 
 const columns = [
   {
@@ -88,21 +89,13 @@ export default function Users() {
     loadUsers();
   };
 
-  const submit = async (e: FormEvent) => {
+  const submit: SubmitHandler<RegisterUserInputs> = async (data) => {
     setFormLoading(true);
-    e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-
-    const user: User = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-    };
 
     try {
       isFormUpdating
-        ? await updateUser({ ...user, id: selectedRows[0].id })
-        : await storeUser(user);
+        ? await updateUser({ ...data, id: selectedRows[0].id })
+        : await storeUser(data);
       loadUsers();
     } catch (error) {
       toast.error("Problem adding user");

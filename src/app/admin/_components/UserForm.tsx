@@ -1,32 +1,60 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import InputText from "@/components/InputText";
-import { User } from "@/types/User";
-import { FormEvent } from "react";
+import { RegisterUserInputs, User } from "@/types/User";
 
 type UserFormProps = {
   user: User;
   loading?: boolean;
-  onSubmit: (e: FormEvent) => void;
+  onSubmit: SubmitHandler<RegisterUserInputs>;
 };
+
 export default function UserForm(props: UserFormProps) {
-  const user = { ...props.user };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterUserInputs>();
 
   return (
     <Card>
       <CardBody>
         <p className="text-2xl mb-8">Update user</p>
-        <form onSubmit={props.onSubmit} className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(props.onSubmit)}
+          className="flex flex-col gap-4"
+        >
           <InputText
-            required={true}
-            defaultValue={user.name}
             label="Name"
+            type="name"
+            required="The name is required"
+            register={register}
+            error={errors.name}
           ></InputText>
           <InputText
-            required={true}
-            defaultValue={user.email}
             label="Email"
+            type="email"
+            required="The email is required"
+            pattern={{
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            }}
+            register={register}
+            error={errors.email}
+          ></InputText>
+          <InputText
+            label="Password"
+            type="password"
+            required="The password is required"
+            register={register}
+            error={errors.password}
+            minLength={{
+              value: 8,
+              message: "Password must be at least 8 characters",
+            }}
           ></InputText>
           <div className="flex justify-end mt-4">
             <Button loading={props.loading}>Submit</Button>
