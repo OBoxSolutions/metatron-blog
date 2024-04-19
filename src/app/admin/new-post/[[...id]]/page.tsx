@@ -126,6 +126,14 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               required="The description is required"
               defaultValue={post.description ?? ""}
               register={register}
+              minLength={{
+                value: 40,
+                message: "At least 40 characters are required",
+              }}
+              maxLength={{
+                value: 120,
+                message: "A maximum of 120 characters is allowed",
+              }}
               error={errors.description}
             ></TextArea>
             <TextArea
@@ -133,7 +141,11 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               required="The content is required"
               defaultValue={post.content ?? ""}
               register={register}
-              error={errors.description}
+              minLength={{
+                value: 200,
+                message: "At least 200 characters are required",
+              }}
+              error={errors.content}
             ></TextArea>
             <Button className="ml-auto" loading={isLoading}>
               Submit
