@@ -145,7 +145,7 @@ export default function Users() {
 
       <Dialog dialog={formDialog} closeDialog={setFormDialog} width="500px">
         <UserForm
-          user={selectedRows[0]}
+          user={isFormUpdating ? selectedRows[0] : ({} as User)}
           onSubmit={submit}
           loading={formLoading}
         ></UserForm>
