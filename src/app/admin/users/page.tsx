@@ -19,7 +19,7 @@ import { User } from "@/types/User";
 
 import { db, usersCollection } from "@/utils/firebase";
 
-import { destroy, store, update } from "@/services/users";
+import { index, destroy, store, update } from "@/services/users";
 
 const columns = [
   {
@@ -48,13 +48,8 @@ export default function Users() {
   const loadUsers = async () => {
     setLoading(true);
 
-    const querySnapshot = await getDocs(usersCollection);
-    setUsers(
-      querySnapshot.docs.map((doc) => ({
-        ...(doc.data() as User),
-        id: doc.id,
-      })),
-    );
+    setUsers(await index());
+
     setLoading(false);
   };
 
