@@ -1,21 +1,20 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { toast } from "sonner";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
+import Dialog from "@/components/Dialog";
 
 import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
+import CommentForm from "../_components/CommentForm";
 
 import { Comment } from "@/types/Comment";
 
-import { db, commentsCollection } from "@/utils/firebase";
-import Dialog from "@/components/Dialog";
-import CommentForm from "../_components/CommentForm";
+import { destroy, index, update } from "@/services/comments";
 
 const columns = [
   {
@@ -39,13 +38,8 @@ export default function Comments() {
   const loadComments = async () => {
     setLoading(true);
 
-    const querySnapshot = await getDocs(commentsCollection);
-    setComments(
-      querySnapshot.docs.map((doc) => ({
-        ...(doc.data() as Comment),
-        id: doc.id,
-      })),
-    );
+    setComments(await index());
+
     setLoading(false);
   };
 
@@ -67,14 +61,13 @@ export default function Comments() {
     setFormDialog(true);
   };
 
-  const destroy = async () => {
+  const destroyComment = async () => {
     setLoading(true);
 
-    const docRef = doc(db, "comments", String(selectedRows[0].id));
-
-    await deleteDoc(docRef);
-    setDeleteDialog(false);
+    await destroy(String(selectedRows[0].id));
     loadComments();
+
+    setDeleteDialog(false);
   };
 
   const edit = async (e: FormEvent) => {
@@ -82,14 +75,13 @@ export default function Comments() {
     setFormLoading(true);
 
     const formData = new FormData(e.target as HTMLFormElement);
-
-    const docRef = doc(db, "comments", String(selectedRows[0].id));
-    await updateDoc(docRef, {
+    await update({
+      id: String(selectedRows[0].id),
       text: formData.get("text") as string,
     });
+    loadComments();
 
     toast.success("Comment updated");
-    loadComments();
     setFormLoading(false);
     setFormDialog(false);
   };
@@ -122,7 +114,7 @@ export default function Comments() {
       <DialogDeleteConfirmation
         dialog={deleteDialog}
         closeDialog={setDeleteDialog}
-        onClickAccept={destroy}
+        onClickAccept={destroyComment}
         onClickCancel={() => setDeleteDialog(false)}
       ></DialogDeleteConfirmation>
     </Section>
