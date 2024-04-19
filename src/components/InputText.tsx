@@ -12,7 +12,7 @@ export default function InputText<T>(props: InputProps<T>) {
         name={props.name ?? props.label?.toLowerCase()}
         defaultValue={props.defaultValue}
         disabled={props.disabled}
-        type={props.type}
+        type="text"
         aria-invalid={!!props.error}
         {...(props?.register &&
           props.register(
