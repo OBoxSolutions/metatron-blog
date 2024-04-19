@@ -17,7 +17,11 @@ export default function UserForm(props: UserFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterUserInputs>();
+  } = useForm<RegisterUserInputs>({
+    defaultValues: {
+      ...props.user,
+    },
+  });
 
   return (
     <Card>
