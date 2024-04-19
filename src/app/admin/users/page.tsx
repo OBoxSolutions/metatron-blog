@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { deleteDoc, doc, getDocs } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import { toast } from "sonner";
 import { mdiPlus } from "@mdi/js";
 
