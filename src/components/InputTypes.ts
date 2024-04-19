@@ -23,7 +23,6 @@ export type InputProps<T> = {
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
-  type?: string;
   register?: UseFormRegister<FieldValues>;
   required?: boolean | string;
   pattern?: InputPattern;
