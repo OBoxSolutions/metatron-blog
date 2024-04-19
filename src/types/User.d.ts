@@ -1,10 +1,10 @@
 type User = {
   id?: string;
-  postsIds: string[];
-  favoritesIds: string[];
+  postsIds?: string[];
+  favoritesIds?: string[];
   commentsIds?: string[];
   name: string;
-  image: string;
+  image?: string;
   email: string;
 };
 
