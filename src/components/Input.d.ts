@@ -27,4 +27,5 @@ export type InputProps = {
   maxLength?: number | ValidationAttribute;
   validate?: (value: string) => boolean | string;
   error?: FieldError;
+  children: React.ReactNode;
 };
