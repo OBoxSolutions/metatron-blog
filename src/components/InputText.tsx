@@ -17,15 +17,16 @@ export default function InputText(props: InputProps) {
         disabled={props.disabled}
         type={props.type}
         aria-invalid={!!props.error}
-        {...props.register(props.name ?? props.label?.toLowerCase(), {
-          required: props.required,
-          pattern: props.pattern,
-          minLength: props.minLength,
-          min: props.min,
-          maxLength: props.maxLength,
-          max: props.max,
-          validate: props.validate,
-        })}
+        {...(props?.register &&
+          props.register(props.name ?? props.label?.toLowerCase(), {
+            required: props.required,
+            pattern: props.pattern,
+            minLength: props.minLength,
+            min: props.min,
+            maxLength: props.maxLength,
+            max: props.max,
+            validate: props.validate,
+          }))}
       />
       {props?.error?.message && (
         <p role="alert" className="text-red-400">
