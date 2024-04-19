@@ -8,22 +8,18 @@ export default function TextArea<T>(props: InputProps<T>) {
       <textarea
         id={props?.id}
         className="p-1 rounded outline-none mt-0 shadow text-black"
-        name={props.name ? props.name : props.label?.toLowerCase()}
         disabled={props.disabled}
         aria-invalid={!!props.error}
         {...(props?.register &&
-          props.register(
-            (props.name as Path<T>) ?? props.label?.toLowerCase(),
-            {
-              required: props.required,
-              pattern: props.pattern,
-              minLength: props.minLength,
-              min: props.min,
-              maxLength: props.maxLength,
-              max: props.max,
-              validate: props.validate,
-            },
-          ))}
+          props.register(props.registerName as Path<T>, {
+            required: props.required,
+            pattern: props.pattern,
+            minLength: props.minLength,
+            min: props.min,
+            maxLength: props.maxLength,
+            max: props.max,
+            validate: props.validate,
+          }))}
       />
     </Input>
   );

@@ -19,8 +19,8 @@ export type ValidationAttribute = {
 export type InputProps<T> = {
   id?: string;
   label?: string;
-  name?: string;
   disabled?: boolean;
+  registerName?: string;
   register?: UseFormRegister<FieldValues>;
   required?: boolean | string;
   pattern?: InputPattern;
