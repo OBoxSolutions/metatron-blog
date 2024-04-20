@@ -33,7 +33,6 @@ export default function UserForm(props: UserFormProps) {
         >
           <InputText
             label="Name"
-            type="name"
             required="The name is required"
             registerName="name"
             register={register}
