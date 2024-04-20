@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   id?: string;
   postsIds?: string[];
   favoritesIds?: string[];
@@ -8,11 +8,10 @@ type User = {
   email: string;
 };
 
-type RegisterUserInputs = {
+export type RegisterUserInputs = {
   name: string;
+  image?: File;
   email: string;
   password: string;
   confirmPassword?: string;
 };
-
-export { User, RegisterUserInputs };
