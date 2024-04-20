@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { mdiPlus } from "@mdi/js";
+import { ref as fireRef, getDownloadURL, uploadBytes } from "firebase/storage";
+
+import { storage } from "@/utils/firebase";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
@@ -92,10 +95,22 @@ export default function Users() {
   const submit: SubmitHandler<RegisterUserInputs> = async (data) => {
     setFormLoading(true);
 
+    const profileImageRef = fireRef(storage, `users/${data.name}`);
+
     try {
+      if (!data.image) return;
+
+      await uploadBytes(profileImageRef, data.image);
+      const profileImageDownloadUrl = await getDownloadURL(profileImageRef);
+
       isFormUpdating
-        ? await updateUser({ ...data, id: selectedRows[0].id })
-        : await storeUser(data);
+        ? await updateUser({
+            ...data,
+            image: profileImageDownloadUrl,
+            id: selectedRows[0].id,
+          })
+        : await storeUser({ ...data, image: profileImageDownloadUrl });
+
       loadUsers();
     } catch (error) {
       toast.error("Problem adding user");
