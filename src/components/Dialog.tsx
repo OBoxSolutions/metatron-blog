@@ -22,10 +22,20 @@ export default function Dialog({
       }
     }
 
+    function handleKeyboardEvent(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+
+      if (!dialogContentRef?.current?.contains(event.target as Node)) {
+        closeDialog(false);
+      }
+    }
+
     document.addEventListener("mousedown", handleEvent);
+    document.addEventListener("keydown", handleKeyboardEvent);
 
     return () => {
       document.removeEventListener("mousedown", handleEvent);
+      document.removeEventListener("keydown", handleKeyboardEvent);
     };
   }, [dialog, closeDialog, dialogContentRef]);
 
