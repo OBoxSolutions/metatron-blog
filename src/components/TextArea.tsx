@@ -11,7 +11,7 @@ export default function TextArea<T>(props: InputProps<T>) {
         disabled={props.disabled}
         aria-invalid={!!props.error}
         {...(props?.register &&
-          props.register(props.registerName as Path<T>, {
+          props.register(props.registerName, {
             required: props.required,
             pattern: props.pattern,
             minLength: props.minLength,

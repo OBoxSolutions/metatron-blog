@@ -12,7 +12,7 @@ export default function InputText<T>(props: InputProps<T>) {
         type="text"
         aria-invalid={!!props.error}
         {...(props?.register &&
-          props.register(props.registerName as Path<T>, {
+          props.register(props.registerName, {
             required: props.required,
             pattern: props.pattern,
             minLength: props.minLength,
