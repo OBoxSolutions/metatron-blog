@@ -15,7 +15,7 @@ export type InputProps<T> = {
   label?: string;
   type?: string;
   disabled?: boolean;
-  defaultValue: string;
+  defaultValue?: string;
   registerName?: string;
   register?: any;
   required?: boolean | string;
