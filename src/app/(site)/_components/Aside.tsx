@@ -30,6 +30,7 @@ const Aside = (props: AsideProps) => {
                     height={103}
                   />
                   <div className="text-base">
+                    <p className="text-xl">{post.title}</p>
                     <p>{post.description}</p>
                   </div>
                 </Link>
