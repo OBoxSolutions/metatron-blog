@@ -32,6 +32,7 @@ export default function CommentForm(props: CommentFormProps) {
           <TextArea
             label="Text"
             required="The comment is required"
+            registerName="text"
             register={register}
             error={errors.text}
           ></TextArea>

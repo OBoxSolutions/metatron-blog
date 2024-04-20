@@ -35,12 +35,14 @@ export default function UserForm(props: UserFormProps) {
             label="Name"
             type="name"
             required="The name is required"
+            registerName="name"
             register={register}
             error={errors.name}
           ></InputText>
           <InputText
             label="Email"
             type="email"
+            registerName="email"
             required="The email is required"
             pattern={{
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -52,6 +54,7 @@ export default function UserForm(props: UserFormProps) {
           <InputText
             label="Password"
             type="password"
+            registerName="password"
             required="The password is required"
             register={register}
             error={errors.password}

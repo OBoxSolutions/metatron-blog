@@ -118,6 +118,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               label="Title"
               defaultValue={post?.title ?? ""}
               required="The title is required"
+              registerName="title"
               register={register}
               error={errors.title}
             ></InputText>
@@ -125,6 +126,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               label="Description"
               required="The description is required"
               defaultValue={post.description ?? ""}
+              registerName="description"
               register={register}
               minLength={{
                 value: 40,
@@ -140,6 +142,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               label="Content"
               required="The content is required"
               defaultValue={post.content ?? ""}
+              registerName="content"
               register={register}
               minLength={{
                 value: 200,
