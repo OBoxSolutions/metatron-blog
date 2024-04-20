@@ -13,6 +13,7 @@ export type ValidationAttribute = {
 export type InputProps<T> = {
   id?: string;
   label?: string;
+  type?: string;
   disabled?: boolean;
   defaultValue: string;
   registerName?: string;
