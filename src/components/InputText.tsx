@@ -1,4 +1,3 @@
-import { Path } from "react-hook-form";
 import { InputProps } from "./InputTypes";
 import Input from "./Input";
 
