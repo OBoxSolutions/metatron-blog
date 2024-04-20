@@ -9,6 +9,7 @@ export default function TextArea<T>(props: InputProps<T>) {
         id={props?.id}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         disabled={props.disabled}
+        defaultValue={props.defaultValue}
         aria-invalid={!!props.error}
         {...(props?.register &&
           props.register(props.registerName, {

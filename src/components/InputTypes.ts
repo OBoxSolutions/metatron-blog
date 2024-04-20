@@ -1,10 +1,4 @@
-import {
-  FieldError,
-  FieldValues,
-  Path,
-  PathValue,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldError, Path, PathValue } from "react-hook-form";
 
 export type InputPattern = {
   value: RegExp;
@@ -20,6 +14,7 @@ export type InputProps<T> = {
   id?: string;
   label?: string;
   disabled?: boolean;
+  defaultValue: string;
   registerName?: string;
   register?: any;
   required?: boolean | string;

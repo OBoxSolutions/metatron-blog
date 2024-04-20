@@ -9,6 +9,7 @@ export default function InputText<T>(props: InputProps<T>) {
         id={props?.id}
         className="p-1 rounded outline-none mt-0 shadow text-black"
         disabled={props.disabled}
+        defaultValue={props.defaultValue}
         type="text"
         aria-invalid={!!props.error}
         {...(props?.register &&
