@@ -1,12 +1,17 @@
 import { InputProps } from "./InputTypes";
 import Input from "./Input";
-import { MouseEvent, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { mdiUploadBoxOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 
 export default function ImageUpload<T>(props: InputProps<T>) {
   const imgRef = useRef<HTMLImageElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const { ref } = props.register(props.registerName);
+    ref(inputRef.current);
+  }, [inputRef]);
 
   const triggerInputFile = () => {
     if (!inputRef?.current) return;
