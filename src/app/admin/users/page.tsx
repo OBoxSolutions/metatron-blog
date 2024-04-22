@@ -114,7 +114,7 @@ export default function Users() {
     try {
       if (!data.image) return;
 
-      await uploadBytes(profileImageRef, data.image);
+      await uploadBytes(profileImageRef, data.image[0]);
       const profileImageDownloadUrl = await getDownloadURL(profileImageRef);
 
       isFormUpdating
