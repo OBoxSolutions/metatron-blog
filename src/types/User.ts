@@ -10,7 +10,7 @@ export type User = {
 
 export type RegisterUserInputs = {
   name: string;
-  image?: File;
+  image?: FileList;
   email: string;
   password: string;
   confirmPassword?: string;
