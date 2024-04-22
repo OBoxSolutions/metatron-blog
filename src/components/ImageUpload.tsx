@@ -14,7 +14,7 @@ export default function ImageUpload<T>(props: InputProps<T>) {
     inputRef.current.click();
   };
 
-  const setImage = (e: MouseEvent) => {
+  const setImage = async (e: ChangeEvent<HTMLInputElement>) => {
     const element = e?.target as HTMLInputElement;
 
     if (!element?.files) return;
