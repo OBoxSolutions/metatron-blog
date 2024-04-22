@@ -10,7 +10,7 @@ import { RegisterUserInputs, User } from "@/types/User";
 type UserFormProps = {
   user: User;
   loading?: boolean;
-  image: File;
+  image?: File;
   onSubmit: SubmitHandler<RegisterUserInputs>;
 };
 
