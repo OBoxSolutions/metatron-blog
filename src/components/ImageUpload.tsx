@@ -69,7 +69,10 @@ export default function ImageUpload<T>(props: InputProps<T>) {
               validate: props.validate,
             }))}
           ref={inputRef}
-          onChange={setImage}
+          onChange={(e) => {
+            props.register(props.registerName).onChange(e);
+            setImage(e);
+          }}
         />
       </span>
     </Input>
