@@ -12,6 +12,7 @@ import CardBody from "@/components/CardBody";
 import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 import Dialog from "@/components/Dialog";
 import Button from "@/components/Button";
+import UserImagePlaceholder from "@/components/UserImagePlaceholder";
 
 import Section from "../_components/Section";
 import DataTable from "../_components/DataTable";
@@ -24,8 +25,21 @@ import { SubmitHandler } from "react-hook-form";
 
 const columns = [
   {
-    name: "Name",
-    selector: (row: User) => row.name,
+    name: "User",
+    selector: (row: User) => (
+      <div className="flex gap-3 items-center my-2">
+        {row.image ? (
+          <img
+            src={row.image}
+            alt="User profile pic"
+            className="w-10 h-10 rounded-full mr-3"
+          />
+        ) : (
+          <UserImagePlaceholder />
+        )}
+        {row.name}
+      </div>
+    ),
   },
   {
     email: "Email",
