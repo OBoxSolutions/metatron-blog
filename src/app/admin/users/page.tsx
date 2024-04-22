@@ -32,7 +32,7 @@ const columns = [
           <img
             src={row.image}
             alt="User profile pic"
-            className="w-12 h-12 rounded-full mr-3"
+            className="w-12 h-12 rounded-full"
           />
         ) : (
           <UserImagePlaceholder />
