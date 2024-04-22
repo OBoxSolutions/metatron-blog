@@ -13,18 +13,19 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import Image from "next/image";
 
 import { commentsCollection, db, postsCollection } from "@/utils/firebase";
 
 import { Post } from "@/types/Post";
 import { Comment } from "@/types/Comment";
 
-import Section from "../../_components/Section";
 import CommentForm from "@/app/(site)/_components/CommentForm";
+
+import UserImagePlaceholder from "@/components/UserImagePlaceholder";
+
+import Section from "../../_components/Section";
 import Aside from "../../_components/Aside";
-import Image from "next/image";
-import Icon from "@mdi/react";
-import { mdiAccount } from "@mdi/js";
 
 export default function PostSinglePage({
   params,
@@ -137,9 +138,7 @@ export default function PostSinglePage({
               <h3 className="text-3xl">Comments</h3>
               {comments.map((comment) => (
                 <div className="flex gap-5" key={`comment-id-${comment?.id}`}>
-                  <div className="rounded-full bg-gray-500 p-3">
-                    <Icon path={mdiAccount} size={1}></Icon>
-                  </div>
+                  <UserImagePlaceholder />
                   <p>{comment.text}</p>
                 </div>
               ))}
