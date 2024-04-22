@@ -27,7 +27,7 @@ const columns = [
   {
     name: "User",
     selector: (row: User) => (
-      <div className="flex gap-3 items-center my-2">
+      <div className="flex gap-5 items-center my-2">
         {row.image ? (
           <img
             src={row.image}
