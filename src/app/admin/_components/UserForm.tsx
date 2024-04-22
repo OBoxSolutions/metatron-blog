@@ -5,6 +5,7 @@ import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import InputText from "@/components/InputText";
 import InputFile from "@/components/InputFile";
+import ImageUpload from "@/components/ImageUpload";
 import { RegisterUserInputs, User } from "@/types/User";
 
 type UserFormProps = {
@@ -19,11 +20,7 @@ export default function UserForm(props: UserFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterUserInputs>({
-    defaultValues: {
-      ...props.user,
-    },
-  });
+  } = useForm<RegisterUserInputs>();
 
   return (
     <Card>
@@ -33,13 +30,13 @@ export default function UserForm(props: UserFormProps) {
           onSubmit={handleSubmit(props.onSubmit)}
           className="flex flex-col gap-4"
         >
-          <InputFile
+          <ImageUpload
             label="Image"
             required="The image is required"
             registerName="image"
             register={register}
             error={errors.image}
-          ></InputFile>
+          ></ImageUpload>
           <InputText
             label="Name"
             required="The name is required"
