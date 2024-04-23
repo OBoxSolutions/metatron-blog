@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+import { mdiMenu } from "@mdi/js";
+
+import Button from "@/components/Button";
+
 type NavProps = {
   className?: string;
 };
@@ -7,8 +11,9 @@ type NavProps = {
 export default function Nav(props: NavProps) {
   return (
     <nav
-      className={`flex bg-primary justify-end items-center px-5 gap-4 ${props.className}`}
+      className={`flex bg-primary items-center px-5 gap-4 ${props.className}`}
     >
+      <Button icon={mdiMenu} iconSize={1} className="mr-auto"></Button>
       <Link href="/" target="_blank">
         See Site
       </Link>
