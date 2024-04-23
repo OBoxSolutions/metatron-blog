@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 
 type NavProps = {
   className?: string;
+  onClick: () => void;
 };
 
 export default function Nav(props: NavProps) {
@@ -13,7 +14,12 @@ export default function Nav(props: NavProps) {
     <nav
       className={`flex bg-primary items-center px-5 gap-4 ${props.className}`}
     >
-      <Button icon={mdiMenu} iconSize={1} className="mr-auto"></Button>
+      <Button
+        icon={mdiMenu}
+        iconSize={1}
+        className="mr-auto"
+        onClick={props.onClick}
+      ></Button>
       <Link href="/" target="_blank">
         See Site
       </Link>
