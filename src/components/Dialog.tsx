@@ -32,7 +32,7 @@ export default function Dialog({
   }, [dialog, closeDialog, dialogRef]);
 
   const closeIfClickOutside = (e: MouseEvent<HTMLDialogElement>) => {
-    if (dialogRef.current?.children[1].contains(e.target as Node)) {
+    if (dialogRef.current?.lastChild?.contains(e.target as Node)) {
       closeDialog(false);
     }
   };
@@ -44,7 +44,7 @@ export default function Dialog({
       className="text-white"
       onClick={closeIfClickOutside}
     >
-      <div>{children}</div>
+      {children}
       <span className="fixed inset-0 bg-gray-800 opacity-75 -z-10"></span>
     </dialog>
   );
