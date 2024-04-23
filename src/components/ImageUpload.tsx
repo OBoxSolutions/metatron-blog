@@ -1,10 +1,16 @@
-import { InputProps } from "./InputTypes";
-import Input from "./Input";
 import { ChangeEvent, useEffect, useRef } from "react";
+
 import { mdiUploadBoxOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 
-export default function ImageUpload<T>(props: InputProps<T>) {
+import { InputProps } from "./InputTypes";
+import Input from "./Input";
+
+type ImageUploadType<T> = {
+  src?: string;
+} & InputProps<T>;
+
+export default function ImageUpload<T>(props: ImageUploadType<T>) {
   const imgRef = useRef<HTMLImageElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -55,7 +61,7 @@ export default function ImageUpload<T>(props: InputProps<T>) {
           </span>
         </span>
         <span className="absolute inset-0 flex justify-center items-center bg-primary opacity-50"></span>
-        <img src="" alt="" className="w-auto h-full" ref={imgRef} />
+        <img src={props?.src} alt="" className="w-auto h-full" ref={imgRef} />
         <input
           id={props?.id}
           disabled={props.disabled}
