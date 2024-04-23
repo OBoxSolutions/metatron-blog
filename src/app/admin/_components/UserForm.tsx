@@ -4,7 +4,6 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import InputText from "@/components/InputText";
-import InputFile from "@/components/InputFile";
 import ImageUpload from "@/components/ImageUpload";
 import { RegisterUserInputs, User } from "@/types/User";
 
