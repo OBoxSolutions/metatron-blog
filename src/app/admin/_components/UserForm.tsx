@@ -33,6 +33,7 @@ export default function UserForm(props: UserFormProps) {
             label="Image"
             required="The image is required"
             registerName="image"
+            src={props.user.image}
             register={register}
             error={errors.image}
           ></ImageUpload>
@@ -41,6 +42,7 @@ export default function UserForm(props: UserFormProps) {
             required="The name is required"
             registerName="name"
             register={register}
+            defaultValue={props.user.name}
             error={errors.name}
           ></InputText>
           <InputText
@@ -53,6 +55,7 @@ export default function UserForm(props: UserFormProps) {
               message: "Invalid email address",
             }}
             register={register}
+            defaultValue={props.user.email}
             error={errors.email}
           ></InputText>
           <InputText
