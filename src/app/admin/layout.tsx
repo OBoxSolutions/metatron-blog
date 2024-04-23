@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
@@ -20,14 +22,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [asideState, setAsideState] = useState(true);
+
+  const gridColumns = asideState
+    ? "grid-cols-[300px_1fr] grid-rows-[64px_1fr]"
+    : "grid-cols-1";
+
   return (
     <html lang="en">
       <body
-        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid grid-cols-[300px_1fr] grid-rows-[64px_1fr]`}
+        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid ${gridColumns}`}
       >
-        <Aside className="col-span-1 row-span-2"></Aside>
-        <Nav className="col-start-2"></Nav>
-        <main className="col-start-2">{children}</main>
+        <Aside
+          className={`col-span-1 row-span-2 ${asideState ? "" : "hidden"}`}
+        ></Aside>
+
+        <Nav
+          className={`${asideState ? "col-start-2" : "col-span-1"}`}
+          onClick={() => setAsideState(!asideState)}
+        ></Nav>
+
+        <main className={`${asideState ? "col-start-2" : "col-span-1"}`}>
+          {children}
+        </main>
 
         <Toaster expand={true}></Toaster>
       </body>
