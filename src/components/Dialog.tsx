@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { MouseEvent, useEffect, useRef } from "react";
 
 export type DialogProps = {
   dialog: boolean;
@@ -13,44 +13,39 @@ export default function Dialog({
   width = "600px",
   children,
 }: DialogProps) {
-  const dialogContentRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    function handleEvent(event: MouseEvent) {
-      if (!dialogContentRef?.current?.contains(event.target as Node)) {
-        closeDialog(false);
-      }
-    }
+    if (!dialogRef.current) return;
 
-    function handleKeyboardEvent(event: KeyboardEvent) {
-      if (event.key !== "Escape") return;
+    dialog ? dialogRef.current?.showModal() : dialogRef.current?.close();
 
-      if (!dialogContentRef?.current?.contains(event.target as Node)) {
-        closeDialog(false);
-      }
-    }
+    const closeDialogHandler = () => {
+      closeDialog(false);
+    };
 
-    document.addEventListener("mousedown", handleEvent);
-    document.addEventListener("keydown", handleKeyboardEvent);
+    dialogRef.current.addEventListener("close", closeDialogHandler);
 
     return () => {
-      document.removeEventListener("mousedown", handleEvent);
-      document.removeEventListener("keydown", handleKeyboardEvent);
+      dialogRef.current?.removeEventListener("close", closeDialogHandler);
     };
-  }, [dialog, closeDialog, dialogContentRef]);
+  }, [dialog, closeDialog, dialogRef]);
 
-  if (!dialog) return null;
+  const closeIfClickOutside = (e: MouseEvent<HTMLDialogElement>) => {
+    if (dialogRef.current?.children[1].contains(e.target as Node)) {
+      closeDialog(false);
+    }
+  };
 
   return (
-    <div className={`fixed inset-0 flex`}>
-      <div
-        className="h-fit w-fit m-auto z-20"
-        style={{ width }}
-        ref={dialogContentRef}
-      >
-        {children}
-      </div>
-      <div className="fixed inset-0 bg-gray-800 opacity-75 -z-10"></div>
-    </div>
+    <dialog
+      ref={dialogRef}
+      style={{ width }}
+      className="text-white"
+      onClick={closeIfClickOutside}
+    >
+      <div>{children}</div>
+      <span className="fixed inset-0 bg-gray-800 opacity-75 -z-10"></span>
+    </dialog>
   );
 }
