@@ -15,7 +15,7 @@ export default function Menu({
   menu,
   setMenu,
   anchorEl,
-  width = "300px",
+  width = "fit-content",
   children,
 }: MenuProps) {
   const menuContentRef = useRef<HTMLDivElement>(null);
