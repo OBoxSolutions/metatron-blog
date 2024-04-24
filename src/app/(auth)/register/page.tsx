@@ -1,26 +1,49 @@
 "use client";
 
 import Link from "next/link";
-
 import { useForm, SubmitHandler } from "react-hook-form";
-
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import CardBody from "@/components/CardBody";
 import Card from "@/components/Card";
-
 import { RegisterUserInputs } from "@/types/User";
+import useAuthStore from "@/stores/auth/auth.store";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 function RegisterForm() {
+  const registerUser = useAuthStore((state) => state.register);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
+    reset,
   } = useForm<RegisterUserInputs>();
 
-  const onSubmit: SubmitHandler<RegisterUserInputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterUserInputs> = async (data) => {
+    const { name, email, password } = data;
+
+    try {
+      const { ok, msg } = await registerUser(name, email, password);
+
+      if (!ok && msg) {
+        Swal.fire({
+          title: msg,
+          icon: "error",
+          width: 600,
+          padding: "3em",
+          color: "#F27474",
+        });
+        // reset();
+      } else {
+        // reset();
+        // router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -38,10 +61,12 @@ function RegisterForm() {
               required="The name is required"
               register={register}
               error={errors.name}
+              registerName="name"
             ></InputText>
             <InputText
               label="Email"
               type="email"
+              registerName="email"
               required="The email is required"
               pattern={{
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -53,6 +78,7 @@ function RegisterForm() {
             <InputText
               label="Password"
               type="password"
+              registerName="password"
               required="The password is required"
               register={register}
               error={errors.password}
@@ -63,11 +89,11 @@ function RegisterForm() {
             ></InputText>
             <InputText
               label="Confirm Password"
-              name="confirmPassword"
+              registerName="confirmpassword"
               type="password"
               required="The confirm password is required"
               validate={(value: string) =>
-                value === getValues("password")[0] || "Passwords do not match"
+                value === getValues("password") || "Passwords do not match"
               }
               register={register}
               error={errors.confirmPassword}

@@ -12,29 +12,19 @@ interface User {
   image?: string;
 }
 
-export const findUserByEmail = async (email: string): Promise<User | null> => {
+export const findUserByEmail = async (email: string): Promise<any> => {
   try {
     const q = query(usersCollection, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      return null;
-    } else {
-      const userData = querySnapshot.docs[0].data();
-      const userId = querySnapshot.docs[0].id;
-
-      const user: User = {
-        id: userId,
-        name: userData.name,
-        email: userData.email,
-        password: userData.password,
-        image: userData.image || undefined, // Usar undefined si no hay imagen
-        postsIds: userData.postsIds || [],
-        favoritesIds: userData.favoritesIds || [],
-        commentsIds: userData.commentsIds || [],
-      };
-
-      return user;
+    console.log(querySnapshot.empty);
+    if (!querySnapshot.empty) {
+      return {ok:false, msg:"Usuario ya existe en la BD"}
     }
+
+    if(querySnapshot.empty){
+      return {ok:true}
+    }
+    
   } catch (error) {
     console.error("Error al buscar usuario por email:", error);
     throw error;

@@ -26,8 +26,8 @@ export default function Login() {
     const user = await loginUser(data.email,data.password)
     if(user !==null){
       console.log("logeado")
-      reset()
-      router.push('/')
+      // reset()
+      // router.push('/')
 
     }else{
       Swal.fire({
@@ -37,7 +37,7 @@ export default function Login() {
         padding: "3em",
         color: "#F27474",
       });
-      reset()
+      // reset()
     }
     
     

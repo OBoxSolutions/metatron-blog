@@ -15,7 +15,7 @@ interface AuthState {
 
 interface AuthActions {
   login: (email: string, password: string) => Promise<void | null>;
-  register: (nombre: string, email: string, password: string) => Promise<void | null>;
+  register: (nombre: string, email: string, password: string) => Promise<{ok:boolean; msg?:string}>;
   logout: () => void;
   // TODO: Implementar JWT
   // checkToken: () => Promise<boolean>;
@@ -55,10 +55,13 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
 
   register: async (name: string, email: string, password: string) => {
     try {
-    const userData = await findUserByEmail(email);
+    const {ok,msg} = await findUserByEmail(email);
 
-    if (!userData) return null;
-
+    if (!ok && msg) {
+      console.log("ese usuario ya existe")
+      return {msg, ok};
+    } 
+    
       // encriptar contraña
       const salt = bcrypt.genSaltSync();
       password = bcrypt.hashSync(password, salt);
@@ -70,8 +73,12 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
       });
       const uid = docRef.id;
       set({ uid, name, email, checking: false, logged: true });
+
+      return {
+        ok: true 
+      }
     } catch (error) {
-      console.error("Error en firestore", error);
+      return { ok: false, msg: error }
     }
   },
 
