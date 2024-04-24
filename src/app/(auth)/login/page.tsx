@@ -1,13 +1,14 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import useAuthStore from "@/stores/auth/auth.store";
+import {  useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
-
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 type LoginInputs = {
   email: string;
@@ -15,14 +16,34 @@ type LoginInputs = {
 };
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginInputs>();
+  const loginUser= useAuthStore((state)=>state.login)
+  const router = useRouter()
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    console.log(data);
+  const {register,handleSubmit,formState: { errors },reset} = useForm<LoginInputs>();
+
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+  try {
+    const user = await loginUser(data.email,data.password)
+    if(user !==null){
+      console.log("logeado")
+      reset()
+      router.push('/')
+
+    }else{
+      Swal.fire({
+        title: "Crendenciales Incorrectas",
+        icon: 'error',
+        width: 600,
+        padding: "3em",
+        color: "#F27474",
+      });
+      reset()
+    }
+    
+    
+  } catch (error) {
+    console.log(error)
+  }
   };
 
   return (
@@ -37,6 +58,7 @@ export default function Login() {
               label="Email"
               type="email"
               required="The email is required"
+              registerName="email"
               pattern={{
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: "Invalid email address",
@@ -47,6 +69,7 @@ export default function Login() {
             <InputText
               label="Password"
               type="password"
+              registerName="password"
               required="The password is required"
               minLength={{
                 value: 8,
