@@ -21,19 +21,26 @@ export default function Menu({
   const menuContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleEvent(event: MouseEvent) {
+    const handleEvent = (event: MouseEvent) => {
+      if (menuContentRef?.current?.contains(event.target as Node)) return;
+
+      if (anchorEl.contains(event.target as Node)) {
+        setMenu(!menu);
+        return;
+      }
+
       if (!menuContentRef?.current?.contains(event.target as Node)) {
         setMenu(false);
       }
-    }
+    };
 
-    function handleKeyboardEvent(event: KeyboardEvent) {
+    const handleKeyboardEvent = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
 
       if (!menuContentRef?.current?.contains(event.target as Node)) {
         setMenu(false);
       }
-    }
+    };
 
     document.addEventListener("mousedown", handleEvent);
     document.addEventListener("keydown", handleKeyboardEvent);
@@ -42,12 +49,14 @@ export default function Menu({
       document.removeEventListener("mousedown", handleEvent);
       document.removeEventListener("keydown", handleKeyboardEvent);
     };
-  }, [menu, setMenu, menuContentRef]);
-
-  if (!menu) return null;
+  }, [menu]);
 
   return createPortal(
-    <div className="absolute right-0" style={{ width }} ref={menuContentRef}>
+    <div
+      className={`absolute right-0 ${menu ? "block" : "hidden"}`}
+      style={{ width }}
+      ref={menuContentRef}
+    >
       <Card>
         <CardBody>{children}</CardBody>
       </Card>
