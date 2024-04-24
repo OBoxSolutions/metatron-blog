@@ -53,7 +53,7 @@ export default function Menu({
 
   return createPortal(
     <div
-      className={`absolute right-0 ${menu ? "block" : "hidden"}`}
+      className={`absolute right-0 shadow-md ${menu ? "block" : "hidden"}`}
       style={{ width }}
       ref={menuContentRef}
     >
