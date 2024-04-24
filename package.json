@@ -11,6 +11,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.2",
     "firebase": "^10.10.0",
     "next": "14.1.4",
@@ -22,10 +23,12 @@
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.51.3",
     "sonner": "^1.4.41",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
