@@ -9,6 +9,7 @@ import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 type LoginInputs = {
   email: string;
@@ -17,6 +18,7 @@ type LoginInputs = {
 
 export default function Login() {
   const loginUser = useAuthStore((state) => state.login);
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
 
   const {
@@ -28,21 +30,8 @@ export default function Login() {
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     try {
-      const { ok, msg } = await loginUser(data.email, data.password);
-      if (!ok) {
-        Swal.fire({
-          title: msg,
-          icon: "error",
-          width: 600,
-          padding: "3em",
-          color: "#F27474",
-        });
-        reset();
-      } else {
-        console.log("logeado");
-        reset();
-        router.push("/");
-      }
+      const { ok } = await loginUser(data.email, data.password);
+      ok ? router.push("/") : setLoginError("Wrong credentials");
     } catch (error) {
       console.log(error);
     }
@@ -52,6 +41,11 @@ export default function Login() {
     <div>
       <Card>
         <CardBody>
+          {loginError && (
+            <Card className="bg-danger mb-5">
+              <CardBody>{loginError}</CardBody>
+            </Card>
+          )}
           <form
             className="flex flex-col gap-5 mb-0"
             onSubmit={handleSubmit(onSubmit)}
