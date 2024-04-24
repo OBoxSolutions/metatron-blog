@@ -11,11 +11,22 @@ interface AuthState {
   logged: boolean;
   name: string | null;
   email: string | null;
+  postsIds?: string[];
+  favoritesIds?: string[];
+  commentsIds?: string[];
+  image?: string;
 }
 
 interface AuthActions {
-  login: (email: string, password: string) => Promise<void | null>;
-  register: (nombre: string, email: string, password: string) => Promise<{ok:boolean; msg?:string}>;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ ok: boolean; msg?: string | {} }>;
+  register: (
+    nombre: string,
+    email: string,
+    password: string
+  ) => Promise<{ ok: boolean; msg?: string | {} }>;
   logout: () => void;
   // TODO: Implementar JWT
   // checkToken: () => Promise<boolean>;
@@ -27,41 +38,52 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
   logged: false,
   name: null,
   email: null,
+  postsIds: [],
+  favoritesIds: [],
+  commentsIds: [],
+  image: "",
 
   login: async (email: string, password: string) => {
     try {
-      const userData = await findUserByEmail(email);
+      const { ok, msg, user } = await findUserByEmail(email, "login");
 
-      if (!userData) return null;
-
-      const cryptPassword = userData.password;
-      const validPassword = bcrypt.compareSync(password, cryptPassword);
-
-      if (!validPassword) {
-        return null;
+      // para uso de la autentificacion aunque se deberia mostrar x cuestiones de seguridad
+      // solo "credenciales incorrectas"
+      if (!ok) {
+        return { ok, msg: "Usuario no existe en BD" };
       }
-      set((state) => ({
-        ...state,
-        uid: userData.id,
-        name: userData.name,
-        email,
-        checking: false,
-        logged: true,
-      }));
+
+      if (ok && user) {
+        const cryptPassword = user.password;
+        const validPassword = bcrypt.compareSync(password, cryptPassword);
+
+        if (!validPassword) {
+          return { ok: false, msg: "Contraseña incorrecta" };
+        }
+        set((state) => ({
+          ...state,
+          uid: user.id,
+          name: user.name,
+          email,
+          checking: false,
+          logged: true,
+        }));
+      }
+
+      return { ok: true };
     } catch (error) {
-      console.log(error);
+      return { ok: false, msg: error || "Error desconocido" };
     }
   },
 
   register: async (name: string, email: string, password: string) => {
     try {
-    const {ok,msg} = await findUserByEmail(email);
+      const { ok, msg } = await findUserByEmail(email, "register");
 
-    if (!ok && msg) {
-      console.log("ese usuario ya existe")
-      return {msg, ok};
-    } 
-    
+      if (!ok && msg) {
+        return { ok, msg };
+      }
+
       // encriptar contraña
       const salt = bcrypt.genSaltSync();
       password = bcrypt.hashSync(password, salt);
@@ -72,13 +94,21 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
         password,
       });
       const uid = docRef.id;
-      set({ uid, name, email, checking: false, logged: true });
+
+      set((state) => ({
+        ...state,
+        uid,
+        name,
+        email,
+        checking: false,
+        logged: true,
+      }));
 
       return {
-        ok: true 
-      }
+        ok: true,
+      };
     } catch (error) {
-      return { ok: false, msg: error }
+      return { ok: false, msg: error || "Error desconocido" };
     }
   },
 

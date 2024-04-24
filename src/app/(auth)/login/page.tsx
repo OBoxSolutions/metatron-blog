@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import useAuthStore from "@/stores/auth/auth.store";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import Card from "@/components/Card";
@@ -16,34 +16,36 @@ type LoginInputs = {
 };
 
 export default function Login() {
-  const loginUser= useAuthStore((state)=>state.login)
-  const router = useRouter()
+  const loginUser = useAuthStore((state) => state.login);
+  const router = useRouter();
 
-  const {register,handleSubmit,formState: { errors },reset} = useForm<LoginInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<LoginInputs>();
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-  try {
-    const user = await loginUser(data.email,data.password)
-    if(user !==null){
-      console.log("logeado")
-      // reset()
-      // router.push('/')
-
-    }else{
-      Swal.fire({
-        title: "Crendenciales Incorrectas",
-        icon: 'error',
-        width: 600,
-        padding: "3em",
-        color: "#F27474",
-      });
-      // reset()
+    try {
+      const { ok, msg } = await loginUser(data.email, data.password);
+      if (!ok) {
+        Swal.fire({
+          title: msg,
+          icon: "error",
+          width: 600,
+          padding: "3em",
+          color: "#F27474",
+        });
+        reset();
+      } else {
+        console.log("logeado");
+        reset();
+        router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    
-    
-  } catch (error) {
-    console.log(error)
-  }
   };
 
   return (

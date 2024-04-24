@@ -36,7 +36,7 @@ function RegisterForm() {
           padding: "3em",
           color: "#F27474",
         });
-        // reset();
+        reset();
       } else {
         // reset();
         // router.push("/");
