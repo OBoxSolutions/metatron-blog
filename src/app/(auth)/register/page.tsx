@@ -38,8 +38,8 @@ function RegisterForm() {
         });
         reset();
       } else {
-        // reset();
-        // router.push("/");
+        reset();
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
