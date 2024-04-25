@@ -17,11 +17,11 @@ interface AuthState {
   image?: string;
 }
 
-interface UpdateUser{
-  name?:string | undefined;
-  email?:string | undefined;
-  image?:string | undefined;
-  newPassword?:string | undefined
+interface UpdateUser {
+  name?: string | undefined;
+  email?: string | undefined;
+  image?: string | undefined;
+  newPassword?: string | undefined;
 }
 
 interface AuthActions {
@@ -35,7 +35,7 @@ interface AuthActions {
     password: string
   ) => Promise<{ ok: boolean; msg?: string | {} }>;
   logout: () => void;
-  updateUser:(newData:UpdateUser)=>Promise<void>
+  updateUser: (newData: UpdateUser) => Promise<void>;
   // TODO: Implementar JWT
   // checkToken: () => Promise<boolean>;
 }
@@ -75,6 +75,7 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
           email,
           checking: false,
           logged: true,
+          image: user.image,
         }));
       }
 
@@ -110,7 +111,7 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
         email,
         checking: false,
         logged: true,
-        image:""
+        image: "",
       }));
 
       return {
@@ -128,16 +129,20 @@ const authStoreApi: StateCreator<AuthState & AuthActions> = (set) => ({
       logged: false,
       name: null,
       email: null,
+      postsIds: [],
+      favoritesIds: [],
+      commentsIds: [],
+      image: "",
     });
   },
-  updateUser:async(newData:UpdateUser)=>{
+  updateUser: async (newData: UpdateUser) => {
     set((state) => ({
       ...state,
-      name:newData.name,
-      email:newData.email,
-      image: newData.image
+      name: newData.name,
+      email: newData.email,
+      image: newData.image,
     }));
-  }
+  },
 });
 
 const useAuthStore = create<AuthState & AuthActions>()(
