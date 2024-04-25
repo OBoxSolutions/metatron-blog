@@ -13,6 +13,7 @@ const config: Config = {
         primary: "#052035",
         "text-primary": "#ffffff",
         accent: "#28AFB0",
+        danger: "#FF5555",
       },
     },
   },
