@@ -64,7 +64,7 @@ export default function RootLayout({
           onClick={() => setAsideState(!asideState)}
         ></Nav>
 
-        <main className="col-start-2">{children}</main>
+        <main className="col-start-2 mx-3 lg:mx-0">{children}</main>
 
         <Toaster expand={true}></Toaster>
       </body>
