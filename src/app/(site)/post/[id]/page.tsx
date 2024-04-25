@@ -133,7 +133,9 @@ export default function PostSinglePage({
               height={600}
               className="w-full"
             ></Image>
-            <article>{post.content}</article>
+            <article
+              dangerouslySetInnerHTML={{ __html: post?.content }}
+            ></article>
             <div className="flex flex-col gap-4 mt-16">
               <h3 className="text-3xl">Comments</h3>
               {comments.map((comment) => (
