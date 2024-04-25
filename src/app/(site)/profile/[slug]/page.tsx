@@ -5,16 +5,29 @@ import DialogDeleteConfirmation from "@/components/DialogDeleteConfirmation";
 import { destroy } from "@/services/comments";
 import useAuthStore from "@/stores/auth/auth.store";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const userName = useAuthStore((state) => state.name);
   const userImage = useAuthStore((state) => state.image);
   const userEmail = useAuthStore((state) => state.email);
   const userId = useAuthStore((state) => state.uid);
+  const userLogged =useAuthStore((state)=>state.logged)
+  const resetStorage = useAuthStore(state=>state.logout)
+  
+  const router = useRouter()
 
   const [loading, setLoading] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
+
+  useEffect(() => {
+    if(!userLogged){
+      router.push('/')
+    }
+      
+  }, [userLogged])
+  
 
   const onDestroyUser = async () => {
     try {
@@ -22,8 +35,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       if (userId !== null) {
         console.log("Salio bien todo")
         await destroy(userId);
-        
-        setDeleteDialog(false)
+        resetStorage()
       }
     } catch (error) {
       setLoading(false);
