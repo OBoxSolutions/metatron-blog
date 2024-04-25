@@ -24,14 +24,12 @@ export default function RootLayout({
 }>) {
   const [asideState, setAsideState] = useState(true);
 
-  const gridColumns = asideState
-    ? "grid-cols-[300px_1fr] grid-rows-[64px_1fr]"
-    : "grid-cols-1";
+  const gridColumns = asideState ? "grid-cols-[300px_1fr]" : "grid-cols-1";
 
   return (
     <html lang="en">
       <body
-        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid ${gridColumns}`}
+        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
       >
         <Aside
           className={`col-span-1 row-span-2 ${asideState ? "" : "hidden"}`}
