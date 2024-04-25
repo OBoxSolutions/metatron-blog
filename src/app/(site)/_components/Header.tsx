@@ -16,6 +16,7 @@ export default function Header() {
   const userName = useAuthStore((state) => state.name);
   const logout = useAuthStore((state) => state.logout);
   const [menu, setMenu] = useState(false);
+  const userId = useAuthStore((state) => state.uid);
 
   const userNameInitials = userName
     ? userName
@@ -69,7 +70,7 @@ export default function Header() {
             {anchorEl && (
               <Menu anchorEl={anchorEl} menu={menu} setMenu={setMenu}>
                 <ul className="flex flex-col gap-5">
-                  <Link href="/admin/profile">Profile</Link>
+                  <Link href={`/profile/${userId}`}>Profile</Link>
                   <li onClick={logout}>Logout</li>
                 </ul>
               </Menu>
