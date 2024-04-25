@@ -9,38 +9,26 @@ import Card from "@/components/Card";
 import { RegisterUserInputs } from "@/types/User";
 import useAuthStore from "@/stores/auth/auth.store";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import { useState } from "react";
 
 function RegisterForm() {
   const registerUser = useAuthStore((state) => state.register);
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
-    reset,
   } = useForm<RegisterUserInputs>();
 
   const onSubmit: SubmitHandler<RegisterUserInputs> = async (data) => {
     const { name, email, password } = data;
 
     try {
-      const { ok, msg } = await registerUser(name, email, password);
+      const { ok } = await registerUser(name, email, password);
 
-      if (!ok && msg) {
-        Swal.fire({
-          title: msg,
-          icon: "error",
-          width: 600,
-          padding: "3em",
-          color: "#F27474",
-        });
-        reset();
-      } else {
-        reset();
-        router.push("/");
-      }
+      ok ? router.push("/") : setLoginError("Wrong credentials");
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +38,11 @@ function RegisterForm() {
     <div>
       <Card>
         <CardBody>
+          {loginError && (
+            <Card className="bg-danger mb-5">
+              <CardBody>{loginError}</CardBody>
+            </Card>
+          )}
           <form
             noValidate
             className="flex flex-col gap-5 mb-0"
