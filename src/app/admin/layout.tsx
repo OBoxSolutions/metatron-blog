@@ -3,12 +3,16 @@
 import { useEffect, useState } from "react";
 
 import { Hind_Siliguri } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+
 import "./globals.css";
 
 import Aside from "./_components/Aside";
 import Nav from "./_components/Nav";
 
 import { Toaster } from "sonner";
+import Loading from "./loading";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin"],
@@ -24,6 +28,9 @@ export default function RootLayout({
 }>) {
   const [isScreenSmall, setIsScreenSmall] = useState(false);
   const [asideState, setAsideState] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 768px)");
@@ -64,7 +71,9 @@ export default function RootLayout({
           onClick={() => setAsideState(!asideState)}
         ></Nav>
 
-        <main className="col-start-2 mx-3 lg:mx-0">{children}</main>
+        <main className="col-start-2 mx-3 lg:mx-0 relative">
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </main>
 
         <Toaster expand={true}></Toaster>
       </body>
