@@ -47,6 +47,8 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
 
   const onSubmit: SubmitHandler<PostInputs> = async (data) => {
     setLoading(true);
+    console.log(data);
+    return;
 
     const post = {
       id: String(params?.id) ?? "",
@@ -142,7 +144,23 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               error={errors.description}
             ></TextArea>
 
-            <ReactQuill></ReactQuill>
+            <ReactQuill
+              defaultValue={post.content ?? ""}
+              onChange={(_, _1, _2, editor) => {
+                console.log(editor.getContents());
+                register("content").onChange({
+                  type: "content",
+                  target: { name: "content", value: editor.getContents() },
+                });
+              }}
+              onBlur={(_, _1, editor) =>
+                register("content").onBlur({
+                  type: "content",
+                  target: { name: "content", value: editor.getContents() },
+                })
+              }
+              ref={(ref) => register("content").ref(ref)}
+            ></ReactQuill>
             <Button className="ml-auto" loading={isLoading}>
               Submit
             </Button>
