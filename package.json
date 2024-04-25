@@ -23,6 +23,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.51.3",
+    "react-quill": "^2.0.0",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8",
     "sweetalert2": "^11.10.8",
