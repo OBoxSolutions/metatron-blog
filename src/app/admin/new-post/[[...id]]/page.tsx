@@ -47,8 +47,6 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
 
   const onSubmit: SubmitHandler<PostInputs> = async (data) => {
     setLoading(true);
-    console.log(data);
-    return;
 
     const post = {
       id: String(params?.id) ?? "",
