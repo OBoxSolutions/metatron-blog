@@ -12,6 +12,7 @@ type UserFormProps = {
   loading?: boolean;
   image?: File;
   onSubmit: SubmitHandler<RegisterUserInputs>;
+  changePassword?: boolean;
 };
 
 export default function UserForm(props: UserFormProps) {
@@ -58,18 +59,22 @@ export default function UserForm(props: UserFormProps) {
             defaultValue={props.user.email}
             error={errors.email}
           ></InputText>
-          <InputText
-            label="Password"
-            type="password"
-            registerName="password"
-            required="The password is required"
-            register={register}
-            error={errors.password}
-            minLength={{
-              value: 8,
-              message: "Password must be at least 8 characters",
-            }}
-          ></InputText>
+          {props.changePassword === undefined ? (
+            <InputText
+              label="Password"
+              type="password"
+              registerName="password"
+              required="The password is required"
+              register={register}
+              error={errors.password}
+              minLength={{
+                value: 8,
+                message: "Password must be at least 8 characters",
+              }}
+            ></InputText>
+          ) : (
+            <></>
+          )}
           <div className="flex justify-end mt-4">
             <Button loading={props.loading}>Submit</Button>
           </div>
