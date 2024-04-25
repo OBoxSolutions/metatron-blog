@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
@@ -22,7 +22,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isScreenSmall, setIsScreenSmall] = useState(false);
   const [asideState, setAsideState] = useState(true);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 768px)");
+
+    const handleBreakpointChange = (
+      e: MediaQueryListEvent | MediaQueryList,
+    ) => {
+      setIsScreenSmall(e.matches);
+    };
+
+    query.addEventListener("change", handleBreakpointChange);
+    handleBreakpointChange(query);
+
+    return () => query.removeEventListener("change", handleBreakpointChange);
+  });
 
   const gridColumns = asideState
     ? "grid-cols-[0px_1fr] md:grid-cols-[300px_1fr]"
@@ -34,11 +50,13 @@ export default function RootLayout({
         className={`${hindSiliguri.className} transition-all h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
       >
         <div
-          className={`col-span-1 row-span-2 overflow-x-hidden transition-all ${
-            asideState ? "" : "-scale-x-full"
-          }`}
+          className={`col-span-1 row-span-2 overflow-x-hidden transition-all`}
         >
-          <Aside></Aside>
+          <Aside
+            floating={isScreenSmall}
+            isShowing={asideState}
+            setIsShowing={setAsideState}
+          ></Aside>
         </div>
 
         <Nav
