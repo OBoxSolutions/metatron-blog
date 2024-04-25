@@ -8,7 +8,6 @@ import InputText from "@/components/InputText";
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
 import Link from "next/link";
-import Swal from "sweetalert2";
 import { useState } from "react";
 
 type LoginInputs = {
@@ -25,7 +24,6 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<LoginInputs>();
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
