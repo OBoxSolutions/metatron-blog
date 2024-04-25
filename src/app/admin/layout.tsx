@@ -25,7 +25,7 @@ export default function RootLayout({
   const [asideState, setAsideState] = useState(true);
 
   const gridColumns = asideState
-    ? "grid-cols-[300px_1fr]"
+    ? "grid-cols-[0px_1fr] md:grid-cols-[300px_1fr]"
     : "grid-cols-[0px_1fr]";
 
   return (
