@@ -24,25 +24,29 @@ export default function RootLayout({
 }>) {
   const [asideState, setAsideState] = useState(true);
 
-  const gridColumns = asideState ? "grid-cols-[300px_1fr]" : "grid-cols-1";
+  const gridColumns = asideState
+    ? "grid-cols-[300px_1fr]"
+    : "grid-cols-[0px_1fr]";
 
   return (
     <html lang="en">
       <body
-        className={`${hindSiliguri.className} h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
+        className={`${hindSiliguri.className} transition-all h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
       >
-        <Aside
-          className={`col-span-1 row-span-2 ${asideState ? "" : "hidden"}`}
-        ></Aside>
+        <div
+          className={`col-span-1 row-span-2 overflow-x-hidden transition-all ${
+            asideState ? "" : "-scale-x-full"
+          }`}
+        >
+          <Aside></Aside>
+        </div>
 
         <Nav
-          className={`${asideState ? "col-start-2" : "col-span-1"}`}
+          className="col-start-2"
           onClick={() => setAsideState(!asideState)}
         ></Nav>
 
-        <main className={`${asideState ? "col-start-2" : "col-span-1"}`}>
-          {children}
-        </main>
+        <main className="col-start-2">{children}</main>
 
         <Toaster expand={true}></Toaster>
       </body>
