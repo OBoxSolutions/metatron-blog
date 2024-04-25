@@ -22,7 +22,7 @@ export default function DialogDeleteConfirmation(
               Cancel
             </Button>
             <Button onClick={props.onClickAccept} className="bg-danger">
-              Accept
+              Delete
             </Button>
           </div>
         </CardBody>
