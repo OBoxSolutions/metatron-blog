@@ -12,7 +12,7 @@ type CommentFormProps = {
 export default function CommentForm(props: CommentFormProps) {
   return (
     <form className={props.className} onSubmit={props.onSubmit}>
-      <TextArea required={true} name="text" disabled={props.loading}></TextArea>
+      <TextArea required={true} disabled={props.loading}></TextArea>
       <div className="flex justify-end mt-4">
         <Button loading={props.loading}>Send</Button>
       </div>

@@ -1,9 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import InputText from "@/components/InputText";
 import TextArea from "@/components/TextArea";
@@ -138,18 +141,24 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
               }}
               error={errors.description}
             ></TextArea>
-            <TextArea
-              label="Content"
-              required="The content is required"
+
+            <ReactQuill
               defaultValue={post.content ?? ""}
-              registerName="content"
-              register={register}
-              minLength={{
-                value: 200,
-                message: "At least 200 characters are required",
+              onChange={(_, _1, _2, editor) => {
+                console.log(editor.getContents());
+                register("content").onChange({
+                  type: "content",
+                  target: { name: "content", value: editor.getHTML() },
+                });
               }}
-              error={errors.content}
-            ></TextArea>
+              onBlur={(_, _1, editor) =>
+                register("content").onBlur({
+                  type: "content",
+                  target: { name: "content", value: editor.getHTML() },
+                })
+              }
+              ref={(ref) => register("content").ref(ref)}
+            ></ReactQuill>
             <Button className="ml-auto" loading={isLoading}>
               Submit
             </Button>

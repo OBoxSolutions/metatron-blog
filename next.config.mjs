@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["images.unsplash.com", "unsplash.com","firebasestorage.googleapis.com"],
-  },
+    output: 'export',
+    images: {
+        domains: ["images.unsplash.com", "unsplash.com","firebasestorage.googleapis.com"],
+    },
 };
 
 export default nextConfig;
