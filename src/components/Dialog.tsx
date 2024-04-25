@@ -5,6 +5,7 @@ export type DialogProps = {
   closeDialog: (dialog: boolean) => void;
   width?: string;
   children?: React.ReactNode;
+  alert?:string
 };
 
 export default function Dialog({

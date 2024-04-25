@@ -16,7 +16,7 @@ export default function DialogDeleteConfirmation(
       <Card>
         <CardBody>
           <p className="text-2xl">Delete?</p>
-          <p className="py-4">The selected element will be deleted</p>
+          <p className="py-4">{props.alert || "The selected element will be deleted"}</p>
           <div className="flex justify-end gap-1">
             <Button onClick={props.onClickCancel} outline>
               Cancel
