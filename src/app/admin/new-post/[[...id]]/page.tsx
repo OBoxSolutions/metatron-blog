@@ -150,13 +150,13 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
                 console.log(editor.getContents());
                 register("content").onChange({
                   type: "content",
-                  target: { name: "content", value: editor.getContents() },
+                  target: { name: "content", value: editor.getHTML() },
                 });
               }}
               onBlur={(_, _1, editor) =>
                 register("content").onBlur({
                   type: "content",
-                  target: { name: "content", value: editor.getContents() },
+                  target: { name: "content", value: editor.getHTML() },
                 })
               }
               ref={(ref) => register("content").ref(ref)}
