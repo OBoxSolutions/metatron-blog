@@ -1,7 +1,9 @@
 import { Post } from "@/types/Post";
 import { db, postsCollection } from "@/utils/firebase";
 import {
+  DocumentData,
   DocumentReference,
+  Query,
   addDoc,
   deleteDoc,
   doc,
@@ -10,10 +12,16 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export async function index(): Promise<Post[]> {
-  const querySnapshot = await getDocs(postsCollection);
+export async function index(query?: Query): Promise<Post[]> {
+  let querySnapshot = null;
 
-  const localPosts = querySnapshot.docs.map((doc) => {
+  if (query) {
+    querySnapshot = await getDocs(query);
+  } else {
+    querySnapshot = await getDocs(postsCollection);
+  }
+
+  const localPosts = querySnapshot.docs.map((doc: DocumentData) => {
     return { ...doc.data(), id: doc.id };
   });
 
