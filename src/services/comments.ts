@@ -32,12 +32,12 @@ export async function index(query?: Query): Promise<Comment[]> {
 export async function show(id: string): Promise<Comment> {
   const docRef = doc(db, "comments", id);
   const querySnapshot = await getDoc(docRef);
-  const localPost = {
+  const localComment = {
     ...(querySnapshot.data() as Comment),
     id: querySnapshot.id,
   };
 
-  return localPost;
+  return localComment;
 }
 
 export async function store(comment: Comment): Promise<DocumentReference> {
