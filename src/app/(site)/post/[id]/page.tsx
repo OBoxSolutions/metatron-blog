@@ -28,6 +28,7 @@ import Section from "../../_components/Section";
 import Aside from "../../_components/Aside";
 
 import { show } from "@/services/posts";
+import { index } from "@/services/comments";
 
 export default function PostSinglePage({
   params,
@@ -90,14 +91,8 @@ export default function PostSinglePage({
 
   const loadComments = async (commentsIds: string[]) => {
     const q = query(commentsCollection, where(documentId(), "in", commentsIds));
-    const querySnapshot = await getDocs(q);
-
-    setComments(
-      querySnapshot.docs.map((doc: DocumentData) => ({
-        ...doc.data(),
-        id: doc.id,
-      })),
-    );
+    const comments = await index(q);
+    setComments(comments);
   };
 
   const addComment = async (e: FormEvent) => {
