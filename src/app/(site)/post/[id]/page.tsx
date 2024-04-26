@@ -27,6 +27,8 @@ import UserImagePlaceholder from "@/components/UserImagePlaceholder";
 import Section from "../../_components/Section";
 import Aside from "../../_components/Aside";
 
+import { show } from "@/services/posts";
+
 export default function PostSinglePage({
   params,
 }: {
@@ -50,18 +52,22 @@ export default function PostSinglePage({
     if (!params.id) return;
 
     const loadData = async () => {
-      setCommentsIds(await loadPost());
+      const post = await loadPost();
+
+      if (!post) return;
+
+      setCommentsIds(post);
       if (commentsIds?.length) {
         await loadComments(commentsIds);
       }
     };
 
     const loadPost = async () => {
-      const docRef = doc(db, "posts", String(params.id));
-      const querySnapshot = await getDoc(docRef);
+      const localPost = await show(String(params.id));
 
-      const localPost = querySnapshot.data() as Post;
-      localPost && setPost(localPost);
+      if (!localPost) return;
+
+      setPost(localPost);
 
       const queryFeaturedPosts = query(
         postsCollection,
