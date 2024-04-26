@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import {
-  DocumentData,
   addDoc,
   arrayUnion,
   doc,
