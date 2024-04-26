@@ -2,12 +2,9 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import {
-  addDoc,
   arrayUnion,
   doc,
   documentId,
-  getDoc,
-  getDocs,
   query,
   updateDoc,
   where,
@@ -26,13 +23,13 @@ import UserImagePlaceholder from "@/components/UserImagePlaceholder";
 import Section from "../../_components/Section";
 import Aside from "../../_components/Aside";
 
-import { show } from "@/services/posts";
-import { index } from "@/services/comments";
+import { index as indexPosts, show } from "@/services/posts";
+import { index, store, show as showComment } from "@/services/comments";
 
 export default function PostSinglePage({
   params,
 }: {
-  params: { id?: string[] };
+  params: { id?: string };
 }) {
   const [post, setPost] = useState<Post>({
     userId: "1",
@@ -74,12 +71,10 @@ export default function PostSinglePage({
         where("isFeatured", "==", true),
       );
 
-      const querySnapshotFeaturedPosts = await getDocs(queryFeaturedPosts);
+      const featuredPosts = await indexPosts(queryFeaturedPosts);
 
-      const featuredPosts = querySnapshotFeaturedPosts.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      })) as Post[];
+      if (!featuredPosts) return;
+
       setFeaturedPosts(featuredPosts.splice(0, 4));
 
       return localPost?.commentsIds ?? [];
@@ -100,13 +95,13 @@ export default function PostSinglePage({
     const formData = new FormData(e.target as HTMLFormElement);
 
     try {
-      const commentRef = await addDoc(commentsCollection, {
-        text: formData.get("text"),
-        postId: params.id,
+      await store({
+        text: formData.get("text") as string,
+        postId: params.id ? params.id : undefined,
         userId: "1",
       });
 
-      const comment = await getDoc(commentRef);
+      const comment = await showComment(params.id ? params.id : "");
 
       const docRef = doc(db, "posts", String(params.id));
       comment?.id &&
