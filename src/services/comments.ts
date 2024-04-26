@@ -1,7 +1,9 @@
 import { Comment } from "@/types/Comment";
 import { db, commentsCollection } from "@/utils/firebase";
 import {
+  DocumentData,
   DocumentReference,
+  Query,
   addDoc,
   deleteDoc,
   doc,
@@ -10,14 +12,21 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export async function index(): Promise<Comment[]> {
-  const querySnapshot = await getDocs(commentsCollection);
+export async function index(query?: Query): Promise<Comment[]> {
+  let querySnapshot = null;
 
-  const localPosts = querySnapshot.docs.map((doc) => {
-    return { ...doc.data(), id: doc.id };
-  });
+  if (query) {
+    querySnapshot = await getDocs(query);
+  } else {
+    querySnapshot = await getDocs(commentsCollection);
+  }
 
-  return localPosts as Comment[];
+  const comments = querySnapshot.docs.map((doc: DocumentData) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+
+  return comments as Comment[];
 }
 
 export async function show(id: string): Promise<Comment> {
