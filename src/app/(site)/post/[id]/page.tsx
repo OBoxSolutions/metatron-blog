@@ -9,6 +9,7 @@ import { arrayUnion, doc, query, updateDoc, where } from "firebase/firestore";
 import { db, postsCollection } from "@/utils/firebase";
 
 import { Post } from "@/types/Post";
+import { CommentWithUser } from "@/types/Comment";
 
 import CommentForm from "@/app/(site)/_components/CommentForm";
 
@@ -123,7 +124,12 @@ export default function PostSinglePage({
               {comments.map((comment) => (
                 <div className="flex gap-5" key={`comment-id-${comment?.id}`}>
                   <UserImagePlaceholder />
-                  <p>{comment.text}</p>
+                  <div className="flex flex-col">
+                    <p className="text-sm text-slate-400">
+                      {comment?.user?.name}
+                    </p>
+                    <p>{comment.text}</p>
+                  </div>
                 </div>
               ))}
             </div>
