@@ -1,20 +1,14 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import {
-  arrayUnion,
-  doc,
-  documentId,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+
 import Image from "next/image";
 
-import { commentsCollection, db, postsCollection } from "@/utils/firebase";
+import { arrayUnion, doc, query, updateDoc, where } from "firebase/firestore";
+
+import { db, postsCollection } from "@/utils/firebase";
 
 import { Post } from "@/types/Post";
-import { Comment } from "@/types/Comment";
 
 import CommentForm from "@/app/(site)/_components/CommentForm";
 
@@ -24,7 +18,9 @@ import Section from "../../_components/Section";
 import Aside from "../../_components/Aside";
 
 import { index as indexPosts, show } from "@/services/posts";
-import { index, store, show as showComment } from "@/services/comments";
+import { store, show as showComment } from "@/services/comments";
+
+import { useCommentsWithUsers } from "@/utils/hooks/comments";
 
 export default function PostSinglePage({
   params,
@@ -41,9 +37,9 @@ export default function PostSinglePage({
     content: "",
   });
   const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
-  const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
   const [commentsIds, setCommentsIds] = useState<string[]>([]);
+  const [comments] = useCommentsWithUsers(commentsIds);
 
   useEffect(() => {
     if (!params.id) return;
@@ -54,9 +50,6 @@ export default function PostSinglePage({
       if (!post) return;
 
       setCommentsIds(post);
-      if (commentsIds?.length) {
-        await loadComments(commentsIds);
-      }
     };
 
     const loadPost = async () => {
@@ -82,12 +75,6 @@ export default function PostSinglePage({
 
     loadData();
   }, [params.id, commentsIds]);
-
-  const loadComments = async (commentsIds: string[]) => {
-    const q = query(commentsCollection, where(documentId(), "in", commentsIds));
-    const comments = await index(q);
-    setComments(comments);
-  };
 
   const addComment = async (e: FormEvent) => {
     setLoading(true);
