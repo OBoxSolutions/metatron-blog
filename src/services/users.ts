@@ -2,6 +2,7 @@ import { User } from "@/types/User";
 import { db, usersCollection } from "@/utils/firebase";
 import {
   DocumentReference,
+  Query,
   addDoc,
   deleteDoc,
   doc,
@@ -10,8 +11,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export async function index(): Promise<User[]> {
-  const querySnapshot = await getDocs(usersCollection);
+export async function index(query?: Query): Promise<User[]> {
+  let querySnapshot = null;
+
+  if (query) {
+    querySnapshot = await getDocs(query);
+  } else {
+    querySnapshot = await getDocs(usersCollection);
+  }
 
   const localPosts = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
