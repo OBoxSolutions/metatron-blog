@@ -1,4 +1,4 @@
-type Post = {
+export type Post = {
   id?: string | number;
   userId: string;
   commentsIds?: string[];
@@ -9,5 +9,3 @@ type Post = {
   isFeatured: boolean;
   content: string;
 };
-
-export { Post };
