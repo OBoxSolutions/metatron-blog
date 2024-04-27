@@ -46,6 +46,7 @@ export default function Footer() {
                   alt={icon.alt}
                   width={42}
                   height={42}
+                  className="hover:opacity-80 cursor-pointer"
                 ></Image>
               </li>
             ))}
