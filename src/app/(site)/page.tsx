@@ -16,6 +16,7 @@ import { Post } from "@/types/Post";
 
 import Link from "next/link";
 import { postsCollection } from "@/utils/firebase";
+import SearchBar from "@/components/SearchBar";
 
 function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
@@ -67,6 +68,13 @@ export default function Home() {
 
   return (
     <div className="max-w-screen-xl mx-auto">
+      <Section className="flex flex-col md:w-fit relative mx-auto my-52">
+        <h2 className="text-xl md:text-3xl text-gray-300 absolute -top-10">
+          A tech blog for you
+        </h2>
+        <h1 className="text-6xl lg:text-8xl">Welcome to Metatron</h1>
+        <SearchBar className="md:ml-52 mt-10"></SearchBar>
+      </Section>
       {firstFeaturedPost && (
         <Section>
           <div className="md:grid grid-cols-6 gap-16">
