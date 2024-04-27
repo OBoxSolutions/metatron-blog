@@ -75,7 +75,7 @@ export default function Home() {
         <h1 className="text-6xl lg:text-8xl">
           Welcome to{" "}
           <span className="relative">
-            <span className="py-1 px-24 bg-accent absolute rounded-full"></span>
+            <span className="py-1 px-24 bg-accent absolute rounded-full invisible md:visible"></span>
             Metatron
           </span>
         </h1>
@@ -104,7 +104,7 @@ export default function Home() {
                   </p>
                 </div>
               </Link>
-            </article>
+            </article>{" "}
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
           </div>
         </Section>
