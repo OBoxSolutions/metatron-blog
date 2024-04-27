@@ -81,6 +81,7 @@ export default function Home() {
         </h1>
         <SearchBar className="md:ml-52 mt-10"></SearchBar>
       </Section>
+
       {firstFeaturedPost && (
         <Section>
           <div className="md:grid grid-cols-6 gap-16">
@@ -96,6 +97,12 @@ export default function Home() {
                 <h3 className="text-4xl mt-4 text-center">
                   {firstFeaturedPost.title}
                 </h3>
+
+                <div>
+                  <p className="text-gray-400 text-base mt-3 text-center">
+                    {firstFeaturedPost.date}
+                  </p>
+                </div>
               </Link>
             </article>
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
