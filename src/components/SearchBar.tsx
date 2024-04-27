@@ -4,9 +4,11 @@ import Button from "./Button";
 
 export default function SearchBar({ className }: { className: string }) {
   return (
-    <div className={className}>
-      <InputText className="rounded-full"></InputText>
-      <Button icon={mdiMagnify}></Button>
-    </div>
+    <form className={`relative ${className} pt-0`}>
+      <InputText className="rounded-full py-3"></InputText>
+      <span className="absolute right-1 top-4">
+        <Button icon={mdiMagnify} iconSize={1} iconPadding="p-3"></Button>
+      </span>
+    </form>
   );
 }
