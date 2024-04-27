@@ -10,7 +10,7 @@ type HeaderLinkProp = {
 export default function HeaderLink(props: HeaderLinkProp) {
   return (
     <li key={`site-link-${props.link.href}`}>
-      <Link href={props.link.href}>{props.link.text}</Link>
+      <Link className="hover:opacity-80" href={props.link.href}>{props.link.text}</Link>
     </li>
   );
 }
