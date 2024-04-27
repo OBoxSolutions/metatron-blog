@@ -16,6 +16,7 @@ import { Post } from "@/types/Post";
 
 import Link from "next/link";
 import { postsCollection } from "@/utils/firebase";
+import SearchBar from "@/components/SearchBar";
 
 function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
   return useMemo(() => {
@@ -67,6 +68,20 @@ export default function Home() {
 
   return (
     <div className="max-w-screen-xl mx-auto">
+      <Section className="flex flex-col md:w-fit relative mx-auto my-52">
+        <h2 className="text-xl md:text-3xl text-gray-300 absolute -top-10">
+          A tech blog for you
+        </h2>
+        <h1 className="text-6xl lg:text-8xl">
+          Welcome to{" "}
+          <span className="relative">
+            <span className="py-1 px-24 bg-accent absolute rounded-full"></span>
+            Metatron
+          </span>
+        </h1>
+        <SearchBar className="md:ml-52 mt-10"></SearchBar>
+      </Section>
+
       {firstFeaturedPost && (
         <Section>
           <div className="md:grid grid-cols-6 gap-16">
@@ -82,6 +97,12 @@ export default function Home() {
                 <h3 className="text-4xl mt-4 text-center">
                   {firstFeaturedPost.title}
                 </h3>
+
+                <div>
+                  <p className="text-gray-400 text-base mt-3 text-center">
+                    {firstFeaturedPost.date}
+                  </p>
+                </div>
               </Link>
             </article>
             <Aside className="col-span-2" posts={featuredPosts}></Aside>
@@ -123,7 +144,13 @@ export default function Home() {
                 width={355}
                 height={240}
               ></Image>
-              <CardBody>{post.description}</CardBody>
+              <CardBody>
+                <h3 className="text-2xl">{post.title}</h3>
+                <p>{post.description}</p>
+                <div>
+                  <p className="text-gray-400 text-base mt-3">{post.date}</p>
+                </div>
+              </CardBody>
             </Card>
           </Link>
         ))}

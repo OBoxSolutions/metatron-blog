@@ -51,10 +51,15 @@ export default function Header() {
     <header className="bg-primary py-5">
       <div className="max-w-screen-xl mx-auto flex">
         <div className="flex items-center flex-1">
-        <Link className="hover:opacity-75 cursor-pointer" href={'/'}>
-        <Image src={'/simple_logo.svg'} alt="METATRON" className="mr-4" width={64 } height={64}/>
-        </Link>
-        <h1 className="text-3xl mr-auto hidden sm:flex">Metatron</h1>
+          <Link className="hover:opacity-75 cursor-pointer" href={"/"}>
+            <Image
+              src={"/simple_logo.svg"}
+              alt="Metatron"
+              className="mr-4"
+              width={64}
+              height={64}
+            />
+          </Link>
         </div>
         <nav>
           <ul className="flex gap-10 h-full items-center ">

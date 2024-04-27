@@ -27,4 +27,5 @@ export type InputProps<T> = {
   validate?: (value: PathValue<T, Path<T>>) => boolean | string;
   error?: FieldError;
   children?: React.ReactNode;
+  className?: string;
 };

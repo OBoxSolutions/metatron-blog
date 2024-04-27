@@ -6,6 +6,7 @@ import { mdiLoading } from "@mdi/js";
 type ButtonProps = {
   icon?: string;
   iconSize?: number;
+  iconPadding?: string;
   children?: React.ReactNode;
   className?: string;
   href?: string;
@@ -24,7 +25,7 @@ export default function Button(props: ButtonProps) {
   const parentProps = props.href ? { href: props.href } : {};
 
   if (props.icon) {
-    buttonClasses += "p-4 rounded-full bg-accent";
+    buttonClasses += `${props.iconPadding || "p-4"} rounded-full bg-accent`;
     loadingClasses += "rounded-full";
   } else {
     buttonClasses += "px-4 py-2 rounded bg-accent";
