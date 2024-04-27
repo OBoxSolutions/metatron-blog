@@ -137,7 +137,10 @@ export default function Home() {
                 width={355}
                 height={240}
               ></Image>
-              <CardBody>{post.description}</CardBody>
+              <CardBody>
+                <h3 className="text-2xl">{post.title}</h3>
+                <p>{post.description}</p>
+              </CardBody>
             </Card>
           </Link>
         ))}
