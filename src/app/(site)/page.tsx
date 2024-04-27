@@ -72,7 +72,13 @@ export default function Home() {
         <h2 className="text-xl md:text-3xl text-gray-300 absolute -top-10">
           A tech blog for you
         </h2>
-        <h1 className="text-6xl lg:text-8xl">Welcome to Metatron</h1>
+        <h1 className="text-6xl lg:text-8xl">
+          Welcome to{" "}
+          <span className="relative">
+            <span className="py-1 px-28 bg-accent absolute rounded-full"></span>
+            Metatron
+          </span>
+        </h1>
         <SearchBar className="md:ml-52 mt-10"></SearchBar>
       </Section>
       {firstFeaturedPost && (
