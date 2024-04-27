@@ -34,7 +34,10 @@ export function useCommentsWithUsers(commentsIds: string[]): Array<Comment[]> {
         const user = users.find((user) => user.id === comment.userId);
         return {
           ...comment,
-          user,
+          user: user ?? {
+            name: "Anonymous",
+            email: "",
+          },
         };
       }),
     );
