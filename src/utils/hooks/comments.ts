@@ -3,12 +3,15 @@ import { useMemo, useState } from "react";
 import { documentId, query, where } from "firebase/firestore";
 import { commentsCollection } from "../firebase";
 
-import { index } from "@/services/comments";
+import { index as indexComments } from "@/services/comments";
+import { index as indexUsers } from "@/services/users";
 
-import { Comment } from "@/types/Comment";
+import { CommentWithUser } from "@/types/Comment";
 
-export function useCommentsWithUsers(commentsIds: string[]): Array<Comment[]> {
-  const [comments, setComments] = useState<Comment[]>([]);
+export function useCommentsWithUsers(
+  commentsIds: string[],
+): Array<CommentWithUser[]> {
+  const [comments, setComments] = useState<CommentWithUser[]>([]);
 
   useMemo(async () => {
     if (!commentsIds.length) return [];
@@ -17,7 +20,7 @@ export function useCommentsWithUsers(commentsIds: string[]): Array<Comment[]> {
       commentsCollection,
       where(documentId(), "in", commentsIds),
     );
-    const comments = await index(qComments);
+    const comments = await indexComments(qComments);
 
     if (!comments) return;
 
@@ -27,11 +30,12 @@ export function useCommentsWithUsers(commentsIds: string[]): Array<Comment[]> {
       commentsCollection,
       where(documentId(), "in", usersIds),
     );
-    const users = await index(qUsers);
+    const users = await indexUsers(qUsers);
 
     setComments(
       comments.map((comment) => {
         const user = users.find((user) => user.id === comment.userId);
+
         return {
           ...comment,
           user: user ?? {
