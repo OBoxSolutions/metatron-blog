@@ -144,11 +144,11 @@ export default function Home() {
                 width={355}
                 height={240}
               ></Image>
-              <CardBody>
+              <CardBody className="flex flex-col gap-3">
                 <h3 className="text-2xl">{post.title}</h3>
                 <p>{post.description}</p>
                 <div>
-                  <p className="text-gray-400 text-base mt-3">{post.date}</p>
+                  <p className="text-gray-400 text-base">{post.date}</p>
                 </div>
               </CardBody>
             </Card>
