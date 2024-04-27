@@ -54,7 +54,7 @@ export default function Header() {
           <Link className="hover:opacity-75 cursor-pointer" href={"/"}>
             <Image
               src={"/simple_logo.svg"}
-              alt="METATRON"
+              alt="Metatron"
               className="mr-4"
               width={64}
               height={64}
