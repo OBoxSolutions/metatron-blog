@@ -140,6 +140,9 @@ export default function Home() {
               <CardBody>
                 <h3 className="text-2xl">{post.title}</h3>
                 <p>{post.description}</p>
+                <div>
+                  <p className="text-gray-400 text-base mt-3">{post.date}</p>
+                </div>
               </CardBody>
             </Card>
           </Link>
