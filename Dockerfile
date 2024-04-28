@@ -14,6 +14,8 @@ RUN \
 ENV NODE_ENV production
 
 COPY . .
+COPY public ./.next/standalone/public
+COPY .next/static ./.next/standalone/.next/static
 
 RUN yarn build
 
