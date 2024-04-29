@@ -31,7 +31,10 @@ export default function Search({ params }: { params: { slug?: string } }) {
   return (
     <div className="max-w-screen-xl mx-auto">
       <h1 className="text-5xl mt-20">Search Posts</h1>
-      <SearchBar className="md:mr-80 pl-0"></SearchBar>
+      <SearchBar
+        className="md:mr-80 pl-0"
+        defaultValue={params.slug}
+      ></SearchBar>
 
       <Section className="flex flex-col gap-3">
         {posts.map((post) => (
