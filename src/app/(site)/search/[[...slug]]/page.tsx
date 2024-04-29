@@ -15,15 +15,20 @@ import { Post } from "@/types/Post";
 import Link from "next/link";
 
 import { index } from "@/services/posts";
+import useSearch from "@/utils/hooks/search";
 
 export default function Search({ params }: { params: { slug?: string } }) {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [filteredPosts] = useSearch(posts, searchText);
 
   useEffect(() => {
     const loadPosts = async () => {
       const posts = await index();
       setPosts(posts);
     };
+
+    setSearchText(decodeURIComponent(params.slug ?? ""));
 
     loadPosts();
   }, []);
@@ -33,11 +38,12 @@ export default function Search({ params }: { params: { slug?: string } }) {
       <h1 className="text-5xl mt-20">Search Posts</h1>
       <SearchBar
         className="md:mr-80 pl-0"
-        defaultValue={decodeURIComponent(params?.slug ?? "")}
+        onSubmit={(value) => setSearchText(value)}
+        defaultValue={searchText}
       ></SearchBar>
 
       <Section className="flex flex-col gap-3">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <Link key={`index-post-${post.id}`} href={`/post/${post.id}`}>
             <Card className="flex">
               <Image
