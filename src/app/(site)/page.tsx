@@ -79,7 +79,7 @@ export default function Home() {
             Metatron
           </span>
         </h1>
-        <SearchBar className="md:ml-52 mt-10"></SearchBar>
+        <SearchBar className="md:ml-52 mt-10" onSubmit={(e) => goToSearchView(e.target.value)}></SearchBar>
       </Section>
 
       {firstFeaturedPost && (
@@ -158,3 +158,4 @@ export default function Home() {
     </div>
   );
 }
+
