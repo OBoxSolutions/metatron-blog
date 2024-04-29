@@ -7,6 +7,7 @@ export default function InputText<T>(props: InputProps<T>) {
       <input
         id={props?.id}
         className={`p-1 rounded outline-none mt-0 shadow text-black ${props.className}`}
+        name={props?.name}
         disabled={props.disabled}
         defaultValue={props.defaultValue}
         type={props?.type ?? "text"}
