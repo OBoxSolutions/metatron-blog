@@ -2185,7 +2185,6 @@ __metadata:
     react-quill: ^2.0.0
     sonner: ^1.4.41
     styled-components: ^6.1.8
-    sweetalert2: ^11.10.8
     tailwindcss: ^3.3.0
     typescript: ^5
     zustand: ^4.5.2
@@ -3193,13 +3192,6 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
-  languageName: node
-  linkType: hard
-
-"sweetalert2@npm:^11.10.8":
-  version: 11.10.8
-  resolution: "sweetalert2@npm:11.10.8"
-  checksum: d2a732ecaf6ff70829b145869c843a51bb8d3ab0f679bdf9cd8a1f2a53091e8511fcaf916edc29c8f1a9243ec15a2c25c5faff408edb405945b8b415693b8358
   languageName: node
   linkType: hard
 

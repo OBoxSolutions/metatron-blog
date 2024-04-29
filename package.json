@@ -27,7 +27,6 @@
     "react-quill": "^2.0.0",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8",
-    "sweetalert2": "^11.10.8",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
