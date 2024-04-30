@@ -37,7 +37,7 @@ export default function Search({ params }: { params: { slug?: string } }) {
     <div className="max-w-screen-xl mx-auto">
       <h1 className="text-5xl mt-20">Search Posts</h1>
       <SearchBar
-        className="md:mr-80 pl-0"
+        className="md:mr-80"
         onSubmit={(value) => setSearchText(value)}
         defaultValue={searchText}
       ></SearchBar>
