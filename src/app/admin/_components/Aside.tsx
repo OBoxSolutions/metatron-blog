@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "@mdi/react";
+import Image from "next/image";
 import {
   mdiViewDashboard,
   mdiPost,
