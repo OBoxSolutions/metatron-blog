@@ -44,7 +44,7 @@ const Aside = (props: AsideProps) => {
   return (
     <>
       <aside
-        className={`border-r border-gray-800 h-screen bg-primary transition-all ${
+        className={`border-r border-gray-800 h-screen bg-primary transition-all fixed w-[300px] ${
           props.floating ? "fixed z-20" : ""
         } ${props.isShowing ? "" : "-translate-x-full"} ${props.className}`}
       >
