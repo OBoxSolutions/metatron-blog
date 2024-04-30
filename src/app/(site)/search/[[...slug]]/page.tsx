@@ -45,9 +45,9 @@ export default function Search({ params }: { params: { slug?: string } }) {
       <Section className="flex flex-col gap-3">
         {filteredPosts.map((post) => (
           <Link key={`index-post-${post.id}`} href={`/post/${post.id}`}>
-            <Card className="flex">
+            <Card className="md:flex">
               <Image
-                className="h-full w-auto"
+                className="h-auto md:h-full w-full md:w-auto"
                 src={post.image}
                 alt={post.description}
                 width={355}
