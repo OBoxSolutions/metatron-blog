@@ -18,7 +18,7 @@ export default function Nav(props: NavProps) {
 
   return (
     <nav
-      className={`flex bg-primary items-center px-5 gap-4 ${props.className}`}
+      className={`flex items-center px-5 gap-4 border-b border-gray-800 ${props.className}`}
     >
       <Button
         icon={mdiMenu}
