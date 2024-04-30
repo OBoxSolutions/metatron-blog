@@ -34,6 +34,11 @@ export default function Header() {
     },
     {
       icon: "",
+      text: "Search",
+      href: "/search/",
+    },
+    {
+      icon: "",
       text: "Admin",
       href: "/admin/",
     },
