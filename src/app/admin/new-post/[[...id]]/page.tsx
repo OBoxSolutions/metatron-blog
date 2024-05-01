@@ -145,7 +145,6 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
             <ReactQuill
               defaultValue={post.content ?? ""}
               onChange={(_, _1, _2, editor) => {
-                console.log(editor.getContents());
                 register("content").onChange({
                   type: "content",
                   target: { name: "content", value: editor.getHTML() },
