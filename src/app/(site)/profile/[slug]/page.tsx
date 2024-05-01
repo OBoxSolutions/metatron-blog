@@ -24,7 +24,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const userId = useAuthStore((state) => state.uid);
   const userLogged = useAuthStore((state) => state.logged);
   const resetStorage = useAuthStore((state) => state.logout);
-  const editUser=  useAuthStore(state=>state.updateUser)
+  const editUser = useAuthStore((state) => state.updateUser);
   const user = {
     name: userName ?? "",
     image: userImage ?? "",
@@ -46,13 +46,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }, [userLogged]);
 
-  
-
   const onDestroyUser = async () => {
     try {
       setLoading(true);
       if (userId !== null) {
-        console.log("Salio bien todo");
         await destroy(userId);
         resetStorage();
       }
@@ -92,12 +89,11 @@ export default function Page({ params }: { params: { slug: string } }) {
   const updateUser = async (user: User) => {
     const docRef = await update(user);
 
-    if(docRef){
+    if (docRef) {
       toast.success("User updated");
       setFormDialog(false);
-      editUser(user)
+      editUser(user);
     }
-    console.log("Dio error")
   };
 
   const openEditDialog = () => {
@@ -110,16 +106,18 @@ export default function Page({ params }: { params: { slug: string } }) {
       <article className="flex flex-col justify-center items-center">
         <h2 className="text-4xl antialiased text-center mt-4">Profile</h2>
         <article>
-          {userImage !== ""  ? (
-             <Image
-             className={'object-cover w-52 h-52 mt-2 rounded-full shadow-md border-4 border-gray-300'}
-               height={200}
-               width={200}
-               src={userImage ?? ""}
-               alt={userName ?? "user"}
-             />
-          ) : (<UserImagePlaceholder className="w-52 h-52 mt-2" size={"full"} />
-           
+          {userImage !== "" ? (
+            <Image
+              className={
+                "object-cover w-52 h-52 mt-2 rounded-full shadow-md border-4 border-gray-300"
+              }
+              height={200}
+              width={200}
+              src={userImage ?? ""}
+              alt={userName ?? "user"}
+            />
+          ) : (
+            <UserImagePlaceholder className="w-52 h-52 mt-2" size={"full"} />
           )}
         </article>
       </article>

@@ -9,7 +9,6 @@ import { arrayUnion, doc, query, updateDoc, where } from "firebase/firestore";
 import { db, postsCollection } from "@/utils/firebase";
 
 import { Post } from "@/types/Post";
-import { CommentWithUser } from "@/types/Comment";
 
 import CommentForm from "@/app/(site)/_components/CommentForm";
 

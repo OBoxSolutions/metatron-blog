@@ -34,6 +34,11 @@ export default function Header() {
     },
     {
       icon: "",
+      text: "Search",
+      href: "/search/",
+    },
+    {
+      icon: "",
       text: "Admin",
       href: "/admin/",
     },
@@ -49,19 +54,17 @@ export default function Header() {
 
   return (
     <header className="bg-primary py-5">
-      <div className="max-w-screen-xl mx-auto flex">
-        <div className="flex items-center flex-1">
-          <Link className="hover:opacity-75 cursor-pointer" href={"/"}>
-            <Image
-              src={"/simple_logo.svg"}
-              alt="Metatron"
-              className="mr-4"
-              width={64}
-              height={64}
-            />
-          </Link>
-        </div>
-        <nav>
+      <div className="max-w-screen-xl mx-auto flex flex-col items-center md:flex-row">
+        <Link className="hover:opacity-75 cursor-pointer" href={"/"}>
+          <Image
+            src={"/simple_logo.svg"}
+            alt="Metatron"
+            className="mr-4"
+            width={64}
+            height={64}
+          />
+        </Link>
+        <nav className="md:ml-auto mt-5">
           <ul className="flex gap-10 h-full items-center ">
             {links.map((link) => (
               <HeaderLink

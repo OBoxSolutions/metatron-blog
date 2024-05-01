@@ -52,31 +52,27 @@ export default function RootLayout({
     : "grid-cols-[0px_1fr]";
 
   return (
-    <html lang="en">
-      <body
-        className={`${hindSiliguri.className} transition-all h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
-      >
-        <div
-          className={`col-span-1 row-span-2 overflow-x-hidden transition-all`}
-        >
-          <Aside
-            floating={isScreenSmall}
-            isShowing={asideState}
-            setIsShowing={setAsideState}
-          ></Aside>
-        </div>
+    <body
+      className={`${hindSiliguri.className} transition-all h-screen bg-neutral text-text-primary grid grid-rows-[64px_1fr] ${gridColumns}`}
+    >
+      <div className={`col-span-1 row-span-2 overflow-x-hidden transition-all`}>
+        <Aside
+          floating={isScreenSmall}
+          isShowing={asideState}
+          setIsShowing={setAsideState}
+        ></Aside>
+      </div>
 
-        <Nav
-          className="col-start-2"
-          onClick={() => setAsideState(!asideState)}
-        ></Nav>
+      <Nav
+        className="col-start-2"
+        onClick={() => setAsideState(!asideState)}
+      ></Nav>
 
-        <main className="col-start-2 mx-3 lg:mx-0 relative">
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-        </main>
+      <main className="col-start-2 mx-3 lg:mx-0 relative">
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      </main>
 
-        <Toaster expand={true}></Toaster>
-      </body>
-    </html>
+      <Toaster expand={true}></Toaster>
+    </body>
   );
 }

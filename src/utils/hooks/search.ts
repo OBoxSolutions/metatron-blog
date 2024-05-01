@@ -8,7 +8,6 @@ export default function useSearch(
 ): [Post[]] {
   const searchResults = useMemo(() => {
     if (!searchText) {
-      console.log("000");
       return posts;
     }
 

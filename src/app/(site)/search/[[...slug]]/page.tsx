@@ -37,7 +37,7 @@ export default function Search({ params }: { params: { slug?: string } }) {
     <div className="max-w-screen-xl mx-auto">
       <h1 className="text-5xl mt-20">Search Posts</h1>
       <SearchBar
-        className="md:mr-80 pl-0"
+        className="md:mr-80"
         onSubmit={(value) => setSearchText(value)}
         defaultValue={searchText}
       ></SearchBar>
@@ -45,9 +45,9 @@ export default function Search({ params }: { params: { slug?: string } }) {
       <Section className="flex flex-col gap-3">
         {filteredPosts.map((post) => (
           <Link key={`index-post-${post.id}`} href={`/post/${post.id}`}>
-            <Card className="flex">
+            <Card className="md:grid md:grid-cols-[380px_1fr] gap-3">
               <Image
-                className="h-full w-auto"
+                className="h-auto w-full"
                 src={post.image}
                 alt={post.description}
                 width={355}
