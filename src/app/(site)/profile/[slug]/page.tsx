@@ -17,7 +17,7 @@ import { storage } from "@/utils/firebase";
 import { toast } from "sonner";
 import { update } from "@/services/users";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page() {
   const userName = useAuthStore((state) => state.name);
   const userImage = useAuthStore((state) => state.image);
   const userEmail = useAuthStore((state) => state.email);
@@ -33,12 +33,11 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [formDialog, setFormDialog] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [isFormUpdating, setIsFormUpdating] = useState(false);
-  const [selectedRows, setSelectedRows] = useState<User[]>([]);
 
   useEffect(() => {
     if (!userLogged) {
