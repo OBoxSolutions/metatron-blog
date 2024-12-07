@@ -17,7 +17,7 @@ export default function Nav(props: NavProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
   return (
-    <nav
+    (<nav
       className={`flex items-center px-5 gap-4 border-b border-gray-800 ${props.className}`}
     >
       <Button
@@ -31,11 +31,12 @@ export default function Nav(props: NavProps) {
       </Link>
       <div
         className="rounded-full p-3 bg-accent cursor-pointer relative"
-        ref={(ref) => setAnchorEl(ref)}
+        ref={ref => {
+          setAnchorEl(ref);
+        }}
       >
         <p className="w-6 h-6 text-center">JG</p>
       </div>
-
       {anchorEl && (
         <Menu anchorEl={anchorEl} menu={menu} setMenu={setMenu}>
           <ul className="flex flex-col gap-5">
@@ -44,6 +45,6 @@ export default function Nav(props: NavProps) {
           </ul>
         </Menu>
       )}
-    </nav>
+    </nav>)
   );
 }

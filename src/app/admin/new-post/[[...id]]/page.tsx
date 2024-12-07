@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -27,7 +27,8 @@ type PostInputs = {
   content: string;
 };
 
-export default function NewPost({ params }: { params: { id?: string[] } }) {
+export default function NewPost(props: { params: Promise<{ id?: string[] }> }) {
+  const params = use(props.params);
   const [isLoading, setLoading] = useState(false);
   const [post, setPost] = useState<Post>({
     userId: "1",
@@ -93,7 +94,7 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
   };
 
   return (
-    <Section width="max-w-2xl">
+    (<Section width="max-w-2xl">
       <Breadcrumbs
         className="my-5"
         breadcrumbs={[
@@ -107,7 +108,6 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
           },
         ]}
       ></Breadcrumbs>
-
       <h2 className="text-3xl mb-2">Make new post</h2>
       <Card>
         <CardBody>
@@ -156,7 +156,9 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
                   target: { name: "content", value: editor.getHTML() },
                 })
               }
-              ref={(ref) => register("content").ref(ref)}
+              ref={ref => {
+                register("content").ref(ref);
+              }}
             ></ReactQuill>
             <Button className="ml-auto" loading={isLoading}>
               Submit
@@ -164,6 +166,6 @@ export default function NewPost({ params }: { params: { id?: string[] } }) {
           </form>
         </CardBody>
       </Card>
-    </Section>
+    </Section>)
   );
 }

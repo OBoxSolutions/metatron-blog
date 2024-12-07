@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 
 import Image from "next/image";
 
@@ -17,7 +17,8 @@ import Link from "next/link";
 import { index } from "@/services/posts";
 import useSearch from "@/utils/hooks/search";
 
-export default function Search({ params }: { params: { slug?: string } }) {
+export default function Search(props: { params: Promise<{ slug?: string }> }) {
+  const params = use(props.params);
   const [posts, setPosts] = useState<Post[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [filteredPosts] = useSearch(posts, searchText);

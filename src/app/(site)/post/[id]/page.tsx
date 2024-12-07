@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, use } from "react";
 
 import Image from "next/image";
 
@@ -22,11 +22,12 @@ import { store, show as showComment } from "@/services/comments";
 
 import { useCommentsWithUsers } from "@/utils/hooks/comments";
 
-export default function PostSinglePage({
-  params,
-}: {
-  params: { id?: string };
-}) {
+export default function PostSinglePage(
+  props: {
+    params: Promise<{ id?: string }>;
+  }
+) {
+  const params = use(props.params);
   const [post, setPost] = useState<Post>({
     userId: "1",
     title: "",

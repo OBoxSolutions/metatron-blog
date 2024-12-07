@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,12 +15,12 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.2",
     "firebase": "^10.10.0",
-    "next": "14.1.4",
+    "next": "15.0.4",
     "quill": "2.0.0",
-    "react": "^18",
+    "react": "19.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-data-table-component": "^7.6.2",
-    "react-dom": "^18",
+    "react-dom": "19.0.0",
     "react-firebase-hooks": "^5.1.1",
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.51.3",
@@ -33,12 +33,16 @@
     "@biomejs/biome": "1.7.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.1",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.1",
+  "resolutions": {
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.1"
+  }
 }

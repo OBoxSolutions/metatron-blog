@@ -53,7 +53,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-primary py-5">
+    (<header className="bg-primary py-5">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center md:flex-row">
         <Link className="hover:opacity-75 cursor-pointer" href={"/"}>
           <Image
@@ -76,7 +76,9 @@ export default function Header() {
             {logged && (
               <div
                 className="rounded-full p-3 bg-accent cursor-pointer relative"
-                ref={(ref) => setAnchorEl(ref)}
+                ref={ref => {
+                  setAnchorEl(ref);
+                }}
               >
                 <p className="w-6 h-6 text-center">{userNameInitials}</p>
               </div>
@@ -92,6 +94,6 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-    </header>
+    </header>)
   );
 }
