@@ -16,7 +16,7 @@ RUN \
   fi
 
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 COPY . .
 
@@ -36,7 +36,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
 EXPOSE 3000
-ENV PORT 3000
+ENV PORT=3000
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
