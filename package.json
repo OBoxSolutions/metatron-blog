@@ -14,7 +14,7 @@
     "@mdi/react": "^1.6.1",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.2",
-    "firebase": "^10.10.0",
+    "firebase": "^11.0.2",
     "next": "15.0.4",
     "quill": "2.0.0",
     "react": "19.0.0",
