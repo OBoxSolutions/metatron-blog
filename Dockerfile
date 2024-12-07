@@ -4,7 +4,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Install dependencies
-COPY package.json yarn.lock* ./
+COPY package.json yarn.lock* .yarnrc.yml ./
 
 RUN corepack enable
 
