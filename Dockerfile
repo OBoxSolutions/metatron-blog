@@ -5,6 +5,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+
+RUN corepack enable
+
 RUN \
   if [ -f yarn.lock ]; then yarn; \
   elif [ -f package-lock.json ]; then npm i; \
