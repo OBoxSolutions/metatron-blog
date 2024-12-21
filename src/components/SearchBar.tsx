@@ -1,3 +1,5 @@
+"use client";
+
 import { mdiMagnify } from "@mdi/js";
 import InputText from "./InputText";
 import Button from "./Button";
