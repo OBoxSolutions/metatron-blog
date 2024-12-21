@@ -1,77 +1,63 @@
-"use client";
-
-import { useMemo } from "react";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { DocumentData, getDocs } from "firebase/firestore";
+import { db } from "@/utils/firebaseAdmin";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import Aside from "./_components/Aside";
 import Section from "./_components/Section";
+
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";
+import SearchBar from "@/components/SearchBar";
 
 import { Post } from "@/types/Post";
 
-import Link from "next/link";
-import { postsCollection } from "@/utils/firebase";
-import SearchBar from "@/components/SearchBar";
+async function loadPosts(): Promise<Post[]> {
+  const snapshot = await db.collection("posts").get();
 
-function useFeaturedPosts(posts: Post[]): [Post | undefined, Post[]] {
-  return useMemo(() => {
-    const featuredPosts = posts.filter((post) => post.isFeatured);
+  const posts = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<Post, "id">),
+  }));
 
-    return [featuredPosts.shift(), featuredPosts.slice(0, 3)];
-  }, [posts]);
+  return posts;
 }
 
-function useLatestPosts(posts: Post[]): [Post | undefined, Post[]] {
-  return useMemo(() => {
-    const latestPosts = posts.sort(
-      (a, b) => +new Date(a.date) - +new Date(b.date),
-    );
-
-    return [latestPosts.shift(), latestPosts.slice(0, 3)];
-  }, [posts]);
+function sortPostsByDate(posts: Post[]) {
+  return posts.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 }
 
-function useOtherPosts(
-  posts: Post[],
-  featuredPosts: Post[],
-  latestPosts: Post[],
-) {
-  return posts.filter(
-    (post) => featuredPosts.includes(post) || latestPosts.includes(post),
+function filterPosts(posts: Post[]) {
+  const sortedPosts = sortPostsByDate(posts);
+
+  return sortedPosts.reduce(
+    (acc, post) => {
+      if (post.isFeatured) {
+        acc[0].push(post);
+      } else if (acc[1].length < 4) {
+        acc[1].push(post);
+      } else {
+        acc[2].push(post);
+      }
+      return acc;
+    },
+    [[], [], []] as Post[][],
   );
 }
 
-export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [firstFeaturedPost, featuredPosts] = useFeaturedPosts(posts);
-  const [firstLatestPost, latestPosts] = useLatestPosts(posts);
-  const otherPosts = useOtherPosts(posts, featuredPosts, latestPosts);
+export default async function Home() {
+  const posts = await loadPosts();
 
-  useEffect(() => {
-    const loadPosts = async () => {
-      const querySnapshot = await getDocs(postsCollection);
-      setPosts(
-        querySnapshot.docs.map((doc: DocumentData) => ({
-          ...doc.data(),
-          id: doc.id,
-        })),
-      );
-    };
+  const [featuredPosts, latestPosts, otherPosts] = filterPosts(posts);
 
-    loadPosts();
-  }, []);
+  const firstFeaturedPost = featuredPosts.shift();
+  const firstLatestPost = latestPosts.shift();
 
-  const router = useRouter();
-
-  const goToSearchView = (searchText: string) => {
-    router.push(`/search/${searchText}`);
-  };
+  //const goToSearchView = (searchText: string) => {
+  //  router.push(`/search/${searchText}`);
+  //};
 
   return (
     <div className="max-w-screen-xl mx-auto">
@@ -88,7 +74,7 @@ export default function Home() {
         </h1>
         <SearchBar
           className="md:ml-52 mt-10"
-          onSubmit={(text) => goToSearchView(text)}
+          //onSubmit={(text) => goToSearchView(text)}
         ></SearchBar>
       </Section>
 
