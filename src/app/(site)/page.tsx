@@ -1,4 +1,4 @@
-import { db } from "@/utils/firebaseAdmin";
+import { db } from "@/utils/firebase.admin";
 
 import Image from "next/image";
 import Link from "next/link";
