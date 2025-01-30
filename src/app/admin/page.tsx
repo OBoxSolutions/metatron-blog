@@ -58,7 +58,7 @@ export default function Admin() {
         <RegisteredUsersBar></RegisteredUsersBar>
         <PopularCategoriesDoughnut></PopularCategoriesDoughnut>
         <Card>
-          <CardBody>More active writers</CardBody>
+          <CardBody>Most active writers</CardBody>
           <CardBody>
             <ul className="flex flex-col gap-3">
               {activeWriters.map((writer) => (
