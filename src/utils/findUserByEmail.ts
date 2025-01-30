@@ -1,5 +1,5 @@
 import { getDocs, query, where } from "firebase/firestore";
-import { usersCollection } from "./firebase";
+import { usersCollection } from "./firebase.browser";
 
 interface User {
   id: string;
@@ -14,7 +14,7 @@ interface User {
 
 export const findUserByEmail = async (
   email: string,
-  form: "register" | "login"
+  form: "register" | "login",
 ): Promise<{ ok: boolean; msg?: string; user?: User }> => {
   try {
     const q = query(usersCollection, where("email", "==", email));
@@ -43,7 +43,6 @@ export const findUserByEmail = async (
     }
 
     return { ok: false };
-
   } catch (error) {
     console.error("Error al buscar usuario por email:", error);
     throw error;

@@ -1,5 +1,5 @@
 import { User } from "@/types/User";
-import { db, usersCollection } from "@/utils/firebase";
+import { db, usersCollection } from "@/utils/firebase.browser";
 import {
   DocumentReference,
   Query,

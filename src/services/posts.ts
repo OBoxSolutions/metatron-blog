@@ -1,5 +1,5 @@
 import { Post } from "@/types/Post";
-import { db, postsCollection } from "@/utils/firebase";
+import { db, postsCollection } from "@/utils/firebase.browser";
 import {
   DocumentData,
   DocumentReference,

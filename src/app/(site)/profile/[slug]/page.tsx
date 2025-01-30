@@ -13,7 +13,7 @@ import UserForm from "@/app/admin/_components/UserForm";
 import { SubmitHandler } from "react-hook-form";
 import { RegisterUserInputs, User } from "@/types/User";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "@/utils/firebase";
+import { storage } from "@/utils/firebase.browser";
 import { toast } from "sonner";
 import { update } from "@/services/users";
 

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { arrayUnion, doc, query, updateDoc, where } from "firebase/firestore";
 
-import { db, postsCollection } from "@/utils/firebase";
+import { db, postsCollection } from "@/utils/firebase.browser";
 
 import { Post } from "@/types/Post";
 
@@ -22,11 +22,9 @@ import { store, show as showComment } from "@/services/comments";
 
 import { useCommentsWithUsers } from "@/utils/hooks/comments";
 
-export default function PostSinglePage(
-  props: {
-    params: Promise<{ id?: string }>;
-  }
-) {
+export default function PostSinglePage(props: {
+  params: Promise<{ id?: string }>;
+}) {
   const params = use(props.params);
   const [post, setPost] = useState<Post>({
     userId: "1",

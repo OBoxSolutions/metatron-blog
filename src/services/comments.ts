@@ -1,5 +1,5 @@
 import { Comment } from "@/types/Comment";
-import { db, commentsCollection } from "@/utils/firebase";
+import { db, commentsCollection } from "@/utils/firebase.browser";
 import {
   DocumentData,
   DocumentReference,

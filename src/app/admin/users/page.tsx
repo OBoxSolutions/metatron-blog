@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { mdiPlus } from "@mdi/js";
 import { ref as fireRef, getDownloadURL, uploadBytes } from "firebase/storage";
 
-import { storage } from "@/utils/firebase";
+import { storage } from "@/utils/firebase.browser";
 
 import Card from "@/components/Card";
 import CardBody from "@/components/CardBody";

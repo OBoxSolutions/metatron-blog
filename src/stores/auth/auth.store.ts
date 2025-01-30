@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { usersCollection } from "@/utils/firebase";
+import { usersCollection } from "@/utils/firebase.browser";
 import { findUserByEmail } from "@/utils/findUserByEmail";
 
 interface AuthState {
