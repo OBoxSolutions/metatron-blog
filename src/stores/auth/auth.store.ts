@@ -1,9 +1,12 @@
-import { usersCollection } from "@/utils/firebase";
-import { findUserByEmail } from "@/utils/findUserByEmail";
-import { addDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
+
+import bcrypt from "bcryptjs";
+
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import bcrypt from "bcryptjs";
+
+import { usersCollection } from "@/utils/firebase";
+import { findUserByEmail } from "@/utils/findUserByEmail";
 
 interface AuthState {
   uid: string | null;
@@ -27,12 +30,12 @@ interface UpdateUser {
 interface AuthActions {
   login: (
     email: string,
-    password: string
+    password: string,
   ) => Promise<{ ok: boolean; msg?: string | {} }>;
   register: (
     nombre: string,
     email: string,
-    password: string
+    password: string,
   ) => Promise<{ ok: boolean; msg?: string | {} }>;
   logout: () => void;
   updateUser: (newData: UpdateUser) => Promise<void>;
@@ -149,7 +152,7 @@ const useAuthStore = create<AuthState & AuthActions>()(
   devtools(
     persist(authStoreApi, {
       name: "auth-storage",
-    })
-  )
+    }),
+  ),
 );
 export default useAuthStore;
